@@ -1,0 +1,83 @@
+import React, { Fragment, useCallback, useEffect } from 'react'
+import { Layout, Select, Button } from 'antd'
+
+/* component */
+import GoogleAD from '../src/component/google-ad'
+
+/* mapping */
+
+/* helper */
+import { withTranslation } from '../src/i18n'
+
+import styles from '../styles/Home.module.css'
+
+import { debounce } from 'throttle-debounce'
+
+const { Header, Content } = Layout
+
+const storageKey = 'MAPLESTORE_BOSS_CRYSTAL_CALCULATOR_DATA'
+
+const initialValues = {}
+
+function Home({ t, i18n }) {
+  const handleSaveToStorage = useCallback(
+    debounce(1000, (_, AllData) => {
+      process.browser &&
+        window.localStorage.setItem(storageKey, JSON.stringify(AllData))
+    }),
+    []
+  )
+  useEffect(() => {
+    if (process.browser) {
+      // JSON.parse(window.localStorage.getItem(storageKey)) || initialValues
+    }
+  }, [])
+  return (
+    <Fragment>
+      <Header className={styles.header}>
+        <div className={styles['header-container']}>
+          <h2 style={{ marginBottom: 0 }}>
+            {t('title')}
+            &nbsp;
+          </h2>
+          <div style={{ marginLeft: 'auto' }}>
+            <Button
+              onClick={() => {
+                form.resetFields()
+                handleSaveToStorage({}, initialValues)
+              }}
+              style={{ marginRight: '.5rem' }}
+            >
+              {t('reset')}
+            </Button>
+            <Select
+              onChange={(value) =>
+                i18n.changeLanguage && i18n.changeLanguage(value)
+              }
+              defaultValue={i18n.language}
+            >
+              <Select.Option value="en">English</Select.Option>
+              <Select.Option value="zh_tw">繁體中文</Select.Option>
+              <Select.Option value="zh_cn">简体中文</Select.Option>
+            </Select>
+          </div>
+        </div>
+      </Header>
+      <Content className={styles.content}></Content>
+      {/* <Content className={styles.content}>
+        <div className={styles.info}>
+          <div className={styles['info-text']}>
+            {t('just_a_advertisement')}(´・ω・`)
+          </div>
+          <GoogleAD />
+        </div>
+      </Content> */}
+    </Fragment>
+  )
+}
+
+Home.getInitialProps = async () => ({
+  namespacesRequired: ['index'],
+})
+
+export default withTranslation('index')(Home)

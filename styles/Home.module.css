@@ -1,0 +1,36 @@
+.header {
+  background-color: #c1c8f1;
+  padding: 0;
+  height: unset;
+}
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.content {
+  padding-top: 0.5rem;
+}
+
+.footer {
+  text-align: center;
+}
+
+@media screen and (max-width: 1599px) {
+  .header-container,
+  .footer {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .header-container,
+  .content {
+    width: 100%;
+    max-width: 1600px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}

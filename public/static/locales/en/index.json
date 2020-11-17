@@ -1,0 +1,9 @@
+{
+  "title": "Maplestory Boss Crystal Calculator",
+
+  "seo_desc": "Boss Crystal Calculator for Maplestory, calculating best choices for 60 intense power crystal per week.",
+
+  "page_not_found": "Page Not Found",
+  "error_with_status": "A {{statusCode}} error occurred on server",
+  "error_without_status": "An error occurred on the server"
+}
