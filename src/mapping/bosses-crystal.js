@@ -88,7 +88,7 @@ export default [
   // 簡單庫洛斯
   {
     id: 7,
-    name: 'kullos',
+    name: 'cross',
     difficulties: [
       {
         difficulty: 'easy',
@@ -101,7 +101,7 @@ export default [
   // 普通庫洛斯
   {
     id: 8,
-    name: 'kullos',
+    name: 'cross',
     difficulties: [
       {
         difficulty: 'normal',
@@ -379,7 +379,7 @@ export default [
   // 混沌拉圖斯
   {
     id: 27,
-    name: 'chaos_papulatus',
+    name: 'papulatus',
     difficulties: [
       {
         difficulty: 'chaos',
@@ -530,31 +530,3 @@ export default [
     enterTime: 1,
   },
 ]
-
-Arkarium.png
-Black_Mage.png
-Crimson_Queen.png
-Cross.png
-Cygnus.png
-Damien.png
-Gloom.png
-Gollux.png
-Guard_Captain_Darknell.png
-Hilla.png
-Horntail.png
-Julieta.png
-Lotus.png
-Lucid.png
-Magnus.png
-Mori_Ranmaru.png
-OMNI - CLN.png
-Papulatus.png
-Pierre.png
-Pink_Bean.png
-Princess_No.png
-Vellum.png
-Verus_Hilla.png
-Von_Bon.png
-Von_Leon.png
-Will.png
-Zakum.png
