@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@ant-design/charts": "1.0.0",
+    "@ant-design/icons": "^4.3.0",
     "@next/bundle-analyzer": "^9.5.3",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-less": "^1.0.1",
