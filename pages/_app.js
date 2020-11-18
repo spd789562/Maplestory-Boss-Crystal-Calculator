@@ -2,11 +2,12 @@ import { Fragment } from 'react'
 import App from 'next/app'
 import Head from 'next/head'
 import { Layout, BackTop } from 'antd'
-import { appWithTranslation, withTranslation } from '../src/i18n'
-import '../styles/antd.less'
-import '../styles/globals.css'
+import { appWithTranslation, withTranslation } from '@i18n'
+import { Provider } from '@store'
+import '@styles/antd.less'
+import '@styles/globals.css'
 
-import styles from '../styles/Home.module.css'
+import styles from '@styles/Home.module.css'
 
 const NextHead = withTranslation('index')(({ t, i18n: { language } }) => (
   <Head>
@@ -61,7 +62,9 @@ function MyApp({ Component, pageProps }) {
       <NextHead />
       <Layout>
         <BackTop />
-        <Component {...pageProps} />
+        <Provider>
+          <Component {...pageProps} />
+        </Provider>
         <AppFooter />
       </Layout>
     </Fragment>

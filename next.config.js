@@ -58,6 +58,7 @@ module.exports = composeConfig(
     }
 
     config.plugins.push(new MomentLocalesPlugin())
+    config.resolve.modules.push(path.resolve('./'))
 
     return config
   },
