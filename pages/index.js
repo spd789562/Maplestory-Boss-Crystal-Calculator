@@ -3,6 +3,7 @@ import { Layout, Select, Button } from 'antd'
 
 /* component */
 import GoogleAD from '../src/component/google-ad'
+import BossList from '@components/boss-list'
 
 /* mapping */
 
@@ -63,7 +64,9 @@ function Home({ t, i18n }) {
           </div>
         </div>
       </Header>
-      <Content className={styles.content}></Content>
+      <Content className={styles.content}>
+        <BossList />
+      </Content>
       {/* <Content className={styles.content}>
         <div className={styles.info}>
           <div className={styles['info-text']}>
