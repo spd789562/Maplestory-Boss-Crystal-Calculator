@@ -1,18 +1,9 @@
-import { Fragment } from 'react'
-
-/* store */
-import { useStore } from '@store'
-import { TOGGLE_BOSS_DEEATABLE } from '@store/boss'
-
 /* components */
 import { List, Card } from 'antd'
 import Item from './item'
 
 /* i18n */
 import { withTranslation } from '@i18n'
-
-/* utils */
-import { find, propEq } from 'ramda'
 
 /* mapping */
 import BossesMapping from '@mapping/bosses-crystal'
