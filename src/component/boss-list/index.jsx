@@ -1,6 +1,9 @@
 /* components */
-import { List, Card } from 'antd'
+import { List, Card, Space } from 'antd'
 import Item from './item'
+
+/* components */
+import OptionSelect from './option-select'
 
 /* i18n */
 import { withTranslation } from '@i18n'
@@ -10,14 +13,20 @@ import BossesMapping from '@mapping/bosses-crystal'
 
 const BossList = () => {
   return (
-    <Card title="boss_list">
-      <List
-        style={{ backgroundColor: '#fff' }}
-        bordered
-        dataSource={BossesMapping}
-        renderItem={(item) => <Item {...item} />}
-      />
-    </Card>
+    <List
+      style={{ backgroundColor: '#fff' }}
+      bordered
+      dataSource={BossesMapping}
+      header={
+        <div style={{ display: 'flex' }}>
+          defeatable
+          <Space style={{ marginLeft: 'auto' }}>
+            <OptionSelect />
+          </Space>
+        </div>
+      }
+      renderItem={(item) => <Item {...item} />}
+    />
   )
 }
 
