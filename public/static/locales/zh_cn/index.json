@@ -2,7 +2,52 @@
   "title": "力量结晶计算机",
 
   "seo_desc": "冒险岛力量结晶计算机，计算当周60个力量结晶的最佳选择",
-  
+
+  "display_options": "显示选项",
+  "difficulty": "难度",
+  "partyCount": "人数",
+  "defeatTime": "次数",
+
+  "optimal_result": "当前最佳结果",
+  "name": "名称",
+  "count": "次数",
+  "mesos": "枫币",
+  "total": "总和",
+
+  "defeatable": "可击杀",
+
+  "easy":"简单",
+  "normal":"普通",
+  "hard":"困难",
+  "chaos":"混沌",
+
+  "zakum": "炎魔",
+  "magnus": "梅格奈斯",
+  "hilla": "希拉",
+  "mori_ranmaru": "森兰丸",
+  "cross": "库洛斯",
+  "princess_no": "浓姬",
+  "julieta": "茱丽伊特",
+  "omni_cln": "卡翁",
+  "von_bon": "班班",
+  "pierre": "比艾乐",
+  "crimson_queen": "血腥皇后",
+  "vellum": "贝伦",
+  "von_leon": "凡雷恩",
+  "horntail": "暗黑龙王",
+  "arkarium": "阿卡伊农",
+  "pink_bean": "皮卡啾",
+  "cygnus": "西格诺斯",
+  "papulatus": "拉图斯",
+  "lotus": "史乌",
+  "damien": "戴米安",
+  "lucid": "露希妲",
+  "will": "威尔",
+  "gloom": "戴斯克",
+  "verus_hilla": "真．希拉",
+  "guard_captain_darknell": "顿凯尔",
+  "black_mage":"黑魔法师",
+
   "page_not_found": "无此页面",
   "error_with_status": "A {{statusCode}} error occurred on server",
   "error_without_status": "An error occurred on the server"
