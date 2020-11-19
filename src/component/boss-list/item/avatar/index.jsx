@@ -16,13 +16,16 @@ import { find, pipe, prop, propEq } from 'ramda'
 
 const matchStorageData = (id) => find(propEq('id', id))
 
+const preventClick = (e) => e.stopPropagation()
+
 const BossAvatar = ({ id, name }) => {
   const dispatch = useDispatch()
   const defeatable = useStroeSelector(
     'boss',
     pipe(matchStorageData(id), prop('defeatable'))
   )
-  const handleToggleDefeatable = () => () => {
+  const handleToggleDefeatable = () => (e) => {
+    e.stopPropagation()
     dispatch({ type: TOGGLE_BOSS_DEFEATABLE, payload: id })
   }
   return (
@@ -41,6 +44,7 @@ const BossAvatar = ({ id, name }) => {
             />
           )
         }
+        onClick={preventClick}
       >
         <div
           className={`boss-avatar boss-avatar__${

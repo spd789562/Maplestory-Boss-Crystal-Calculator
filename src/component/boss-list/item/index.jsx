@@ -30,6 +30,7 @@ const BossItem = ({
         <PartyCount id={id} />,
         <DefeatTime id={id} defeatType={defeatType} />,
       ]}
+      className="boss-list-item"
     >
       <List.Item.Meta
         avatar={<Avatar id={id} name={name} />}
@@ -44,7 +45,7 @@ const BossItem = ({
         description={<Mesos id={id} name={name} difficulties={difficulties} />}
       />
       <style jsx global>{`
-        .ant-list-item:hover {
+        .boss-list-item:hover {
           background-color: #f7f7f7;
         }
       `}</style>

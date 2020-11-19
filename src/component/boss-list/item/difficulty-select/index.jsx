@@ -15,6 +15,7 @@ import { withTranslation } from '@i18n'
 import { find, pipe, prop, propEq } from 'ramda'
 
 const matchStorageData = (id) => find(propEq('id', id))
+const preventClick = (e) => e.stopPropagation()
 
 const DifficultySelect = ({ id, difficulties }) => {
   const dispatch = useDispatch()
@@ -34,7 +35,7 @@ const DifficultySelect = ({ id, difficulties }) => {
     })
   }
   return (
-    <Space>
+    <Space onClick={preventClick}>
       <DashboardOutlined />
       <Select defaultValue={difficulty} onChange={handleChange}>
         {difficulties.map(({ difficulty: bossDifficulty }) => (

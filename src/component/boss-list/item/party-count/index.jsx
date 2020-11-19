@@ -16,6 +16,8 @@ import { find, pipe, prop, propEq } from 'ramda'
 
 const matchStorageData = (id) => find(propEq('id', id))
 
+const preventClick = (e) => e.stopPropagation()
+
 const MAX_PARTY_COUNT = 6
 
 const PartyCount = ({ id }) => {
@@ -38,7 +40,7 @@ const PartyCount = ({ id }) => {
     }
   }
   return (
-    <Space>
+    <Space onClick={preventClick}>
       <UsergroupAddOutlined />
       <InputNumber
         min={1}

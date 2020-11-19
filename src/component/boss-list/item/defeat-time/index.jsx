@@ -15,6 +15,7 @@ import { withTranslation } from '@i18n'
 import { find, pipe, prop, propEq } from 'ramda'
 
 const matchStorageData = (id) => find(propEq('id', id))
+const preventClick = (e) => e.stopPropagation()
 
 const DefeatTime = ({ id, defeatType = 'day' }) => {
   const dispatch = useDispatch()
@@ -37,7 +38,7 @@ const DefeatTime = ({ id, defeatType = 'day' }) => {
     }
   }
   return (
-    <Space>
+    <Space onClick={preventClick}>
       <CheckOutlined />
       <InputNumber
         style={{ width: 60 }}
