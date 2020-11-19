@@ -71,7 +71,7 @@ export default [
         mesos: 11250000,
       },
     ],
-    defeatType: 'day',
+    defeatType: 'week',
     defeatTime: 1,
   },
   // 森蘭丸
@@ -160,7 +160,7 @@ export default [
     difficulties: [
       {
         difficulty: 'normal',
-        mesos: 9680000,
+        mesos: 968000,
       },
     ],
     defeatType: 'day',
@@ -173,7 +173,7 @@ export default [
     difficulties: [
       {
         difficulty: 'normal',
-        mesos: 9680000,
+        mesos: 968000,
       },
     ],
     defeatType: 'day',
@@ -186,7 +186,7 @@ export default [
     difficulties: [
       {
         difficulty: 'normal',
-        mesos: 9680000,
+        mesos: 968000,
       },
     ],
     defeatType: 'day',
@@ -199,7 +199,7 @@ export default [
     difficulties: [
       {
         difficulty: 'normal',
-        mesos: 9680000,
+        mesos: 968000,
       },
     ],
     defeatType: 'day',
@@ -484,6 +484,7 @@ export default [
   {
     id: 33,
     name: 'verus_hilla',
+    withoutDifficulty: true,
     difficulties: [
       {
         difficulty: 'hard',
@@ -518,6 +519,7 @@ export default [
   {
     id: 35,
     name: 'black_mage',
+    withoutDifficulty: true,
     difficulties: [
       {
         difficulty: 'hard',
