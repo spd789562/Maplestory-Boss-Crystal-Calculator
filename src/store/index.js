@@ -10,7 +10,7 @@ import { combineReducer } from './_helper'
 import bossReducer from './boss'
 import metaReducer from './meta'
 
-import { isNil, prop, curry, path, pickAll } from 'ramda'
+import { isNil, prop, curry, path, pickAll, pipe } from 'ramda'
 
 const GlobalStore = createContext({})
 
@@ -36,6 +36,9 @@ export const Provider = ({ children }) => {
 // export const useDispatch = () => useContext(GlobalStore).dispatch
 export const useDispatch = () =>
   useContextSelector(GlobalStore, prop('dispatch'))
+
+export const useStroeSelector = (field, selector) =>
+  useContextSelector(GlobalStore, pipe(prop(field), selector))
 
 export const useStore = (keyPath, initialValue = null) => {
   const dispatch = useDispatch()
