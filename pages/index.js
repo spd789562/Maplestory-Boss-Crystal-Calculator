@@ -1,9 +1,15 @@
 import React, { Fragment, useCallback, useEffect } from 'react'
 import { Layout, Select, Button } from 'antd'
 
+/* store */
+import { useDispatch } from '@store'
+import { INIT_BOSS_DATA } from '@store/boss'
+
 /* component */
+import { Row, Col } from 'antd'
 import GoogleAD from '../src/component/google-ad'
 import BossList from '@components/boss-list'
+import OptimalTable from '@components/optimal-table'
 
 /* mapping */
 
@@ -21,16 +27,11 @@ const storageKey = 'MAPLESTORE_BOSS_CRYSTAL_CALCULATOR_DATA'
 const initialValues = {}
 
 function Home({ t, i18n }) {
-  const handleSaveToStorage = useCallback(
-    debounce(1000, (_, AllData) => {
-      process.browser &&
-        window.localStorage.setItem(storageKey, JSON.stringify(AllData))
-    }),
-    []
-  )
+  const dispatch = useDispatch()
   useEffect(() => {
     if (process.browser) {
-      // JSON.parse(window.localStorage.getItem(storageKey)) || initialValues
+      const data = JSON.parse(window.localStorage.getItem(storageKey))
+      data.length && dispatch({ type: INIT_BOSS_DATA, payload: data })
     }
   }, [])
   return (
@@ -65,7 +66,14 @@ function Home({ t, i18n }) {
         </div>
       </Header>
       <Content className={styles.content}>
-        <BossList />
+        <Row gutter={[8, 8]}>
+          <Col span={24}>
+            <BossList />
+          </Col>
+          <Col span={24}>
+            <OptimalTable />
+          </Col>
+        </Row>
       </Content>
       {/* <Content className={styles.content}>
         <div className={styles.info}>
