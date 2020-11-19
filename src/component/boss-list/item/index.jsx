@@ -26,6 +26,7 @@ const BossItem = ({
   difficulties,
   withoutDifficulty,
   defeatType,
+  defeatTime,
 }) => {
   const [bossOptions] = useStore('meta.bossOptions')
   const hasDifficultySelect = difficulties.length > 1
@@ -36,7 +37,9 @@ const BossItem = ({
     actions.push(<DifficultySelect id={id} difficulties={difficulties} />)
   hasOptions('partyCount') && actions.push(<PartyCount id={id} />)
   hasOptions('defeatTime') &&
-    actions.push(<DefeatTime id={id} defeatType={defeatType} />)
+    actions.push(
+      <DefeatTime id={id} defeatType={defeatType} defeatTime={defeatTime} />
+    )
 
   return (
     <List.Item actions={actions} className="boss-list-item">
