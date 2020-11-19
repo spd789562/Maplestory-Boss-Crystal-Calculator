@@ -17,19 +17,23 @@
   text-align: center;
 }
 
-@media screen and (max-width: 1599px) {
+@media screen and (max-width: 1199px) {
   .header-container,
   .footer {
     padding-left: 1rem;
     padding-right: 1rem;
   }
+  .content {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
 }
 
-@media screen and (min-width: 1600px) {
+@media screen and (min-width: 1200px) {
   .header-container,
   .content {
     width: 100%;
-    max-width: 1600px;
+    max-width: 1200px;
     margin-right: auto;
     margin-left: auto;
   }

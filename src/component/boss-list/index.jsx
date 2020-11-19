@@ -11,7 +11,7 @@ import { withTranslation } from '@i18n'
 /* mapping */
 import BossesMapping from '@mapping/bosses-crystal'
 
-const BossList = () => {
+const BossList = ({ t }) => {
   return (
     <List
       style={{ backgroundColor: '#fff' }}
@@ -19,7 +19,7 @@ const BossList = () => {
       dataSource={BossesMapping}
       header={
         <div style={{ display: 'flex' }}>
-          defeatable
+          {t('defeatable')}
           <Space style={{ marginLeft: 'auto' }}>
             <OptionSelect />
           </Space>

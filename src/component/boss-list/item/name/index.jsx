@@ -3,18 +3,23 @@ import { memo } from 'react'
 /* store */
 import { useStroeSelector } from '@store'
 
+/* i18n */
+import { withTranslation } from '@i18n'
+
 /* utils */
 import { find, pipe, prop, propEq } from 'ramda'
 
 const matchStorageData = (id) => find(propEq('id', id))
 
-const BossName = ({ id, name, difficulties, withoutDifficulty }) => {
+const BossName = ({ id, name, difficulties, withoutDifficulty, t }) => {
   const difficulty = useStroeSelector(
     'boss',
     pipe(matchStorageData(id), prop('difficulty'))
   )
 
-  return <span>{withoutDifficulty ? name : `${difficulty}_${name}`}</span>
+  return (
+    <span>{withoutDifficulty ? t(name) : `${t(difficulty)}${t(name)}`}</span>
+  )
 }
 
-export default memo(BossName)
+export default withTranslation('index')(memo(BossName))

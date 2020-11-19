@@ -27,6 +27,7 @@ const BossItem = ({
   withoutDifficulty,
   defeatType,
   defeatTime,
+  t,
 }) => {
   const [bossOptions] = useStore('meta.bossOptions')
   const hasDifficultySelect = difficulties.length > 1
@@ -51,6 +52,7 @@ const BossItem = ({
             name={name}
             difficulties={difficulties}
             withoutDifficulty={withoutDifficulty}
+            t={t}
           />
         }
         description={<Mesos id={id} name={name} difficulties={difficulties} />}

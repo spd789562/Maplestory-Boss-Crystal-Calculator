@@ -17,7 +17,7 @@ import { find, pipe, prop, propEq } from 'ramda'
 const matchStorageData = (id) => find(propEq('id', id))
 const preventClick = (e) => e.stopPropagation()
 
-const DifficultySelect = ({ id, difficulties }) => {
+const DifficultySelect = ({ id, difficulties, t }) => {
   const dispatch = useDispatch()
   const difficulty = useStroeSelector(
     'boss',
@@ -40,7 +40,7 @@ const DifficultySelect = ({ id, difficulties }) => {
       <Select defaultValue={difficulty} onChange={handleChange}>
         {difficulties.map(({ difficulty: bossDifficulty }) => (
           <Select.Option key={`${id}-${bossDifficulty}`} value={bossDifficulty}>
-            {bossDifficulty}
+            {t(bossDifficulty).trim()}
           </Select.Option>
         ))}
       </Select>
