@@ -1,6 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 
-import { GOOGlE_AD_ID, GOOGlE_ANALYTICS_ID } from '../src/config'
+import { GOOGLE_AD_ID, GOOGLE_ANALYTICS_ID } from '../src/config'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -14,12 +14,12 @@ class MyDocument extends Document {
         <Head>
           {/* <script
             async
-            data-ad-client={`ca-pub-${GOOGlE_AD_ID}`}
+            data-ad-client={`ca-pub-${GOOGLE_AD_ID}`}
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
           ></script> */}
           <script
             async
-            src={`https://www.googletagmanager.com/gtag/js?id=${GOOGlE_ANALYTICS_ID}`}
+            src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`}
           />
           <script
             dangerouslySetInnerHTML={{
