@@ -16,6 +16,7 @@ import BossMapping from '@mapping/bosses-crystal'
 export const INIT_BOSS_DATA = 'INIT_BOSS_DATA'
 export const TOGGLE_BOSS_DEFEATABLE = 'TOGGLE_BOSS_DEFEATABLE'
 export const UPDATE_BOSS_DATA = 'UPDATE_BOSS_DATA'
+export const RESET_BOSS_DATA = 'RESET_BOSS_DATA'
 
 const storageKey = 'MAPLESTORE_BOSS_CRYSTAL_CALCULATOR_DATA'
 
@@ -30,7 +31,7 @@ const saveToStroage = (state) => {
 
 const initialState = BossMapping.map(({ id, difficulties }) => ({
   id,
-  defeatable: true,
+  defeatable: false,
   partyCount: 1,
   defeatTime: 0,
   difficulty: difficulties[difficulties.length - 1].difficulty,
@@ -51,6 +52,7 @@ const reducer = reducerCreator(initialState, {
       (index) => update(index, mergeRight(state[index], payload.data), state),
       saveToStroage
     )(state),
+  [RESET_BOSS_DATA]: () => initialState,
 })
 
 export default {

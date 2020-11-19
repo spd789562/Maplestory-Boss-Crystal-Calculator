@@ -3,7 +3,7 @@ import { Layout, Select, Button } from 'antd'
 
 /* store */
 import { useDispatch } from '@store'
-import { INIT_BOSS_DATA } from '@store/boss'
+import { INIT_BOSS_DATA, RESET_BOSS_DATA } from '@store/boss'
 
 /* component */
 import { Row, Col } from 'antd'
@@ -34,6 +34,9 @@ function Home({ t, i18n }) {
       data.length && dispatch({ type: INIT_BOSS_DATA, payload: data })
     }
   }, [])
+  const handelReset = () => {
+    dispatch({ type: RESET_BOSS_DATA })
+  }
   return (
     <Fragment>
       <Header className={styles.header}>
@@ -43,13 +46,7 @@ function Home({ t, i18n }) {
             &nbsp;
           </h2>
           <div style={{ marginLeft: 'auto' }}>
-            <Button
-              onClick={() => {
-                form.resetFields()
-                handleSaveToStorage({}, initialValues)
-              }}
-              style={{ marginRight: '.5rem' }}
-            >
+            <Button onClick={handelReset} style={{ marginRight: '.5rem' }}>
               {t('reset')}
             </Button>
             <Select
