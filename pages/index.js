@@ -1,8 +1,15 @@
 import React, { Fragment, useCallback, useEffect } from 'react'
 import { Layout, Select, Button } from 'antd'
 
+/* store */
+import { useDispatch } from '@store'
+import { INIT_BOSS_DATA, RESET_BOSS_DATA } from '@store/boss'
+
 /* component */
+import { Row, Col } from 'antd'
 import GoogleAD from '../src/component/google-ad'
+import BossList from '@components/boss-list'
+import OptimalTable from '@components/optimal-table'
 
 /* mapping */
 
@@ -20,18 +27,16 @@ const storageKey = 'MAPLESTORE_BOSS_CRYSTAL_CALCULATOR_DATA'
 const initialValues = {}
 
 function Home({ t, i18n }) {
-  const handleSaveToStorage = useCallback(
-    debounce(1000, (_, AllData) => {
-      process.browser &&
-        window.localStorage.setItem(storageKey, JSON.stringify(AllData))
-    }),
-    []
-  )
+  const dispatch = useDispatch()
   useEffect(() => {
     if (process.browser) {
-      // JSON.parse(window.localStorage.getItem(storageKey)) || initialValues
+      const data = JSON.parse(window.localStorage.getItem(storageKey))
+      data.length && dispatch({ type: INIT_BOSS_DATA, payload: data })
     }
   }, [])
+  const handelReset = () => {
+    dispatch({ type: RESET_BOSS_DATA })
+  }
   return (
     <Fragment>
       <Header className={styles.header}>
@@ -41,13 +46,7 @@ function Home({ t, i18n }) {
             &nbsp;
           </h2>
           <div style={{ marginLeft: 'auto' }}>
-            <Button
-              onClick={() => {
-                form.resetFields()
-                handleSaveToStorage({}, initialValues)
-              }}
-              style={{ marginRight: '.5rem' }}
-            >
+            <Button onClick={handelReset} style={{ marginRight: '.5rem' }}>
               {t('reset')}
             </Button>
             <Select
@@ -63,7 +62,16 @@ function Home({ t, i18n }) {
           </div>
         </div>
       </Header>
-      <Content className={styles.content}></Content>
+      <Content className={styles.content}>
+        <Row gutter={[8, 8]}>
+          <Col span={24}>
+            <BossList />
+          </Col>
+          <Col span={24}>
+            <OptimalTable />
+          </Col>
+        </Row>
+      </Content>
       {/* <Content className={styles.content}>
         <div className={styles.info}>
           <div className={styles['info-text']}>
