@@ -67,6 +67,7 @@ const BossAvatar = ({ id, name }) => {
           border-width: 3px;
           cursor: pointer;
           overflow: hidden;
+          transition: border-color 0.3s ease;
         }
         .boss-avatar__defeatable {
           border-color: #52c41a;
