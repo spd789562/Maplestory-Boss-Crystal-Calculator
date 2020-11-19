@@ -7,4 +7,5 @@ export default BossMapping.reduce((bosses, boss) => {
   boss.difficulties.forEach(
     ({ difficulty, mesos }) => (bosses[boss.name][difficulty] = mesos)
   )
+  return bosses
 }, {})

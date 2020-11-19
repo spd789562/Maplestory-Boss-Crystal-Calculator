@@ -2,6 +2,8 @@ import { memo } from 'react'
 
 /* components */
 import { List } from 'antd'
+import Name from './name'
+import Mesos from './mesos'
 import Avatar from './avatar'
 import DefeatTime from './defeat-time'
 import PartyCount from './party-count'
@@ -32,9 +34,20 @@ const BossItem = ({
       <List.Item.Meta
         avatar={<Avatar id={id} name={name} />}
         title={
-          withoutDifficulty ? name : `${difficulties[0].difficulty}_${name}`
+          <Name
+            id={id}
+            name={name}
+            difficulties={difficulties}
+            withoutDifficulty={withoutDifficulty}
+          />
         }
+        description={<Mesos id={id} name={name} difficulties={difficulties} />}
       />
+      <style jsx global>{`
+        .ant-list-item:hover {
+          background-color: #f7f7f7;
+        }
+      `}</style>
     </List.Item>
   )
 }
