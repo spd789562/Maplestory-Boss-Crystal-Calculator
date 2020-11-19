@@ -30,9 +30,15 @@ const BossAvatar = ({ id, name }) => {
       <Badge
         count={
           defeatable ? (
-            <CheckCircleTwoTone twoToneColor="#52c41a" />
+            <CheckCircleTwoTone
+              twoToneColor="#52c41a"
+              style={{ fontSize: 18 }}
+            />
           ) : (
-            <CloseCircleTwoTone twoToneColor="#f5222d" />
+            <CloseCircleTwoTone
+              twoToneColor="#f5222d"
+              style={{ fontSize: 18 }}
+            />
           )
         }
       >
@@ -42,7 +48,7 @@ const BossAvatar = ({ id, name }) => {
           }`}
           onClick={handleToggleDefeatable(id)}
         >
-          <Avatar shape="square" src={`/boss/${name}.png`} />
+          <Avatar shape="square" src={`/boss/${name}.png`} size={48} />
         </div>
       </Badge>
 
@@ -54,7 +60,7 @@ const BossAvatar = ({ id, name }) => {
         .boss-avatar {
           border-radius: 6px;
           border-style: solid;
-          border-width: 2px;
+          border-width: 3px;
           cursor: pointer;
           overflow: hidden;
         }
