@@ -101,15 +101,16 @@ const useTableData = (t) => {
   )(BossMapping)
 
   const totalMesos = mergedData.reduce((total, { mesos }) => total + mesos, 0)
+  const totalCount = mergedData.reduce((total, { count }) => total + count, 0)
   return {
     tableData: map(evolve({ mesos: numberFormat }), mergedData),
-    remainCount,
+    totalCount,
     totalMesos: numberFormat(totalMesos),
   }
 }
 
 const OptimalTable = ({ t }) => {
-  const { tableData, remainCount, totalMesos } = useTableData(t)
+  const { tableData, totalCount, totalMesos } = useTableData(t)
   return (
     <Table
       columns={columns.map(evolve({ title: t }))}
@@ -121,7 +122,7 @@ const OptimalTable = ({ t }) => {
         <Table.Summary.Row>
           <Table.Summary.Cell>{t('total')}</Table.Summary.Cell>
           <Table.Summary.Cell>
-            <div style={{ textAlign: 'center' }}>{remainCount}</div>
+            <div style={{ textAlign: 'center' }}>{totalCount}</div>
           </Table.Summary.Cell>
           <Table.Summary.Cell>
             <div style={{ textAlign: 'right' }}>{totalMesos}</div>

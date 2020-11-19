@@ -52,7 +52,6 @@ const BossItem = ({
             name={name}
             difficulties={difficulties}
             withoutDifficulty={withoutDifficulty}
-            t={t}
           />
         }
         description={<Mesos id={id} name={name} difficulties={difficulties} />}
