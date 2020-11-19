@@ -31,7 +31,7 @@ function Home({ t, i18n }) {
   useEffect(() => {
     if (process.browser) {
       const data = JSON.parse(window.localStorage.getItem(storageKey))
-      data.length && dispatch({ type: INIT_BOSS_DATA, payload: data })
+      data && data.length && dispatch({ type: INIT_BOSS_DATA, payload: data })
     }
   }, [])
   const handelReset = () => {
