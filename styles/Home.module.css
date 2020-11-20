@@ -17,6 +17,16 @@
   text-align: center;
 }
 
+.info {
+  width: 100%;
+  background-color: #fff;
+}
+.info-text {
+  text-align: center;
+  color: #aaa;
+  font-size: 12px;
+}
+
 @media screen and (max-width: 1199px) {
   .header-container,
   .footer {

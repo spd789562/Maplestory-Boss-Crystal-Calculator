@@ -72,14 +72,14 @@ function Home({ t, i18n }) {
           </Col>
         </Row>
       </Content>
-      {/* <Content className={styles.content}>
+      <Content className={styles.content}>
         <div className={styles.info}>
           <div className={styles['info-text']}>
             {t('just_a_advertisement')}(´・ω・`)
           </div>
           <GoogleAD />
         </div>
-      </Content> */}
+      </Content>
     </Fragment>
   )
 }

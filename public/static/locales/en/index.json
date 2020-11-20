@@ -48,6 +48,8 @@
   "guard_captain_darknell": "Guard Captain Darknell",
   "black_mage":"Black Mage",
 
+  "just_a_advertisement": "Just a advertisement woundn't hurt",
+
   "page_not_found": "Page Not Found",
   "error_with_status": "A {{statusCode}} error occurred on server",
   "error_without_status": "An error occurred on the server"
