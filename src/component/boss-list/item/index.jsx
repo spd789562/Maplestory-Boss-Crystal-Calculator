@@ -32,7 +32,7 @@ const BossItem = ({
   defeatTime,
   enterShareId,
 }) => {
-  const [bossOptions, dispatch] = useStore('meta.bossOptions')
+  const [{ bossOptions, advanced }, dispatch] = useStore('meta')
   const defeatDate = useStroeSelector(
     'boss',
     pipe(matchStorageData(id), prop('defeatDate'))
@@ -55,7 +55,7 @@ const BossItem = ({
     )
 
   const handleDefeat = () => {
-    if (!defeatDate) {
+    if (!defeatDate && advanced) {
       dispatch({ type: SET_BOSS_DEFEATED, payload: id })
     }
   }
@@ -78,12 +78,14 @@ const BossItem = ({
         }
         description={<Mesos id={id} name={name} difficulties={difficulties} />}
       />
-      <Defeated
-        id={id}
-        defeatType={defeatType}
-        defeatTime={defeatTime}
-        enterShareId={enterShareId}
-      />
+      {advanced && (
+        <Defeated
+          id={id}
+          defeatType={defeatType}
+          defeatTime={defeatTime}
+          enterShareId={enterShareId}
+        />
+      )}
       <style jsx global>{`
         .boss-list-item {
           position: relative;

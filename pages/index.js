@@ -10,6 +10,7 @@ import { Row, Col } from 'antd'
 import GoogleAD from '../src/component/google-ad'
 import BossList from '@components/boss-list'
 import OptimalTable from '@components/optimal-table'
+import SettingCard from '@components/setting-cards'
 
 /* mapping */
 
@@ -64,6 +65,9 @@ function Home({ t, i18n }) {
       </Header>
       <Content className={styles.content}>
         <Row gutter={[8, 8]}>
+          <Col span={24}>
+            <SettingCard />
+          </Col>
           <Col span={24}>
             <BossList />
           </Col>
