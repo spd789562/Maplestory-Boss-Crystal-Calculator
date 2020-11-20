@@ -16,6 +16,10 @@
 
   "defeatable": "可击杀",
 
+  "defeated_on": "击杀于",
+  "today_was_entered": "今日已进入",
+  "is_out_of_times": "已达次数上限",
+
   "easy":"简单",
   "normal":"普通",
   "hard":"困难",

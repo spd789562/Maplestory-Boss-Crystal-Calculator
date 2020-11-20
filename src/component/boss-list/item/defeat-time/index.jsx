@@ -52,12 +52,15 @@ const DefeatTime = ({
   }
   const handleChange = (value) => {
     if (value >= 0 && value <= maxTime) {
+      // log defeatDate when reach maxTime
+      const defeatDate = value === maxTime ? new Date().getTime() : 0
       dispatch({
         type: UPDATE_BOSS_DATA,
         payload: {
           id,
           data: {
             defeatTime: value,
+            defeatDate,
           },
         },
       })

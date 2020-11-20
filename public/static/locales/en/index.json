@@ -16,6 +16,10 @@
 
   "defeatable": "Defeatable",
 
+  "defeated_on": "Defeated on",
+  "today_was_entered": "Today was enter",
+  "is_out_of_times": "Out of count",
+
   "easy":"Easy ",
   "normal":"Normal ",
   "hard":"Hard ",
