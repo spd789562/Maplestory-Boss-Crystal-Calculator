@@ -12,22 +12,44 @@ import { CheckOutlined } from '@ant-design/icons'
 import { withTranslation } from '@i18n'
 
 /* utils */
-import { find, pipe, prop, propEq, pick } from 'ramda'
+import { __, curry, find, pipe, prop, map, propEq, pick } from 'ramda'
 
-const matchStorageData = (id) => find(propEq('id', id))
+/* mapping */
+import BossMapping from '@mapping/bosses-crystal'
+
+const matchStorageData = (id) => curry(find(propEq('id', id)))
+const findBossMapping = (id) => matchStorageData(id)(BossMapping)
+const defineMaxTime = (type, time) => (type === 'day' ? 7 : 1) * time
 const preventClick = (e) => e.stopPropagation()
 
 const DefeatTime = ({
   id,
   defeatType = 'day',
   defeatTime: defeatTypeTime = 1,
+  enterShareId,
 }) => {
   const dispatch = useDispatch()
-  const { defeatTime, defeatable } = useStroeSelector(
+  const [{ defeatTime, defeatable }, sharedBoss] = useStroeSelector(
     'boss',
-    pipe(matchStorageData(id), pick(['defeatTime', 'defeatable']))
+    pipe(
+      (bosses) => [
+        matchStorageData(id)(bosses),
+        ...(enterShareId ? [matchStorageData(enterShareId)(bosses)] : []),
+      ],
+      map(pick(['id', 'defeatTime', 'defeatable']))
+    )
   )
-  const maxTime = (defeatType === 'day' ? 7 : 1) * defeatTypeTime
+  let maxTime = defineMaxTime(defeatType, defeatTypeTime)
+  if (sharedBoss) {
+    const sharedBossData = findBossMapping(sharedBoss.id)
+    const sharedBossMaxTime = defineMaxTime(
+      sharedBossData.defeatType,
+      sharedBossData.defeatTime
+    )
+    const bigMaxTime = Math.max(maxTime, sharedBossMaxTime)
+    const withoutSelfRemainTime = bigMaxTime - sharedBoss.defeatTime
+    maxTime = Math.min(maxTime, withoutSelfRemainTime)
+  }
   const handleChange = (value) => {
     if (value >= 0 && value <= maxTime) {
       dispatch({
@@ -48,6 +70,7 @@ const DefeatTime = ({
         style={{ width: 60 }}
         precision={0}
         max={maxTime}
+        min={0}
         value={defeatTime}
         onChange={handleChange}
         disabled={!defeatable}

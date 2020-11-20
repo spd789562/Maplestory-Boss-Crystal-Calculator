@@ -108,7 +108,7 @@ export default [
         mesos: 1342000,
       },
     ],
-    defeatType: 'day',
+    defeatType: 'week',
     defeatTime: 1,
   },
   // 濃姬
@@ -328,6 +328,7 @@ export default [
     ],
     defeatType: 'day',
     defeatTime: 1,
+    enterShareId: 24,
   },
   // 混沌皮卡啾
   {
@@ -341,6 +342,7 @@ export default [
     ],
     defeatType: 'week',
     defeatTime: 1,
+    enterShareId: 23,
   },
   // 西格諾斯
   {
