@@ -16,6 +16,14 @@
 
   "defeatable": "Defeatable",
 
+  "defeated_on": "Defeated on",
+  "today_was_entered": "Today was enter",
+  "is_out_of_times": "Out of count",
+
+  "advanced_mode": "Advance Mode",
+  "advanced_mode_description": "Advance Mode allow you able to click boss and recode time",
+  "game_region": "Region",
+
   "easy":"Easy ",
   "normal":"Normal ",
   "hard":"Hard ",
@@ -47,6 +55,8 @@
   "verus_hilla": "Verus Hilla",
   "guard_captain_darknell": "Guard Captain Darknell",
   "black_mage":"Black Mage",
+
+  "just_a_advertisement": "Just a advertisement woundn't hurt",
 
   "page_not_found": "Page Not Found",
   "error_with_status": "A {{statusCode}} error occurred on server",

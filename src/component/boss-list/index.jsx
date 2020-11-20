@@ -1,12 +1,17 @@
-/* components */
-import { List, Card, Space } from 'antd'
-import Item from './item'
+/* store */
+import { useStroeSelector, useDispatch } from '@store'
 
 /* components */
+import { List, Checkbox, Space } from 'antd'
+import Item from './item'
 import OptionSelect from './option-select'
+import SelectAll from './select-all'
 
 /* i18n */
 import { withTranslation } from '@i18n'
+
+/* utils */
+import { identity, pipe, prop } from 'ramda'
 
 /* mapping */
 import BossesMapping from '@mapping/bosses-crystal'
@@ -19,7 +24,7 @@ const BossList = ({ t }) => {
       dataSource={BossesMapping}
       header={
         <div style={{ display: 'flex' }}>
-          {t('defeatable')}
+          <SelectAll />
           <Space style={{ marginLeft: 'auto' }}>
             <OptionSelect />
           </Space>

@@ -8,14 +8,20 @@ import {
   propEq,
   not,
   update,
+  map,
   mergeRight,
+  F,
+  T,
 } from 'ramda'
 
 import BossMapping from '@mapping/bosses-crystal'
 
 export const INIT_BOSS_DATA = 'INIT_BOSS_DATA'
 export const TOGGLE_BOSS_DEFEATABLE = 'TOGGLE_BOSS_DEFEATABLE'
+export const SET_ALL_BOSS_DEFEATABLE = 'SET_ALL_BOSS_DEFEATABLE'
 export const UPDATE_BOSS_DATA = 'UPDATE_BOSS_DATA'
+export const SET_BOSS_DEFEATED = 'SET_BOSS_DEFEATED'
+export const CANCEL_BOSS_DEFEATED = 'CANCEL_BOSS_DEFEATED'
 export const RESET_BOSS_DATA = 'RESET_BOSS_DATA'
 
 const storageKey = 'MAPLESTORE_BOSS_CRYSTAL_CALCULATOR_DATA'
@@ -46,13 +52,48 @@ const reducer = reducerCreator(initialState, {
         update(index, evolve({ defeatable: not }, state[index]), state),
       saveToStroage
     )(state),
+  [SET_ALL_BOSS_DEFEATABLE]: (state, payload) =>
+    pipe(map(evolve({ defeatable: payload ? T : F })), saveToStroage)(state),
   [UPDATE_BOSS_DATA]: (state, payload) =>
     pipe(
       findBossIndexById(payload.id),
       (index) => update(index, mergeRight(state[index], payload.data), state),
       saveToStroage
     )(state),
-  [RESET_BOSS_DATA]: () => initialState,
+  [SET_BOSS_DEFEATED]: (state, payload) =>
+    pipe(
+      findBossIndexById(payload),
+      (index) =>
+        update(
+          index,
+          mergeRight(
+            state[index],
+            state[index].defeatable
+              ? {
+                  defeatDate: new Date().getTime(),
+                  defeatTime: state[index].defeatTime + 1,
+                }
+              : {}
+          ),
+          state
+        ),
+      saveToStroage
+    )(state),
+  [CANCEL_BOSS_DEFEATED]: (state, payload) =>
+    pipe(
+      findBossIndexById(payload),
+      (index) =>
+        update(
+          index,
+          mergeRight(state[index], {
+            defeatDate: 0,
+            defeatTime: state[index].defeatTime - 1,
+          }),
+          state
+        ),
+      saveToStroage
+    )(state),
+  [RESET_BOSS_DATA]: () => saveToStroage(initialState),
 })
 
 export default {

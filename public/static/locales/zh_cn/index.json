@@ -16,6 +16,15 @@
 
   "defeatable": "可击杀",
 
+  "defeated_on": "击杀于",
+  "today_was_entered": "今日已进入",
+  "is_out_of_times": "已达次数上限",
+
+  "setting": "设置",
+  "advanced_mode": "进阶模式",
+  "advanced_mode_description": "进阶模式将可以直接点击 Boss 表示今日已击杀此 Boss 并记录时间",
+  "game_region": "地区",
+
   "easy":"简单",
   "normal":"普通",
   "hard":"困难",
@@ -47,6 +56,8 @@
   "verus_hilla": "真．希拉",
   "guard_captain_darknell": "顿凯尔",
   "black_mage":"黑魔法师",
+
+  "just_a_advertisement": "塞一下广告应该没关系吧",
 
   "page_not_found": "无此页面",
   "error_with_status": "A {{statusCode}} error occurred on server",
