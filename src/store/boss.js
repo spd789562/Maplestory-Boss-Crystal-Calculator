@@ -25,7 +25,7 @@ export const SET_BOSS_DEFEATED = 'SET_BOSS_DEFEATED'
 export const CANCEL_BOSS_DEFEATED = 'CANCEL_BOSS_DEFEATED'
 export const RESET_BOSS_DATA = 'RESET_BOSS_DATA'
 
-const storageKey = 'MAPLESTORE_BOSS_CRYSTAL_CALCULATOR_DATA'
+const storageKey = 'MAPLESTORY_BOSS_CRYSTAL_CALCULATOR_DATA'
 
 const findBossIndexById = curry((id, bosses) =>
   findIndex(propEq('id', id), bosses)
@@ -45,7 +45,7 @@ const initialState = BossMapping.map(({ id, difficulties }) => ({
 }))
 
 const reducer = reducerCreator(initialState, {
-  [INIT_BOSS_DATA]: (_, payload) => payload,
+  [INIT_BOSS_DATA]: (_, payload) => saveToStroage(payload),
   [TOGGLE_BOSS_DEFEATABLE]: (state, payload) =>
     pipe(
       findBossIndexById(payload),

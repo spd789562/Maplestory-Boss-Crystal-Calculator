@@ -73,7 +73,7 @@ const SettingCard = ({ t }) => {
         </Col>
         {advanced && (
           <Col span={24} style={{ marginBottom: 24 }}>
-            <Tooltip title={t('reset time on your current time zome')}>
+            <Tooltip title={t('reset_description')}>
               <Form.Item
                 label={t('reset_day')}
                 shouldUpdate
