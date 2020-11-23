@@ -54,7 +54,7 @@ const SettingCard = ({ t }) => {
     <Card title={t('setting')}>
       <Row gutter={[8, 8]}>
         <Col span={24}>
-          <Tooltip title={t('advanced_mode_description')}>
+          <Tooltip title={t('advanced_mode_description')} key={advanced}>
             <Form.Item
               label={t('advanced_mode')}
               shouldUpdate
