@@ -8,7 +8,7 @@ const isClient = typeof window !== 'undefined'
 
 const initialState = {
   region: (isClient && localStorage.getItem('region')) || 'TWMS',
-  advanced: (isClient && localStorage.getItem('advanced')) || false,
+  advanced: (isClient && localStorage.getItem('advanced') === 'true') || false,
   bossOptions: (isClient &&
     localStorage.getItem('bossOptions') &&
     localStorage.getItem('bossOptions').split(',')) || [
