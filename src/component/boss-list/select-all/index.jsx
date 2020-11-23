@@ -18,7 +18,7 @@ const SelectAll = ({ t }) => {
     pipe(map(prop('defeatable')), (defeatables) => {
       const length = defeatables.length || 0
       const defeatableCount = defeatables.filter(identity).length
-      return length === 0 ? 0 : length === defeatableCount ? 1 : -1
+      return defeatableCount === 0 ? 0 : length === defeatableCount ? 1 : -1
     })
   )
   const handleCheck = ({ target: { checked } }) => {
