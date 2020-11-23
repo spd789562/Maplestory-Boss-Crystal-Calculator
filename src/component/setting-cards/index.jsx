@@ -3,7 +3,7 @@ import { useStore } from '@store'
 import { CHANGE_REGION, CHANGE_ADVANCED } from '@store/meta'
 
 /* components */
-import { Row, Col, Card, Select, Form, Switch } from 'antd'
+import { Row, Col, Card, Select, Form, Switch, Tooltip } from 'antd'
 
 /* i18n */
 import { withTranslation } from '@i18n'
@@ -23,9 +23,15 @@ const SettingCard = ({ t }) => {
     <Card title={t('setting')}>
       <Row gutter={[8, 8]}>
         <Col span={24}>
-          <Form.Item label={t('advanced_mode')} shouldUpdate>
-            <Switch onChange={handleChangeAdvanced} value={advanced} />
-          </Form.Item>
+          <Tooltip title={t('advanced_mode_description')}>
+            <Form.Item
+              label={t('advanced_mode')}
+              shouldUpdate
+              style={{ display: 'inline-flex' }}
+            >
+              <Switch onChange={handleChangeAdvanced} value={advanced} />
+            </Form.Item>
+          </Tooltip>
         </Col>
         <Col span={24}>
           <Form.Item label={t('game_region')} shouldUpdate>

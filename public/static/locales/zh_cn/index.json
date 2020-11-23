@@ -22,7 +22,7 @@
 
   "setting": "设置",
   "advanced_mode": "进阶模式",
-  "advanced_mode_description": "进阶模式将可以直接点击 Boss 表示今日已击杀此 Boss 并记录时间",
+  "advanced_mode_description": "进阶模式将可以直接点击 Boss 表示今日已击杀此 Boss 并记录时间，并根据当前日期至下次重置时间限制可击杀次数",
   "game_region": "地区",
 
   "easy":"简单",
