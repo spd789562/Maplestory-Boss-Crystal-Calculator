@@ -67,7 +67,10 @@ const useTableData = (t) => {
   const mergedData = pipe(
     reduce((data, boss) => {
       const storeBossData = convertBossData[boss.id] || {}
-      const bossMesos = MesosMapping[boss.name][storeBossData.difficulty]
+      const bossMesos = Math.floor(
+        MesosMapping[boss.name][storeBossData.difficulty] /
+          (storeBossData.partyCount || 1)
+      )
       if (storeBossData.defeatable) {
         let maxDefeatTime = defineMaxTime(boss.defeatType, boss.defeatTime)
         // has share enter time
@@ -81,7 +84,10 @@ const useTableData = (t) => {
           const bigMaxTime = Math.max(maxDefeatTime, sharedBossMaxTime)
           const withoutSelfRemainTime = bigMaxTime - sharedBoss.defeatTime
           maxDefeatTime = Math.min(maxDefeatTime, withoutSelfRemainTime)
-          const sharedBossMesos = MesosMapping[boss.name][sharedBoss.difficulty]
+          const sharedBossMesos = Math.floor(
+            MesosMapping[boss.name][sharedBoss.difficulty] /
+              (storeBossData.partyCount || 1)
+          )
           // reduce when shared boss
           if (sharedBossMesos > bossMesos) {
             maxDefeatTime =

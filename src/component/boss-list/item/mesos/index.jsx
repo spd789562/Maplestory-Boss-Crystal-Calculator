@@ -4,7 +4,7 @@ import { memo } from 'react'
 import { useStroeSelector } from '@store'
 
 /* utils */
-import { find, pipe, prop, propEq } from 'ramda'
+import { find, pipe, pick, propEq } from 'ramda'
 import numberFormat from '@utils/number-format'
 
 /* mapping */
@@ -12,12 +12,14 @@ import BossMesosMapping from '@mapping/bosses-mesos'
 
 const matchStorageData = (id) => find(propEq('id', id))
 
-const BossMesos = ({ id, name, difficulties }) => {
-  const difficulty = useStroeSelector(
+const BossMesos = ({ id, name }) => {
+  const { difficulty, partyCount } = useStroeSelector(
     'boss',
-    pipe(matchStorageData(id), prop('difficulty'))
+    pipe(matchStorageData(id), pick(['difficulty', 'partyCount']))
   )
-  const mesos = numberFormat(BossMesosMapping[name][difficulty] || 0)
+  const mesos = numberFormat(
+    Math.floor((BossMesosMapping[name][difficulty] || 0) / (+partyCount || 0))
+  )
 
   return <span>{mesos}</span>
 }
