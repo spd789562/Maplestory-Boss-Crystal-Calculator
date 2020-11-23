@@ -1,4 +1,6 @@
-export default [
+import { assoc, reduce } from 'ramda'
+
+const BossList = [
   // 炎魔
   {
     id: 0,
@@ -329,6 +331,7 @@ export default [
     defeatType: 'day',
     defeatTime: 1,
     enterShareId: 24,
+    enterShareTime: 7,
   },
   // 混沌皮卡啾
   {
@@ -343,6 +346,7 @@ export default [
     defeatType: 'week',
     defeatTime: 1,
     enterShareId: 23,
+    enterShareTime: 7,
   },
   // 西格諾斯
   {
@@ -534,3 +538,10 @@ export default [
     enterTime: 1,
   },
 ]
+
+export const BossObject = reduce(
+  (obj, boss) => assoc(boss.id, boss, obj),
+  {}
+)(BossList)
+
+export default BossList

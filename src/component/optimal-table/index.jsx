@@ -25,7 +25,7 @@ import {
 import numberFormat from '@utils/number-format'
 
 /* mapping */
-import BossMapping from '@mapping/bosses-crystal'
+import BossMapping, { BossObject } from '@mapping/bosses-crystal'
 import MesosMapping from '@mapping/bosses-mesos'
 
 const columns = [
@@ -52,6 +52,7 @@ const columns = [
 ]
 
 const toObject = reduce((data, boss) => assoc(boss.id, boss, data), {})
+const defineMaxTime = (type, time) => (type === 'day' ? 7 : 1) * time
 
 const WEEK_MAX = 60
 
@@ -66,20 +67,40 @@ const useTableData = (t) => {
   const mergedData = pipe(
     reduce((data, boss) => {
       const storeBossData = convertBossData[boss.id] || {}
+      const bossMesos = MesosMapping[boss.name][storeBossData.difficulty]
       if (storeBossData.defeatable) {
-        const defeatTimeUnit = boss.defeatType === 'day' ? 7 : 1
-        const maxDefeatTime = defeatTimeUnit * boss.defeatTime
-        const remainDefeatTime = maxDefeatTime - storeBossData.defeatTime
-        times(() => {
-          data.push({
-            id: boss.id,
-            avatar: boss.name,
-            name: boss.withoutDifficulty
-              ? t(boss.name)
-              : `${t(storeBossData.difficulty)}${t(boss.name)}`,
-            mesos: MesosMapping[boss.name][storeBossData.difficulty],
-          })
-        }, remainDefeatTime)
+        let maxDefeatTime = defineMaxTime(boss.defeatType, boss.defeatTime)
+        // has share enter time
+        if (boss.enterShareId) {
+          const sharedBoss = convertBossData[boss.enterShareId]
+          const sharedBossData = BossObject[boss.enterShareId]
+          const sharedBossMaxTime = defineMaxTime(
+            sharedBossData.defeatType,
+            sharedBossData.defeatTime
+          )
+          const bigMaxTime = Math.max(maxDefeatTime, sharedBossMaxTime)
+          const withoutSelfRemainTime = bigMaxTime - sharedBoss.defeatTime
+          maxDefeatTime = Math.min(maxDefeatTime, withoutSelfRemainTime)
+          const sharedBossMesos = MesosMapping[boss.name][sharedBoss.difficulty]
+          // reduce when shared boss
+          if (sharedBossMesos > bossMesos) {
+            maxDefeatTime =
+              maxDefeatTime + sharedBoss.defeatTime - sharedBossData.defeatTime
+          }
+        }
+        let remainDefeatTime = maxDefeatTime - storeBossData.defeatTime
+
+        remainDefeatTime &&
+          times(() => {
+            data.push({
+              id: boss.id,
+              avatar: boss.name,
+              name: boss.withoutDifficulty
+                ? t(boss.name)
+                : `${t(storeBossData.difficulty)}${t(boss.name)}`,
+              mesos: bossMesos,
+            })
+          }, remainDefeatTime)
       }
       return data
     }, []),
