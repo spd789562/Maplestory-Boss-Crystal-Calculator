@@ -29,7 +29,7 @@ const SettingCard = ({ t }) => {
               shouldUpdate
               style={{ display: 'inline-flex' }}
             >
-              <Switch onChange={handleChangeAdvanced} value={advanced} />
+              <Switch onChange={handleChangeAdvanced} checked={advanced} />
             </Form.Item>
           </Tooltip>
         </Col>
