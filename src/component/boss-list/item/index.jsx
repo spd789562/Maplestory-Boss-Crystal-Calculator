@@ -98,7 +98,7 @@ const BossItem = ({
       <style jsx global>{`
         .boss-list-item {
           position: relative;
-          cursor: pointer;
+          cursor: ${advanced ? 'pointer' : 'default'};
         }
         .boss-list-item:hover {
           background-color: #f7f7f7;
