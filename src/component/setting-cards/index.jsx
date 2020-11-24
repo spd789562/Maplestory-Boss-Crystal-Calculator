@@ -130,22 +130,22 @@ const SettingCard = ({ t }) => {
                 </Select>
               </Form.Item>
               &nbsp;
-              <div style={{ color: '#878787' }}>
-                {t('next_reset_time')}:&nbsp;
-                {currentTimeZone.isSame(serverResetTime) ? (
-                  currentTimeZone.format(FORMAT)
-                ) : (
-                  <Fragment>
-                    <div>
-                      {t('current_zone')}: {currentTimeZone.format(FORMAT)}
-                    </div>
-                    <div>
-                      {t('server_zone')}: {serverResetTime.format(FORMAT)}
-                    </div>
-                  </Fragment>
-                )}
-              </div>
             </Tooltip>
+            <div style={{ color: '#878787' }}>
+              {t('next_reset_time')}:&nbsp;
+              {currentTimeZone.isSame(serverResetTime) ? (
+                currentTimeZone.format(FORMAT)
+              ) : (
+                <Fragment>
+                  <div>
+                    {t('current_zone')}: {currentTimeZone.format(FORMAT)}
+                  </div>
+                  <div>
+                    {t('server_zone')}: {serverResetTime.format(FORMAT)}
+                  </div>
+                </Fragment>
+              )}
+            </div>
           </Col>
         )}
         <Col span={24}>
