@@ -1,5 +1,6 @@
 /* store */
 import { useStore } from '@store'
+import { UPDATE_BOSS_DATA } from '@store/boss'
 
 /* components */
 import { Table, Avatar, Space } from 'antd'
@@ -8,21 +9,9 @@ import { Table, Avatar, Space } from 'antd'
 import { withTranslation } from '@i18n'
 
 /* utils */
-import {
-  ascend,
-  assoc,
-  descend,
-  evolve,
-  map,
-  pipe,
-  prop,
-  reduce,
-  slice,
-  sort,
-  times,
-  values,
-} from 'ramda'
+import { assoc, evolve, map, indexBy, prop } from 'ramda'
 import numberFormat from '@utils/number-format'
+import getBossSuggestion from '@utils/get-boss-suggestion'
 
 /* mapping */
 import BossMapping, { BossObject } from '@mapping/bosses-crystal'
@@ -51,81 +40,15 @@ const columns = [
   },
 ]
 
-const toObject = reduce((data, boss) => assoc(boss.id, boss, data), {})
-const defineMaxTime = (type, time) => (type === 'day' ? 7 : 1) * time
-
-const WEEK_MAX = 60
-
 const useTableData = (t) => {
   const [bossData] = useStore('boss')
-  const convertBossData = toObject(bossData)
-  const currentDefeatTotal = reduce(
-    (total, { defeatTime = 0 }) => total + defeatTime,
-    0
-  )(bossData)
-  const remainCount = WEEK_MAX - currentDefeatTotal
-  const mergedData = pipe(
-    reduce((data, boss) => {
-      const storeBossData = convertBossData[boss.id] || {}
-      const bossMesos = Math.floor(
-        MesosMapping[boss.name][storeBossData.difficulty] /
-          (storeBossData.partyCount || 1)
-      )
-      if (storeBossData.defeatable) {
-        let maxDefeatTime = defineMaxTime(boss.defeatType, boss.defeatTime)
-        // has share enter time
-        if (boss.enterShareId) {
-          const sharedBoss = convertBossData[boss.enterShareId]
-          const sharedBossData = BossObject[boss.enterShareId]
-          const sharedBossMaxTime = defineMaxTime(
-            sharedBossData.defeatType,
-            sharedBossData.defeatTime
-          )
-          const bigMaxTime = Math.max(maxDefeatTime, sharedBossMaxTime)
-          const withoutSelfRemainTime = bigMaxTime - sharedBoss.defeatTime
-          maxDefeatTime = Math.min(maxDefeatTime, withoutSelfRemainTime)
-          const sharedBossMesos = Math.floor(
-            MesosMapping[boss.name][sharedBoss.difficulty] /
-              (storeBossData.partyCount || 1)
-          )
-          // reduce when shared boss
-          if (sharedBossMesos > bossMesos) {
-            maxDefeatTime =
-              maxDefeatTime + sharedBoss.defeatTime - sharedBossData.defeatTime
-          }
-        }
-        let remainDefeatTime = maxDefeatTime - storeBossData.defeatTime
-
-        remainDefeatTime &&
-          times(() => {
-            data.push({
-              id: boss.id,
-              avatar: boss.name,
-              name: boss.withoutDifficulty
-                ? t(boss.name)
-                : `${t(storeBossData.difficulty)}${t(boss.name)}`,
-              mesos: bossMesos,
-            })
-          }, remainDefeatTime)
-      }
-      return data
-    }, []),
-    // grab most mesos 60 ahead
-    sort(descend(prop('mesos'))),
-    slice(0, remainCount),
-    // aggrate data
-    reduce((data, boss) => {
-      const { id, name, avatar, mesos } = boss
-      if (!data[id]) {
-        data[id] = { id, name, avatar, count: 0, mesos: 0 }
-      }
-      data[id].count += 1
-      data[id].mesos += mesos
-      return data
-    }, {}),
-    values,
-    sort(ascend(prop('mesos')))
-  )(BossMapping)
+  const mergedData = getBossSuggestion(bossData).map((boss) =>
+    assoc(
+      'name',
+      `${boss.difficulty ? t(boss.difficulty) : ''}${t(boss.name)}`,
+      boss
+    )
+  )
 
   const totalMesos = mergedData.reduce((total, { mesos }) => total + mesos, 0)
   const totalCount = mergedData.reduce((total, { count }) => total + count, 0)

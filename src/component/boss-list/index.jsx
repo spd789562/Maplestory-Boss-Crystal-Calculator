@@ -11,17 +11,24 @@ import SelectAll from './select-all'
 import { withTranslation } from '@i18n'
 
 /* utils */
-import { identity, pipe, prop } from 'ramda'
+import { assoc, map, pipe, prop, includes } from 'ramda'
+import getBossSuggestion from '@utils/get-boss-suggestion'
 
 /* mapping */
 import BossesMapping from '@mapping/bosses-crystal'
 
 const BossList = ({ t }) => {
+  const suggestions = useStroeSelector(
+    'boss',
+    pipe(getBossSuggestion, map(prop('id')))
+  )
   return (
     <List
       style={{ backgroundColor: '#fff' }}
       bordered
-      dataSource={BossesMapping}
+      dataSource={BossesMapping.map((boss) =>
+        assoc('recommand', includes(boss.id, suggestions), boss)
+      )}
       header={
         <div style={{ display: 'flex' }}>
           <SelectAll />

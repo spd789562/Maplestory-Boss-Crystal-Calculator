@@ -5,8 +5,12 @@ import { useStroeSelector, useDispatch } from '@store'
 import { TOGGLE_BOSS_DEFEATABLE } from '@store/boss'
 
 /* components */
-import { Avatar, Badge } from 'antd'
-import { CloseCircleTwoTone, CheckCircleTwoTone } from '@ant-design/icons'
+import { Avatar, Badge, Tooltip } from 'antd'
+import {
+  CloseCircleTwoTone,
+  CheckCircleTwoTone,
+  StarFilled,
+} from '@ant-design/icons'
 
 /* i18n */
 import { withTranslation } from '@i18n'
@@ -18,7 +22,7 @@ const matchStorageData = (id) => find(propEq('id', id))
 
 const preventClick = (e) => e.stopPropagation()
 
-const BossAvatar = ({ id, name }) => {
+const BossAvatar = ({ id, name, recommand, t }) => {
   const dispatch = useDispatch()
   const defeatable = useStroeSelector(
     'boss',
@@ -32,28 +36,42 @@ const BossAvatar = ({ id, name }) => {
     <Fragment>
       <Badge
         count={
-          defeatable ? (
-            <CheckCircleTwoTone
-              twoToneColor="#52c41a"
-              style={{ fontSize: 18 }}
-            />
+          recommand ? (
+            <Tooltip title={t('recommand')} placement="topLeft">
+              <StarFilled
+                style={{ fontSize: 18, color: '#ffdb21', right: '52px' }}
+              />
+            </Tooltip>
           ) : (
-            <CloseCircleTwoTone
-              twoToneColor="#f5222d"
-              style={{ fontSize: 18 }}
-            />
+            0
           )
         }
         onClick={preventClick}
       >
-        <div
-          className={`boss-avatar boss-avatar__${
-            defeatable ? 'defeatable' : 'undefeatable'
-          }`}
-          onClick={handleToggleDefeatable(id)}
+        <Badge
+          count={
+            defeatable ? (
+              <CheckCircleTwoTone
+                twoToneColor="#52c41a"
+                style={{ fontSize: 18 }}
+              />
+            ) : (
+              <CloseCircleTwoTone
+                twoToneColor="#f5222d"
+                style={{ fontSize: 18 }}
+              />
+            )
+          }
         >
-          <Avatar shape="square" src={`/boss/${name}.png`} size={48} />
-        </div>
+          <div
+            className={`boss-avatar boss-avatar__${
+              defeatable ? 'defeatable' : 'undefeatable'
+            }`}
+            onClick={handleToggleDefeatable(id)}
+          >
+            <Avatar shape="square" src={`/boss/${name}.png`} size={48} />
+          </div>
+        </Badge>
       </Badge>
 
       <style jsx global>{`

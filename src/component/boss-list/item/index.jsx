@@ -31,6 +31,7 @@ const BossItem = ({
   defeatType,
   defeatTime,
   enterShareId,
+  recommand,
 }) => {
   const [{ bossOptions, advanced }, dispatch] = useStore('meta')
   const defeatDate = useStroeSelector(
@@ -67,7 +68,7 @@ const BossItem = ({
       onClick={handleDefeat}
     >
       <List.Item.Meta
-        avatar={<Avatar id={id} name={name} />}
+        avatar={<Avatar id={id} name={name} recommand={recommand} />}
         title={
           <Name
             id={id}
