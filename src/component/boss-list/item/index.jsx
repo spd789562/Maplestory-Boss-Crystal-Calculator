@@ -5,7 +5,7 @@ import { useStore, useStroeSelector } from '@store'
 import { SET_BOSS_DEFEATED } from '@store/boss'
 
 /* components */
-import { List } from 'antd'
+import { List, Space } from 'antd'
 import Name from './name'
 import Mesos from './mesos'
 import Avatar from './avatar'
@@ -43,8 +43,15 @@ const BossItem = ({
   const hasOptions = useCallback(_hasOptions(bossOptions), [bossOptions])
   hasDifficultySelect &&
     hasOptions('difficulty') &&
-    actions.push(<DifficultySelect id={id} difficulties={difficulties} />)
-  hasOptions('partyCount') && actions.push(<PartyCount id={id} />)
+    actions.push(
+      <DifficultySelect
+        id={id}
+        difficulties={difficulties}
+        key={`${id}-difficulty`}
+      />
+    )
+  hasOptions('partyCount') &&
+    actions.push(<PartyCount id={id} key={`${id}-party`} />)
   hasOptions('defeatTime') &&
     actions.push(
       <DefeatTime
@@ -52,6 +59,7 @@ const BossItem = ({
         defeatType={defeatType}
         defeatTime={defeatTime}
         enterShareId={enterShareId}
+        key={`${id}-defeat`}
       />
     )
 
@@ -63,7 +71,7 @@ const BossItem = ({
 
   return (
     <List.Item
-      actions={actions}
+      extra={<Space className="extra-item">{actions}</Space>}
       className="boss-list-item"
       onClick={handleDefeat}
     >
@@ -94,6 +102,14 @@ const BossItem = ({
         }
         .boss-list-item:hover {
           background-color: #f7f7f7;
+        }
+        .extra-item {
+          width: unset;
+        }
+        @media screen and (max-width: 510px) {
+          .extra-item {
+            width: 100%;
+          }
         }
       `}</style>
     </List.Item>

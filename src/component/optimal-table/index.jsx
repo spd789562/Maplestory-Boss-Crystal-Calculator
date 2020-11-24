@@ -80,6 +80,7 @@ const OptimalTable = ({ t }) => {
         </Table.Summary.Row>
       )}
       bordered
+      scroll={{ x: true }}
     />
   )
 }
