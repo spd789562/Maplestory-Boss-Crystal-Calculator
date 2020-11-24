@@ -15,6 +15,7 @@
   "total": "总和",
 
   "defeatable": "可击杀",
+  "boss_list_description": "点击 Boss 头像已变更是否可击杀，并输入已击杀次数，结果会根据是否击杀与击杀次数计算出推荐贩卖的Boss",
 
   "defeated_on": "击杀于",
   "today_was_entered": "今日已进入",

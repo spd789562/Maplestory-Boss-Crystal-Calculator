@@ -14,7 +14,8 @@
   "mesos": "Mesos",
   "total": "Total",
 
-  "defeatable": "Defeatable",
+  "defeatable": "Beatable",
+  "boss_list_description": "Click boss to change beatable and enter defeated count, result will base on beatable and defeated count to calculate the recommend boss.",
 
   "defeated_on": "Defeated on",
   "today_was_entered": "Today was enter",

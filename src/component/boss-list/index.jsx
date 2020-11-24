@@ -30,11 +30,14 @@ const BossList = ({ t }) => {
         assoc('recommand', includes(boss.id, suggestions), boss)
       )}
       header={
-        <div style={{ display: 'flex' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
           <SelectAll />
           <Space style={{ marginLeft: 'auto' }}>
             <OptionSelect />
           </Space>
+          <div style={{ color: '#666', fontSize: 14, width: '100%' }}>
+            {t('boss_list_description')}
+          </div>
         </div>
       }
       renderItem={(item) => <Item {...item} />}
