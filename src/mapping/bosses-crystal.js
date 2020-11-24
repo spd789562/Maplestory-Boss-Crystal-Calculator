@@ -294,7 +294,7 @@ const BossList = [
         mesos: 1012500,
       },
       {
-        difficulty: 'hard',
+        difficulty: 'chaos',
         mesos: 1352000,
       },
     ],
@@ -419,7 +419,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'normal',
-        mesos: 3380000,
+        mesos: 33800000,
       },
       {
         difficulty: 'hard',
