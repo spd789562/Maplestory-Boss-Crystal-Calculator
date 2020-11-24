@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 
 /* store */
 import { useStore } from '@store'
@@ -16,11 +16,7 @@ import { evolve } from 'ramda'
 
 const options = ['difficulty', 'partyCount', 'defeatTime']
 
-const Options = ({ t }) => {
-  const [bossOptions, dispatch] = useStore('meta.bossOptions')
-  const handleChange = useCallback((value) => {
-    dispatch({ type: CHANGE_BOSS_OPTIONS, payload: value })
-  })
+const Options = ({ t, bossOptions, handleChange }) => {
   return (
     <Checkbox.Group defaultValue={bossOptions} onChange={handleChange}>
       {options
@@ -36,13 +32,25 @@ const Options = ({ t }) => {
 }
 
 const OptionSelect = ({ t }) => {
+  const [bossOptions, dispatch] = useStore('meta.bossOptions')
+  const handleChange = useCallback((value) => {
+    dispatch({ type: CHANGE_BOSS_OPTIONS, payload: value })
+  }, [])
+  useEffect(() => {
+    if (process.browser) {
+      const bossOptions = localStorage.getItem('bossOptions')
+      bossOptions !== null && handleChange(bossOptions.split(','))
+    }
+  }, [])
   return (
     <Popover
       trigger="hover"
       placement="bottomRight"
       title={t('display_options')}
       arrowPointAtCenter
-      content={<Options t={t} />}
+      content={
+        <Options t={t} bossOptions={bossOptions} handleChange={handleChange} />
+      }
     >
       <MoreOutlined />
     </Popover>

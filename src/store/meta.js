@@ -6,20 +6,12 @@ export const CHANGE_ADVANCED = 'CHANGE_ADVANCED'
 export const CHANGE_RESET_DAY_OF_WEEK = 'CHANGE_RESET_DAY_OF_WEEK'
 export const CHANGE_RESET_HOUR = 'CHANGE_RESET_HOUR'
 
-const isClient = typeof window !== 'undefined'
-
 const initialState = {
-  region: (isClient && localStorage.getItem('region')) || 'TWMS',
-  advanced: (isClient && localStorage.getItem('advanced') === 'true') || false,
-  bossOptions: (isClient &&
-    localStorage.getItem('bossOptions') &&
-    localStorage.getItem('bossOptions').split(',')) || [
-    'difficulty',
-    'partyCount',
-    'defeatTime',
-  ],
-  resetDayOfWeek: (isClient && localStorage.getItem('resetDayOfWeek')) || 4,
-  resetHour: (isClient && localStorage.getItem('resetHour')) || 0,
+  region: 'TWMS',
+  advanced: false,
+  bossOptions: ['difficulty', 'partyCount', 'defeatTime'],
+  resetDayOfWeek: 4,
+  resetHour: 0,
 }
 
 const reducer = reducerCreator(initialState, {

@@ -47,7 +47,7 @@ const PartyCount = ({ id }) => {
         max={MAX_PARTY_COUNT}
         precision={0}
         style={{ width: 52 }}
-        defaultValue={partyCount}
+        value={partyCount}
         onChange={handleChange}
       />
     </Space>

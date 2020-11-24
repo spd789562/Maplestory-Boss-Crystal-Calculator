@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 /* store */
 import { useStore } from '@store'
 import {
@@ -15,7 +17,7 @@ import { withTranslation } from '@i18n'
 
 /* utils */
 import moment from 'moment'
-import { pick, times } from 'ramda'
+import { pick, times, T } from 'ramda'
 import { Fragment } from 'react/cjs/react.production.min'
 
 const FORMAT = 'YYYY/MM/DD HH:mm'
@@ -24,7 +26,6 @@ const TimeZone = {
   TWMS: 480,
   GMS: 0,
 }
-
 const SettingCard = ({ t }) => {
   const [{ region, advanced, resetDayOfWeek, resetHour }, dispatch] = useStore(
     'meta'
@@ -41,6 +42,19 @@ const SettingCard = ({ t }) => {
   const handleChangeHour = (value) => {
     dispatch({ type: CHANGE_RESET_HOUR, payload: value })
   }
+
+  useEffect(() => {
+    if (process.browser) {
+      const region = localStorage.getItem('region')
+      const advanced = localStorage.getItem('advanced') === 'true'
+      const resetDayOfWeek = localStorage.getItem('resetDayOfWeek')
+      const resetHour = localStorage.getItem('resetHour')
+      region !== null && handleChangeRegion(region)
+      advanced !== null && handleChangeAdvanced(advanced)
+      resetDayOfWeek !== null && handleChangeDay(resetDayOfWeek)
+      resetHour !== null && handleChangeHour(resetHour)
+    }
+  }, [])
   const nextResetTime = (moment().day() >= resetDayOfWeek
     ? moment().day(resetDayOfWeek + 7)
     : moment().day(resetDayOfWeek)
@@ -54,10 +68,10 @@ const SettingCard = ({ t }) => {
     <Card title={t('setting')}>
       <Row gutter={[8, 8]}>
         <Col span={24}>
-          <Tooltip title={t('advanced_mode_description')} key={advanced}>
+          <Tooltip title={t('advanced_mode_description')}>
             <Form.Item
               label={t('advanced_mode')}
-              shouldUpdate
+              shouldUpdate={T}
               style={{
                 display: 'inline-flex',
                 marginBottom: advanced ? 4 : 24,
@@ -65,8 +79,8 @@ const SettingCard = ({ t }) => {
             >
               <Switch
                 onChange={handleChangeAdvanced}
-                defaultValue={advanced}
                 checked={advanced}
+                key={`tools-${advanced}`}
               />
             </Form.Item>
           </Tooltip>
