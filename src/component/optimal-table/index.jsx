@@ -23,7 +23,7 @@ const columns = [
     dataIndex: 'name',
     render: (name, { avatar }) => (
       <Space>
-        <Avatar shape="square" src={`/boss/${avatar}.png`} />
+        <Avatar shape="square" alt={name} src={`/boss/${avatar}.png`} />
         {name}
       </Space>
     ),

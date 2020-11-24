@@ -69,7 +69,12 @@ const BossAvatar = ({ id, name, recommand, t }) => {
             }`}
             onClick={handleToggleDefeatable(id)}
           >
-            <Avatar shape="square" src={`/boss/${name}.png`} size={48} />
+            <Avatar
+              shape="square"
+              alt={name}
+              src={`/boss/${name}.png`}
+              size={48}
+            />
           </div>
         </Badge>
       </Badge>
