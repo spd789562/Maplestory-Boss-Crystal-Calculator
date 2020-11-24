@@ -5,8 +5,8 @@
   
   "display_options": "顯示選項",
   "difficulty": "難度",
-  "partyCount": "人數",
-  "defeatTime": "次數",
+  "partyCount": "組隊人數",
+  "defeatTime": "已擊殺次數",
 
   "optimal_result": "當前最佳結果",
   "name": "名稱",
