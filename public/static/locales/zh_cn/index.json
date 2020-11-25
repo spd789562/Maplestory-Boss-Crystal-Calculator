@@ -13,8 +13,11 @@
   "count": "次数",
   "mesos": "枫币",
   "total": "总和",
+  "table": "表格",
+  "chart": "图表",
 
   "defeatable": "可击杀",
+  "boss_list_description": "点击 Boss 头像已变更是否可击杀，并输入已击杀次数，结果会根据是否击杀与击杀次数计算出推荐贩卖的Boss",
 
   "defeated_on": "击杀于",
   "today_was_entered": "今日已进入",
@@ -38,7 +41,7 @@
   "day_6": "礼拜六",
   "game_region": "地区",
 
-  "recommand": "推荐",
+  "recommend": "推荐",
 
   "easy":"简单",
   "normal":"普通",

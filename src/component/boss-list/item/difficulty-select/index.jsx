@@ -37,7 +37,7 @@ const DifficultySelect = ({ id, difficulties, t }) => {
   return (
     <Space onClick={preventClick}>
       <DashboardOutlined />
-      <Select defaultValue={difficulty} onChange={handleChange}>
+      <Select value={difficulty} onChange={handleChange}>
         {difficulties.map(({ difficulty: bossDifficulty }) => (
           <Select.Option key={`${id}-${bossDifficulty}`} value={bossDifficulty}>
             {t(bossDifficulty).trim()}

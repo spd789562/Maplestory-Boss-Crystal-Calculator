@@ -22,7 +22,7 @@ const matchStorageData = (id) => find(propEq('id', id))
 
 const preventClick = (e) => e.stopPropagation()
 
-const BossAvatar = ({ id, name, recommand, t }) => {
+const BossAvatar = ({ id, name, recommend, t }) => {
   const dispatch = useDispatch()
   const defeatable = useStroeSelector(
     'boss',
@@ -36,8 +36,8 @@ const BossAvatar = ({ id, name, recommand, t }) => {
     <Fragment>
       <Badge
         count={
-          recommand ? (
-            <Tooltip title={t('recommand')} placement="topLeft">
+          recommend ? (
+            <Tooltip title={t('recommend')} placement="topLeft">
               <StarFilled
                 style={{ fontSize: 18, color: '#ffdb21', right: '52px' }}
               />
@@ -69,7 +69,12 @@ const BossAvatar = ({ id, name, recommand, t }) => {
             }`}
             onClick={handleToggleDefeatable(id)}
           >
-            <Avatar shape="square" src={`/boss/${name}.png`} size={48} />
+            <Avatar
+              shape="square"
+              alt={name}
+              src={`/boss/${name}.png`}
+              size={48}
+            />
           </div>
         </Badge>
       </Badge>

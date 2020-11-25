@@ -13,6 +13,7 @@ import {
   F,
   T,
   always,
+  mergeLeft,
 } from 'ramda'
 
 import BossMapping from '@mapping/bosses-crystal'
@@ -95,7 +96,10 @@ const reducer = reducerCreator(initialState, {
       saveToStroage
     )(state),
   [RESET_BOSS_DATA]: (state) =>
-    pipe(evolve({ defeatTime: always(0) }), saveToStroage)(state),
+    pipe(
+      map(mergeLeft({ defeatDate: 0, defeatTime: 0 })),
+      saveToStroage
+    )(state),
 })
 
 export default {

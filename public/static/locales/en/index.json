@@ -13,8 +13,11 @@
   "count": "Count",
   "mesos": "Mesos",
   "total": "Total",
+  "table": "Table",
+  "chart": "Chart",
 
-  "defeatable": "Defeatable",
+  "defeatable": "Beatable",
+  "boss_list_description": "Click boss to change beatable and enter defeated count, result will base on beatable and defeated count to calculate the recommend boss.",
 
   "defeated_on": "Defeated on",
   "today_was_entered": "Today was enter",
@@ -38,7 +41,7 @@
   "day_6": "Sat.",
   "game_region": "Region",
 
-  "recommand": "Recommand",
+  "recommend": "Recommend",
 
   "easy":"Easy ",
   "normal":"Normal ",

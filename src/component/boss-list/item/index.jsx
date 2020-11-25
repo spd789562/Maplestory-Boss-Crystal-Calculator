@@ -18,7 +18,7 @@ import Defeated from './defeated'
 import { withTranslation } from '@i18n'
 
 /* utils */
-import { equals, find, propEq, prop, pipe } from 'ramda'
+import { equals, find, propEq, prop, pipe, pick } from 'ramda'
 
 const _hasOptions = (options) => (value) => find(equals(value), options)
 const matchStorageData = (id) => find(propEq('id', id))
@@ -31,12 +31,12 @@ const BossItem = ({
   defeatType,
   defeatTime,
   enterShareId,
-  recommand,
+  recommend,
 }) => {
-  const [{ bossOptions, advanced }, dispatch] = useStore('meta')
-  const defeatDate = useStroeSelector(
+  const [{ bossOptions, filterOption, advanced }, dispatch] = useStore('meta')
+  const { defeatDate, defeatable } = useStroeSelector(
     'boss',
-    pipe(matchStorageData(id), prop('defeatDate'))
+    pipe(matchStorageData(id), pick(['defeatDate', 'defeatable']))
   )
   const hasDifficultySelect = difficulties.length > 1
   const actions = []
@@ -68,15 +68,19 @@ const BossItem = ({
       dispatch({ type: SET_BOSS_DEFEATED, payload: id })
     }
   }
+  const canDisplay =
+    filterOption === 'all' ||
+    (filterOption === 'recommend' && recommend) ||
+    (filterOption === 'defeatable' && defeatable)
 
-  return (
+  return canDisplay ? (
     <List.Item
       extra={<Space className="extra-item">{actions}</Space>}
       className="boss-list-item"
       onClick={handleDefeat}
     >
       <List.Item.Meta
-        avatar={<Avatar id={id} name={name} recommand={recommand} />}
+        avatar={<Avatar id={id} name={name} recommend={recommend} />}
         title={
           <Name
             id={id}
@@ -98,7 +102,7 @@ const BossItem = ({
       <style jsx global>{`
         .boss-list-item {
           position: relative;
-          cursor: pointer;
+          cursor: ${advanced ? 'pointer' : 'default'};
         }
         .boss-list-item:hover {
           background-color: #f7f7f7;
@@ -113,7 +117,7 @@ const BossItem = ({
         }
       `}</style>
     </List.Item>
-  )
+  ) : null
 }
 
 BossItem.getInitialProps = async () => ({

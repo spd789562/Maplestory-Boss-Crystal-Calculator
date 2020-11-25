@@ -5,7 +5,7 @@ import { useStroeSelector, useDispatch } from '@store'
 import { UPDATE_BOSS_DATA } from '@store/boss'
 
 /* components */
-import { Space, InputNumber } from 'antd'
+import { Space, InputNumber, Tooltip } from 'antd'
 import { CheckOutlined } from '@ant-design/icons'
 
 /* i18n */
@@ -27,6 +27,7 @@ const DefeatTime = ({
   defeatType = 'day',
   defeatTime: defeatTypeTime = 1,
   enterShareId,
+  t,
 }) => {
   const dispatch = useDispatch()
   const [{ defeatTime, defeatable }, sharedBoss] = useStroeSelector(
@@ -67,18 +68,20 @@ const DefeatTime = ({
     }
   }
   return (
-    <Space onClick={preventClick}>
-      <CheckOutlined />
-      <InputNumber
-        style={{ width: 60 }}
-        precision={0}
-        max={maxTime}
-        min={0}
-        value={defeatTime}
-        onChange={handleChange}
-        disabled={!defeatable}
-      />
-    </Space>
+    <Tooltip title={t('defeatTime')}>
+      <Space onClick={preventClick}>
+        <CheckOutlined />
+        <InputNumber
+          style={{ width: 60 }}
+          precision={0}
+          max={maxTime}
+          min={0}
+          value={defeatTime}
+          onChange={handleChange}
+          disabled={!defeatable}
+        />
+      </Space>
+    </Tooltip>
   )
 }
 

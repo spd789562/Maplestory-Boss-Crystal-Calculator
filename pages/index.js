@@ -49,19 +49,29 @@ function Home({ t, i18n }) {
         const lastResetTime = defineResetTime(resetDayOfWeek, lastOpen)
         const isDifferentCycle = !currentResetTime.isSame(lastResetTime, 'day')
         const isAfterResetHout = utcMoment().hour() >= +resetHour
-
         data = advanced
           ? data.map((boss) => {
               const { defeatType } = BossObject[boss.id] || {}
               let bossData = clone(boss)
               if (defeatType) {
-                if (isDifferentDay && defeatType === 'day') {
+                // today is different day with last open or defeatDate is different day
+                if (
+                  defeatType === 'day' &&
+                  (isDifferentDay ||
+                    utcMoment().isAfter(utcMoment(bossData.defeatDate), 'day'))
+                ) {
                   bossData = assoc('defeatDate', 0, bossData)
                 }
+                // today is different cycle with last open or defeatDate is different week
                 if (
-                  isDifferentCycle &&
-                  isAfterResetHout &&
-                  defeatType !== 'month'
+                  (isDifferentCycle &&
+                    isAfterResetHout &&
+                    defeatType !== 'month') ||
+                  (defeatType === 'week' &&
+                    !currentResetTime.isSame(
+                      defineResetTime(bossData.defeatDate),
+                      'day'
+                    ))
                 ) {
                   if (defeatType === 'week') {
                     bossData = assoc('defeatDate', 0, bossData)
@@ -69,10 +79,10 @@ function Home({ t, i18n }) {
                   // when corss reset time, reset all defeat count except monthly moss
                   bossData = assoc('defeatTime', 0, bossData)
                 }
-                if (defeatType === 'month' && boss.defeatDate) {
+                if (defeatType === 'month' && bossData.defeatDate) {
                   const bossResetTime = defineResetTime(
                     resetDayOfWeek,
-                    moment(boss.defeatDate).add(1, 'month')
+                    utcMoment(bossData.defeatDate).add(1, 'month')
                   )
                   if (utcMoment().isAfter(bossResetTime)) {
                     bossData = assoc('defeatDate', 0, bossData)

@@ -5,16 +5,19 @@
   
   "display_options": "顯示選項",
   "difficulty": "難度",
-  "partyCount": "人數",
-  "defeatTime": "次數",
+  "partyCount": "組隊人數",
+  "defeatTime": "已擊殺次數",
 
   "optimal_result": "當前最佳結果",
   "name": "名稱",
   "count": "次數",
   "mesos": "楓幣",
   "total": "總和",
+  "table": "表格",
+  "chart": "圖表",
 
   "defeatable": "可擊殺",
+  "boss_list_description": "點擊 Boss 頭像已變更是否可擊殺，並輸入已擊殺次數，結果會根據是否擊殺與擊殺次數計算出推薦販賣的Boss",
 
   "defeated_on": "擊殺於",
   "today_was_entered": "今日已進入",
@@ -38,7 +41,7 @@
   "day_6": "禮拜六",
   "game_region": "地區",
 
-  "recommand": "推薦",
+  "recommend": "推薦",
 
   "easy":"簡單",
   "normal":"普通",
@@ -46,7 +49,7 @@
   "chaos":"混沌",
 
   "zakum": "炎魔",
-  "magnus": "梅格奈斯",
+  "magnus": "梅格耐斯",
   "hilla": "希拉",
   "mori_ranmaru": "森蘭丸",
   "cross": "庫洛斯",
