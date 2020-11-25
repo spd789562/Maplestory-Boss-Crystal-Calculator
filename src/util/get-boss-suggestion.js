@@ -63,17 +63,20 @@ const getBossSuggestion = (bossData) => {
         let remainDefeatTime = maxDefeatTime - storeBossData.defeatTime
 
         remainDefeatTime &&
-          times(() => {
-            data.push({
-              id: boss.id,
-              avatar: boss.name,
-              difficulty: boss.withoutDifficulty
-                ? false
-                : storeBossData.difficulty,
-              name: boss.name,
-              mesos: bossMesos,
-            })
-          }, remainDefeatTime)
+          times(
+            () => {
+              data.push({
+                id: boss.id,
+                avatar: boss.name,
+                difficulty: boss.withoutDifficulty
+                  ? false
+                  : storeBossData.difficulty,
+                name: boss.name,
+                mesos: bossMesos,
+              })
+            },
+            remainDefeatTime < 0 ? 0 : remainDefeatTime
+          )
       }
       return data
     }, []),
