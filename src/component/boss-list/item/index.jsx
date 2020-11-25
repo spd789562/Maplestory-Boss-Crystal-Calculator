@@ -18,7 +18,7 @@ import Defeated from './defeated'
 import { withTranslation } from '@i18n'
 
 /* utils */
-import { equals, find, propEq, prop, pipe } from 'ramda'
+import { equals, find, propEq, prop, pipe, pick } from 'ramda'
 
 const _hasOptions = (options) => (value) => find(equals(value), options)
 const matchStorageData = (id) => find(propEq('id', id))
@@ -33,10 +33,10 @@ const BossItem = ({
   enterShareId,
   recommand,
 }) => {
-  const [{ bossOptions, advanced }, dispatch] = useStore('meta')
-  const defeatDate = useStroeSelector(
+  const [{ bossOptions, filterOption, advanced }, dispatch] = useStore('meta')
+  const { defeatDate, defeatable } = useStroeSelector(
     'boss',
-    pipe(matchStorageData(id), prop('defeatDate'))
+    pipe(matchStorageData(id), pick(['defeatDate', 'defeatable']))
   )
   const hasDifficultySelect = difficulties.length > 1
   const actions = []
@@ -68,8 +68,12 @@ const BossItem = ({
       dispatch({ type: SET_BOSS_DEFEATED, payload: id })
     }
   }
+  const canDisplay =
+    filterOption === 'all' ||
+    (filterOption === 'recommand' && recommand) ||
+    (filterOption === 'defeatable' && defeatable)
 
-  return (
+  return canDisplay ? (
     <List.Item
       extra={<Space className="extra-item">{actions}</Space>}
       className="boss-list-item"
@@ -113,7 +117,7 @@ const BossItem = ({
         }
       `}</style>
     </List.Item>
-  )
+  ) : null
 }
 
 BossItem.getInitialProps = async () => ({

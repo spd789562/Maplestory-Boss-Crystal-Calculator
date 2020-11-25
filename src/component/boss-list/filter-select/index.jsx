@@ -18,7 +18,10 @@ const options = ['all', 'recommand', 'defeatable']
 
 const Options = ({ t, filterOption, handleChange }) => {
   return (
-    <Radio.Group defaultValue={filterOption} onChange={handleChange}>
+    <Radio.Group
+      defaultValue={filterOption}
+      onChange={({ target: { value } }) => handleChange(value)}
+    >
       {options
         .map((value) => ({ value, label: value }))
         .map(evolve({ label: t }))
