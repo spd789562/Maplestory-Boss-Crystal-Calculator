@@ -14,7 +14,7 @@ import { withTranslation } from '@i18n'
 /* utils */
 import { evolve } from 'ramda'
 
-const options = ['all', 'recommand', 'defeatable']
+const options = ['all', 'recommend', 'defeatable']
 
 const Options = ({ t, filterOption, handleChange }) => {
   return (

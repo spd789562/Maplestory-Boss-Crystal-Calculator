@@ -28,7 +28,7 @@ const BossList = ({ t }) => {
       style={{ backgroundColor: '#fff' }}
       bordered
       dataSource={BossesMapping.map((boss) =>
-        assoc('recommand', includes(boss.id, suggestions), boss)
+        assoc('recommend', includes(boss.id, suggestions), boss)
       )}
       header={
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>

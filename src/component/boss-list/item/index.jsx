@@ -31,7 +31,7 @@ const BossItem = ({
   defeatType,
   defeatTime,
   enterShareId,
-  recommand,
+  recommend,
 }) => {
   const [{ bossOptions, filterOption, advanced }, dispatch] = useStore('meta')
   const { defeatDate, defeatable } = useStroeSelector(
@@ -70,7 +70,7 @@ const BossItem = ({
   }
   const canDisplay =
     filterOption === 'all' ||
-    (filterOption === 'recommand' && recommand) ||
+    (filterOption === 'recommend' && recommend) ||
     (filterOption === 'defeatable' && defeatable)
 
   return canDisplay ? (
@@ -80,7 +80,7 @@ const BossItem = ({
       onClick={handleDefeat}
     >
       <List.Item.Meta
-        avatar={<Avatar id={id} name={name} recommand={recommand} />}
+        avatar={<Avatar id={id} name={name} recommend={recommend} />}
         title={
           <Name
             id={id}
