@@ -13,6 +13,8 @@
   "count": "次數",
   "mesos": "楓幣",
   "total": "總和",
+  "table": "表格",
+  "chart": "圖表",
 
   "defeatable": "可擊殺",
   "boss_list_description": "點擊 Boss 頭像已變更是否可擊殺，並輸入已擊殺次數，結果會根據是否擊殺與擊殺次數計算出推薦販賣的Boss",

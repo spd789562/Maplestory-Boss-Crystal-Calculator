@@ -144,7 +144,7 @@ const OptimalTable = ({ t }) => {
     <Card
       title={t('optimal_result')}
       bodyStyle={{ padding: 0 }}
-      tabList={tabList}
+      tabList={tabList.map(evolve({ tab: t }))}
       activeTabKey={tab}
       onTabChange={hangeChangeTab}
     >

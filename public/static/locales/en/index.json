@@ -13,6 +13,8 @@
   "count": "Count",
   "mesos": "Mesos",
   "total": "Total",
+  "table": "Table",
+  "chart": "Chart",
 
   "defeatable": "Beatable",
   "boss_list_description": "Click boss to change beatable and enter defeated count, result will base on beatable and defeated count to calculate the recommend boss.",
