@@ -52,7 +52,7 @@ const OptionSelect = ({ t }) => {
         <Options t={t} bossOptions={bossOptions} handleChange={handleChange} />
       }
     >
-      <MoreOutlined />
+      <MoreOutlined style={{ color: '#666', fontSize: 20 }} />
     </Popover>
   )
 }

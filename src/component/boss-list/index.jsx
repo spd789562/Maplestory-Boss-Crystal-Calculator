@@ -4,8 +4,9 @@ import { useStroeSelector, useDispatch } from '@store'
 /* components */
 import { List, Checkbox, Space } from 'antd'
 import Item from './item'
-import OptionSelect from './option-select'
 import SelectAll from './select-all'
+import OptionSelect from './option-select'
+import FilterSelect from './filter-select'
 
 /* i18n */
 import { withTranslation } from '@i18n'
@@ -33,6 +34,7 @@ const BossList = ({ t }) => {
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
           <SelectAll />
           <Space style={{ marginLeft: 'auto' }}>
+            <FilterSelect />
             <OptionSelect />
           </Space>
           <div style={{ color: '#666', fontSize: 14, width: '100%' }}>

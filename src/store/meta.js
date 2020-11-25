@@ -2,6 +2,7 @@ import { reducerCreator } from './_helper'
 
 export const CHANGE_REGION = 'CHANGE_REGION'
 export const CHANGE_BOSS_OPTIONS = 'CHANGE_BOSS_OPTIONS'
+export const CHANGE_FILTER_OPTION = 'CHANGE_FILTER_OPTION'
 export const CHANGE_ADVANCED = 'CHANGE_ADVANCED'
 export const CHANGE_RESET_DAY_OF_WEEK = 'CHANGE_RESET_DAY_OF_WEEK'
 export const CHANGE_RESET_HOUR = 'CHANGE_RESET_HOUR'
@@ -10,6 +11,7 @@ const initialState = {
   region: 'TWMS',
   advanced: false,
   bossOptions: ['difficulty', 'partyCount', 'defeatTime'],
+  filterOption: 'all',
   resetDayOfWeek: 4,
   resetHour: 0,
 }
@@ -22,6 +24,10 @@ const reducer = reducerCreator(initialState, {
   [CHANGE_BOSS_OPTIONS]: (state, payload) => {
     localStorage.setItem('bossOptions', payload.join(','))
     return { ...state, bossOptions: payload }
+  },
+  [CHANGE_FILTER_OPTION]: (state, payload) => {
+    localStorage.setItem('filterOption', payload)
+    return { ...state, filterOption: payload }
   },
   [CHANGE_ADVANCED]: (state, payload) => {
     localStorage.setItem('advanced', payload)
