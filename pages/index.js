@@ -58,7 +58,11 @@ function Home({ t, i18n }) {
                 if (
                   defeatType === 'day' &&
                   (isDifferentDay ||
-                    utcMoment().isAfter(utcMoment(bossData.defeatDate), 'day'))
+                    (bossData.defeatDate &&
+                      utcMoment().isAfter(
+                        utcMoment(bossData.defeatDate),
+                        'day'
+                      )))
                 ) {
                   bossData = assoc('defeatDate', 0, bossData)
                 }
@@ -68,6 +72,7 @@ function Home({ t, i18n }) {
                     isAfterResetHout &&
                     defeatType !== 'month') ||
                   (defeatType === 'week' &&
+                    bossData.defeatDate &&
                     !currentResetTime.isSame(
                       defineResetTime(bossData.defeatDate),
                       'day'
@@ -97,7 +102,7 @@ function Home({ t, i18n }) {
         window.localStorage.setItem('lastOpenDate', new Date().getTime())
       }
     }
-  }, [])
+  }, [process.browser])
   const handelReset = () => {
     dispatch({ type: RESET_BOSS_DATA })
   }
