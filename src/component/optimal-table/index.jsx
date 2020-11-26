@@ -89,10 +89,8 @@ const Chart = ({ config }) => (
 const OptimalTable = ({ t }) => {
   const [tab, hangeChangeTab] = useState('table')
   const { tableData, totalCount, totalMesos } = useTableData(t)
-  const chartRef = useRef(null)
 
   const config = {
-    chartRef,
     data: tableData.map(mergeLeft({ split: 1 })),
     angleField: 'split',
     colorField: 'name',
