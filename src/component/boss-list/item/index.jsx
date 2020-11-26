@@ -107,12 +107,10 @@ const BossItem = ({
         .boss-list-item:hover {
           background-color: #f7f7f7;
         }
-        .extra-item {
-          width: unset;
-        }
         @media screen and (max-width: ${270 + actions.length * 90}px) {
           .extra-item {
             width: 100%;
+            margin-top: 8px;
           }
         }
       `}</style>
