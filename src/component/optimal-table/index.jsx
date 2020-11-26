@@ -11,7 +11,19 @@ import { Table, Avatar, Space, Card, Row } from 'antd'
 import { withTranslation } from '@i18n'
 
 /* utils */
-import { assoc, evolve, map, indexBy, prop } from 'ramda'
+import {
+  assoc,
+  evolve,
+  defaultTo,
+  map,
+  indexBy,
+  prop,
+  path,
+  not,
+  mergeLeft,
+  includes,
+  pipe,
+} from 'ramda'
 import numberFormat from '@utils/number-format'
 import getBossSuggestion from '@utils/get-boss-suggestion'
 
@@ -77,10 +89,12 @@ const Chart = ({ config }) => (
 const OptimalTable = ({ t }) => {
   const [tab, hangeChangeTab] = useState('table')
   const { tableData, totalCount, totalMesos } = useTableData(t)
+  const chartRef = useRef(null)
 
   const config = {
-    data: tableData,
-    angleField: 'mesos',
+    chartRef,
+    data: tableData.map(mergeLeft({ split: 1 })),
+    angleField: 'split',
     colorField: 'name',
     appendPadding: 10,
     radius: 1,
@@ -135,8 +149,42 @@ const OptimalTable = ({ t }) => {
     },
     height: 500,
     interactions: [
-      { type: 'element-active' },
-      { type: 'pie-statistic-active' },
+      {
+        type: 'element-single-selected',
+        cfg: {
+          start: [
+            {
+              trigger: 'element:touchstart',
+              action: 'element-single-selected:toggle',
+            },
+          ],
+        },
+      },
+      {
+        type: 'pie-statistic-active',
+        cfg: {
+          start: [
+            { trigger: 'element:mouseenter', action: 'pie-statistic:change' },
+            {
+              trigger: 'element:touchstart',
+              action: 'pie-statistic:change',
+            },
+          ],
+          end: [
+            { trigger: 'element:mouseleave', action: 'pie-statistic:reset' },
+            {
+              trigger: 'element:touchstart',
+              action: 'pie-statistic:reset',
+              isEnable: pipe(
+                path(['event', 'gEvent', 'target', 'cfg', 'element', 'states']),
+                defaultTo([]),
+                includes('selected'),
+                not
+              ),
+            },
+          ],
+        },
+      },
     ],
   }
 
