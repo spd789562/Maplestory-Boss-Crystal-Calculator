@@ -110,7 +110,7 @@ const BossItem = ({
         .extra-item {
           width: unset;
         }
-        @media screen and (max-width: 510px) {
+        @media screen and (max-width: ${270 + actions.length * 90}px) {
           .extra-item {
             width: 100%;
           }
