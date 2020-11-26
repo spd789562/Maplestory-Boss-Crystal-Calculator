@@ -7,6 +7,9 @@
   "difficulty": "难度",
   "partyCount": "人数",
   "defeatTime": "次数",
+  "times_day": "天",
+  "times_week": "周",
+  "times_month": "月",
 
   "optimal_result": "当前最佳结果",
   "name": "名称",

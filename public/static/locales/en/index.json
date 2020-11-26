@@ -7,6 +7,9 @@
   "difficulty": "Difficulty",
   "partyCount": "Party Count",
   "defeatTime": "Defeat Time",
+  "times_day": "Day",
+  "times_week": "Week",
+  "times_month": "Month",
 
   "optimal_result": "Optimal Result",
   "name": "Name",
