@@ -76,7 +76,7 @@ function Home({ t, i18n }) {
                   (defeatType === 'week' &&
                     bossData.defeatDate &&
                     !currentResetTime.isSame(
-                      defineResetTime(bossData.defeatDate),
+                      defineResetTime(+resetDayOfWeek, bossData.defeatDate),
                       'day'
                     ))
                 ) {
