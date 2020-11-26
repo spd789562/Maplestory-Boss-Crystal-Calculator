@@ -36,17 +36,19 @@ const defineResetTime = (dayOfWeek, date) =>
 
 function Home({ t, i18n }) {
   const dispatch = useDispatch()
-  const [{ advanced, resetDayOfWeek, resetHour }] = useStore('meta')
   useEffect(() => {
     if (process.browser) {
       let data = JSON.parse(window.localStorage.getItem(storageKey))
+      const advanced = localStorage.getItem('advanced') === 'true'
+      const resetDayOfWeek = localStorage.getItem('resetDayOfWeek') || 4
+      const resetHour = localStorage.getItem('resetHour') || 0
       const _lastOpen =
         +window.localStorage.getItem('lastOpenDate') || utcMoment()
       const lastOpen = utcMoment(_lastOpen)
       if (data && data.length) {
         const isDifferentDay = utcMoment().isAfter(lastOpen, 'day')
-        const currentResetTime = defineResetTime(resetDayOfWeek)
-        const lastResetTime = defineResetTime(resetDayOfWeek, lastOpen)
+        const currentResetTime = defineResetTime(+resetDayOfWeek)
+        const lastResetTime = defineResetTime(+resetDayOfWeek, lastOpen)
         const isDifferentCycle = !currentResetTime.isSame(lastResetTime, 'day')
         const isAfterResetHout = utcMoment().hour() >= +resetHour
         data = advanced
@@ -86,7 +88,7 @@ function Home({ t, i18n }) {
                 }
                 if (defeatType === 'month' && bossData.defeatDate) {
                   const bossResetTime = defineResetTime(
-                    resetDayOfWeek,
+                    +resetDayOfWeek,
                     utcMoment(bossData.defeatDate).add(1, 'month')
                   )
                   if (utcMoment().isAfter(bossResetTime)) {

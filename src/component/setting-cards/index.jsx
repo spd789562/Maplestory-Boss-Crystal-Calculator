@@ -51,8 +51,8 @@ const SettingCard = ({ t }) => {
       const resetHour = localStorage.getItem('resetHour')
       region !== null && handleChangeRegion(region)
       advanced !== null && handleChangeAdvanced(advanced)
-      resetDayOfWeek !== null && handleChangeDay(resetDayOfWeek)
-      resetHour !== null && handleChangeHour(resetHour)
+      resetDayOfWeek !== null && handleChangeDay(+resetDayOfWeek)
+      resetHour !== null && handleChangeHour(+resetHour)
     }
   }, [])
   const nextResetTime = (moment().day() >= resetDayOfWeek
