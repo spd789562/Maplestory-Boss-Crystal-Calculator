@@ -40,7 +40,11 @@ const getBossSuggestion = (bossData) => {
       if (storeBossData.defeatable) {
         let maxDefeatTime = defineMaxTime(boss.defeatType, boss.defeatTime)
         // has share enter time
-        if (boss.enterShareId) {
+        if (
+          boss.enterShareId &&
+          BossObject[boss.enterShareId] &&
+          BossObject[boss.enterShareId].defeatable
+        ) {
           const sharedBoss = convertBossData[boss.enterShareId]
           const sharedBossData = BossObject[boss.enterShareId]
           const sharedBossMaxTime = defineMaxTime(
