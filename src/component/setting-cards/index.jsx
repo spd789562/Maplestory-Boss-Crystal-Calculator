@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useStore } from '@store'
 import {
   CHANGE_REGION,
+  CHANGE_REBOOT,
   CHANGE_ADVANCED,
   CHANGE_RESET_DAY_OF_WEEK,
   CHANGE_RESET_HOUR,
@@ -27,11 +28,15 @@ const TimeZone = {
   GMS: 0,
 }
 const SettingCard = ({ t }) => {
-  const [{ region, advanced, resetDayOfWeek, resetHour }, dispatch] = useStore(
-    'meta'
-  )
+  const [
+    { region, isReboot, advanced, resetDayOfWeek, resetHour },
+    dispatch,
+  ] = useStore('meta')
   const handleChangeRegion = (value) => {
     dispatch({ type: CHANGE_REGION, payload: value })
+  }
+  const handleChangeReboot = (value) => {
+    dispatch({ type: CHANGE_REBOOT, payload: value })
   }
   const handleChangeAdvanced = (value) => {
     dispatch({ type: CHANGE_ADVANCED, payload: value })
@@ -46,10 +51,12 @@ const SettingCard = ({ t }) => {
   useEffect(() => {
     if (process.browser) {
       const region = localStorage.getItem('region')
+      const isReboot = localStorage.getItem('isReboot') === 'true'
       const advanced = localStorage.getItem('advanced') === 'true'
       const resetDayOfWeek = localStorage.getItem('resetDayOfWeek')
       const resetHour = localStorage.getItem('resetHour')
       region !== null && handleChangeRegion(region)
+      isReboot !== null && handleChangeReboot(isReboot)
       advanced !== null && handleChangeAdvanced(advanced)
       resetDayOfWeek !== null && handleChangeDay(+resetDayOfWeek)
       resetHour !== null && handleChangeHour(+resetHour)
@@ -158,6 +165,21 @@ const SettingCard = ({ t }) => {
             >
               <Select.Option value="TWMS">TWMS</Select.Option>
             </Select>
+          </Form.Item>
+        </Col>
+        <Col span={24}>
+          <Form.Item
+            label="Reboot"
+            shouldUpdate={T}
+            style={{
+              display: 'inline-flex',
+            }}
+          >
+            <Switch
+              onChange={handleChangeReboot}
+              checked={isReboot}
+              key={`tools-${isReboot}`}
+            />
           </Form.Item>
         </Col>
       </Row>

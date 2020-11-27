@@ -1,7 +1,7 @@
 import { memo } from 'react'
 
 /* store */
-import { useStroeSelector } from '@store'
+import { useStore, useStroeSelector } from '@store'
 
 /* i18n */
 import { withTranslation } from '@i18n'
@@ -21,9 +21,11 @@ const BossMesos = ({ id, name, t }) => {
     'boss',
     pipe(matchStorageData(id), pick(['difficulty', 'partyCount']))
   )
+  const [isReboot] = useStore('meta.isReboot')
   const { defeatType } = BossObject[id]
   const mesos = numberFormat(
-    Math.floor((BossMesosMapping[name][difficulty] || 0) / (+partyCount || 0))
+    Math.floor((BossMesosMapping[name][difficulty] || 0) / (+partyCount || 0)) *
+      (isReboot ? 3 : 1)
   )
 
   return (

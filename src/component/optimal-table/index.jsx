@@ -11,7 +11,7 @@ import Chart from './chart'
 import { withTranslation } from '@i18n'
 
 /* utils */
-import { assoc, evolve } from 'ramda'
+import { assoc, evolve, multiply } from 'ramda'
 import numberFormat from '@utils/number-format'
 import getBossSuggestion from '@utils/get-boss-suggestion'
 
@@ -22,13 +22,16 @@ const tabList = [
 
 const useTableData = (t) => {
   const [bossData] = useStore('boss')
-  const mergedData = getBossSuggestion(bossData).map((boss) =>
-    assoc(
-      'name',
-      `${boss.difficulty ? t(boss.difficulty) : ''}${t(boss.name)}`,
-      boss
+  const [isReboot] = useStore('meta.isReboot')
+  const mergedData = getBossSuggestion(bossData)
+    .map((boss) =>
+      assoc(
+        'name',
+        `${boss.difficulty ? t(boss.difficulty) : ''}${t(boss.name)}`,
+        boss
+      )
     )
-  )
+    .map(evolve({ mesos: multiply(isReboot ? 3 : 1) }))
 
   const totalMesos = mergedData.reduce((total, { mesos }) => total + mesos, 0)
   const totalCount = mergedData.reduce((total, { count }) => total + count, 0)
