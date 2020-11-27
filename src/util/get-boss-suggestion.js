@@ -39,11 +39,10 @@ const getBossSuggestion = (bossData) => {
       )
       if (storeBossData.defeatable) {
         let maxDefeatTime = defineMaxTime(boss.defeatType, boss.defeatTime)
-        // has share enter time
         if (
           boss.enterShareId &&
-          BossObject[boss.enterShareId] &&
-          BossObject[boss.enterShareId].defeatable
+          convertBossData[boss.enterShareId] &&
+          convertBossData[boss.enterShareId].defeatable
         ) {
           const sharedBoss = convertBossData[boss.enterShareId]
           const sharedBossData = BossObject[boss.enterShareId]
@@ -58,7 +57,7 @@ const getBossSuggestion = (bossData) => {
             MesosMapping[boss.name][sharedBoss.difficulty] /
               (storeBossData.partyCount || 1)
           )
-          // reduce when shared boss
+          // reduce when shared boss mesos grater then this
           if (sharedBossMesos > bossMesos) {
             maxDefeatTime =
               maxDefeatTime + sharedBoss.defeatTime - sharedBossData.defeatTime
