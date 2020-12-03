@@ -81,6 +81,10 @@
 
   "just_a_advertisement": "Just a advertisement woundn't hurt",
 
+  "other_tools": "Other tools",
+  "web_arcane_symbol_calculator": "Arcane Symbol Calculator",
+  "web_maplesalon": "Maplesalon",
+
   "page_not_found": "Page Not Found",
   "error_with_status": "A {{statusCode}} error occurred on server",
   "error_without_status": "An error occurred on the server"

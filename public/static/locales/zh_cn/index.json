@@ -81,6 +81,10 @@
 
   "just_a_advertisement": "塞一下广告应该没关系吧",
 
+  "other_tools": "其他工具",
+  "web_arcane_symbol_calculator": "神秘徽章计算机",
+  "web_maplesalon": "枫沙龙",
+
   "page_not_found": "无此页面",
   "error_with_status": "A {{statusCode}} error occurred on server",
   "error_without_status": "An error occurred on the server"
