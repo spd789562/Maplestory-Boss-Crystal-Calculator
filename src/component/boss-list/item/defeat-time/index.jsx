@@ -1,7 +1,7 @@
 import { memo } from 'react'
 
 /* store */
-import { useStroeSelector, useDispatch } from '@store'
+import { useStore, useStroeSelector, useDispatch } from '@store'
 import { UPDATE_BOSS_DATA } from '@store/boss'
 
 /* components */
@@ -19,7 +19,7 @@ import BossMapping from '@mapping/bosses-crystal'
 
 const matchStorageData = (id) => curry(find(propEq('id', id)))
 const findBossMapping = (id) => matchStorageData(id)(BossMapping)
-const defineMaxTime = (type, time) => (type === 'day' ? 7 : 1) * time
+const defineMaxTime = (type, time, max) => (type === 'day' ? max : 1) * time
 const preventClick = (e) => e.stopPropagation()
 
 const DefeatTime = ({
@@ -30,6 +30,10 @@ const DefeatTime = ({
   t,
 }) => {
   const dispatch = useDispatch()
+  const { remainDays, advanced } = useStroeSelector(
+    'meta',
+    pick(['remainDays', 'advanced'])
+  )
   const [{ defeatTime, defeatable }, sharedBoss] = useStroeSelector(
     'boss',
     pipe(
@@ -40,12 +44,17 @@ const DefeatTime = ({
       map(pick(['id', 'defeatTime', 'defeatable']))
     )
   )
-  let maxTime = defineMaxTime(defeatType, defeatTypeTime)
+  let maxTime = defineMaxTime(
+    defeatType,
+    defeatTypeTime,
+    advanced ? remainDays : 7
+  )
   if (sharedBoss) {
     const sharedBossData = findBossMapping(sharedBoss.id)
     const sharedBossMaxTime = defineMaxTime(
       sharedBossData.defeatType,
-      sharedBossData.defeatTime
+      sharedBossData.defeatTime,
+      advanced ? remainDays : 7
     )
     const bigMaxTime = Math.max(maxTime, sharedBossMaxTime)
     const withoutSelfRemainTime = bigMaxTime - sharedBoss.defeatTime

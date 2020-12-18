@@ -89,12 +89,6 @@ const SettingCard = ({ t }) => {
     })
   }
   const handleChangeAdvanced = (value) => {
-    dispatch({
-      type: UPDATE_META,
-      payload: {
-        advanced: value,
-      },
-    })
     if (value) {
       const serverTime = getResetDay(
         moment().utcOffset(TimeZone[region]),
@@ -103,8 +97,18 @@ const SettingCard = ({ t }) => {
       dispatch({
         type: UPDATE_META,
         payload: {
+          advanced: value,
           resetDayOfWeek: serverTime.day(),
           resetHour: serverTime.hour(),
+          remainDays: Math.ceil(currentTimeZone.diff(moment(), 'days', true)),
+        },
+      })
+    } else {
+      dispatch({
+        type: UPDATE_META,
+        payload: {
+          advanced: value,
+          remainDays: 7,
         },
       })
     }
@@ -251,6 +255,7 @@ const SettingCard = ({ t }) => {
               defaultValue={7}
               style={{ width: 80 }}
               value={remainDays}
+              disabled={advanced}
             >
               {times(
                 (index) => (

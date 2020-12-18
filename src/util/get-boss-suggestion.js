@@ -20,11 +20,11 @@ import BossMapping, { BossObject } from '@mapping/bosses-crystal'
 import MesosMapping from '@mapping/mesos'
 
 const toObject = reduce((data, boss) => assoc(boss.id, boss, data), {})
-const defineMaxTime = (type, time) => (type === 'day' ? 7 : 1) * time
+const defineMaxTime = (type, time, max) => (type === 'day' ? max : 1) * time
 
 const WEEK_MAX = 60
 
-const getBossSuggestion = (bossData, region = 'GMS') => {
+const getBossSuggestion = (bossData, region = 'GMS', maxTime = 7) => {
   const currentRegion = MesosMapping[region] ? region : 'GMS'
   const convertBossData = toObject(bossData)
   const currentDefeatTotal = reduce(
@@ -41,7 +41,11 @@ const getBossSuggestion = (bossData, region = 'GMS') => {
           (storeBossData.partyCount || 1)
       )
       if (storeBossData.defeatable) {
-        let maxDefeatTime = defineMaxTime(boss.defeatType, boss.defeatTime)
+        let maxDefeatTime = defineMaxTime(
+          boss.defeatType,
+          boss.defeatTime,
+          maxTime
+        )
         if (
           boss.enterShareId &&
           convertBossData[boss.enterShareId] &&
@@ -51,7 +55,8 @@ const getBossSuggestion = (bossData, region = 'GMS') => {
           const sharedBossData = BossObject[boss.enterShareId]
           const sharedBossMaxTime = defineMaxTime(
             sharedBossData.defeatType,
-            sharedBossData.defeatTime
+            sharedBossData.defeatTime,
+            maxTime
           )
           const bigMaxTime = Math.max(maxDefeatTime, sharedBossMaxTime)
           const withoutSelfRemainTime = bigMaxTime - sharedBoss.defeatTime
@@ -102,7 +107,6 @@ const getBossSuggestion = (bossData, region = 'GMS') => {
     values,
     sort(ascend(prop('mesos')))
   )(BossMapping)
-
   return mergedData
 }
 

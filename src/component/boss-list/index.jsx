@@ -15,17 +15,21 @@ import { Fragment, useMemo } from 'react'
 import { withTranslation } from '@i18n'
 
 /* utils */
-import { assoc, map, pipe, prop, includes, __ } from 'ramda'
+import { assoc, map, pipe, prop, includes, pick, __ } from 'ramda'
 import getBossSuggestion from '@utils/get-boss-suggestion'
 
 /* mapping */
 import BossesMapping from '@mapping/bosses-crystal'
 
 const BossList = ({ t }) => {
-  const [region] = useStore('meta.region')
+  const { region, remainDays } = useStroeSelector(
+    'meta',
+    pick(['region', 'remainDays'])
+  )
   const [boss] = useStore('boss')
-  const suggestions = pipe(getBossSuggestion(__, region), map(prop('id')))(boss)
-
+  const suggestions = getBossSuggestion(boss, region, remainDays).map(
+    prop('id')
+  )
   return (
     <List
       style={{ backgroundColor: '#fff' }}
