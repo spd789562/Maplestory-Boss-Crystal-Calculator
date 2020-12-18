@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react'
 
 /* store */
 import { useStore } from '@store'
-import { CHANGE_FILTER_OPTION } from '@store/meta'
+import { UPDATE_META } from '@store/meta'
 
 /* components */
 import { Popover, Radio } from 'antd'
@@ -37,13 +37,7 @@ const Options = ({ t, filterOption, handleChange }) => {
 const FilterSelect = ({ t }) => {
   const [filterOption, dispatch] = useStore('meta.filterOption')
   const handleChange = useCallback((value) => {
-    dispatch({ type: CHANGE_FILTER_OPTION, payload: value })
-  }, [])
-  useEffect(() => {
-    if (process.browser) {
-      const filterOption = localStorage.getItem('filterOption')
-      filterOption !== null && handleChange(filterOption)
-    }
+    dispatch({ type: UPDATE_META, payload: { filterOption: value } })
   }, [])
   return (
     <Popover

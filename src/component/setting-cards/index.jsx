@@ -1,14 +1,8 @@
-import { useEffect } from 'react'
+import { useEffect, Fragment } from 'react'
 
 /* store */
 import { useStore } from '@store'
-import {
-  CHANGE_REGION,
-  CHANGE_REBOOT,
-  CHANGE_ADVANCED,
-  CHANGE_RESET_DAY_OF_WEEK,
-  CHANGE_RESET_HOUR,
-} from '@store/meta'
+import { UPDATE_META } from '@store/meta'
 
 /* components */
 import { Row, Col, Card, Select, Form, Switch, Tooltip, Space } from 'antd'
@@ -18,10 +12,43 @@ import { withTranslation } from '@i18n'
 
 /* utils */
 import moment from 'moment'
-import { pick, times, T } from 'ramda'
-import { Fragment } from 'react/cjs/react.production.min'
+import {
+  assoc,
+  dissoc,
+  pick,
+  times,
+  T,
+  ifElse,
+  isNil,
+  prop,
+  pipe,
+  not,
+  identity,
+  has,
+  mergeLeft,
+  join,
+  evolve,
+  split,
+} from 'ramda'
 
 const FORMAT = 'YYYY/MM/DD HH:mm'
+
+const hasValue = (field) => pipe(prop(field), isNil, not)
+const removeFieldWhenNeil = (field) =>
+  ifElse(hasValue(field), identity, dissoc(field))
+const integrateByField = (field) =>
+  ifElse(
+    has(field),
+    identity,
+    ifElse(
+      isNil,
+      () => identity,
+      (data) => {
+        localStorage.removeItem(field)
+        return assoc(field, data)
+      }
+    )(localStorage.getItem(field))
+  )
 
 const TimeZone = {
   TWMS: 480,
@@ -36,7 +63,7 @@ const getResetDay = (momentObj, dayOfWeek) =>
 
 const SettingCard = ({ t }) => {
   const [
-    { region, isReboot, advanced, resetDayOfWeek, resetHour },
+    { region, isReboot, advanced, resetDayOfWeek, resetHour, remainDays },
     dispatch,
   ] = useStore('meta')
 
@@ -52,49 +79,71 @@ const SettingCard = ({ t }) => {
       moment().utcOffset(TimeZone[value]),
       4
     ).utcOffset(moment().utcOffset())
-    dispatch({ type: CHANGE_REGION, payload: value })
     dispatch({
-      type: CHANGE_RESET_DAY_OF_WEEK,
-      payload: serverTime.day(),
+      type: UPDATE_META,
+      payload: {
+        region: value,
+        resetDayOfWeek: serverTime.day(),
+        resetHour: serverTime.hour(),
+      },
     })
-    dispatch({ type: CHANGE_RESET_HOUR, payload: serverTime.hour() })
-  }
-  const handleChangeReboot = (value) => {
-    dispatch({ type: CHANGE_REBOOT, payload: value })
   }
   const handleChangeAdvanced = (value) => {
-    dispatch({ type: CHANGE_ADVANCED, payload: value })
+    dispatch({
+      type: UPDATE_META,
+      payload: {
+        advanced: value,
+      },
+    })
     if (value) {
       const serverTime = getResetDay(
         moment().utcOffset(TimeZone[region]),
         4
       ).utcOffset(moment().utcOffset())
       dispatch({
-        type: CHANGE_RESET_DAY_OF_WEEK,
-        payload: serverTime.day(),
+        type: UPDATE_META,
+        payload: {
+          resetDayOfWeek: serverTime.day(),
+          resetHour: serverTime.hour(),
+        },
       })
-      dispatch({ type: CHANGE_RESET_HOUR, payload: serverTime.hour() })
     }
   }
-  const handleChangeDay = (value) => {
-    dispatch({ type: CHANGE_RESET_DAY_OF_WEEK, payload: value })
+  const handleChangeMeta = (field) => (value) => {
+    dispatch({
+      type: UPDATE_META,
+      payload: {
+        [field]: value,
+      },
+    })
   }
-  const handleChangeHour = (value) => {
-    dispatch({ type: CHANGE_RESET_HOUR, payload: value })
-  }
-
   useEffect(() => {
     if (process.browser) {
-      const region = localStorage.getItem('region')
-      const isReboot = localStorage.getItem('isReboot') === 'true'
-      const advanced = localStorage.getItem('advanced') === 'true'
-      const resetDayOfWeek = localStorage.getItem('resetDayOfWeek')
-      const resetHour = localStorage.getItem('resetHour')
-      region !== null && handleChangeRegion(region)
-      isReboot !== null && handleChangeReboot(isReboot)
-      advanced !== null && handleChangeAdvanced(advanced)
-      resetDayOfWeek !== null && handleChangeDay(+resetDayOfWeek)
-      resetHour !== null && handleChangeHour(+resetHour)
+      const meta = JSON.parse(localStorage.getItem('meta'))
+      const updatedMeta = pipe(
+        removeFieldWhenNeil('region'),
+        removeFieldWhenNeil('isReboot'),
+        removeFieldWhenNeil('advanced'),
+        removeFieldWhenNeil('resetDayOfWeek'),
+        removeFieldWhenNeil('resetHour'),
+        removeFieldWhenNeil('remainDays'),
+        removeFieldWhenNeil('bossOptions'),
+        removeFieldWhenNeil('filterOption'),
+        evolve({ bossOptions: split(',') })
+      )(meta)
+      const integrateOldMeta = pipe(
+        integrateByField('region'),
+        integrateByField('isReboot'),
+        integrateByField('advanced'),
+        integrateByField('resetDayOfWeek'),
+        integrateByField('resetHour'),
+        integrateByField('bossOptions'),
+        integrateByField('filterOption')
+      )(updatedMeta)
+      dispatch({
+        type: UPDATE_META,
+        payload: integrateOldMeta,
+      })
     }
   }, [])
 
@@ -128,7 +177,7 @@ const SettingCard = ({ t }) => {
                 style={{ display: 'inline-flex', marginBottom: 0 }}
               >
                 <Select
-                  onChange={handleChangeDay}
+                  onChange={handleChangeMeta('resetDayOfWeek')}
                   style={{ width: 100 }}
                   value={+resetDayOfWeek}
                 >
@@ -149,7 +198,7 @@ const SettingCard = ({ t }) => {
                 style={{ display: 'inline-flex', marginBottom: 0 }}
               >
                 <Select
-                  onChange={handleChangeHour}
+                  onChange={handleChangeMeta('resetHour')}
                   style={{ width: 80 }}
                   value={+resetHour}
                 >
@@ -196,6 +245,25 @@ const SettingCard = ({ t }) => {
           </Form.Item>
         </Col>
         <Col span={24}>
+          <Form.Item label={t('remain_days')} shouldUpdate>
+            <Select
+              onChange={handleChangeMeta('remainDays')}
+              defaultValue={7}
+              style={{ width: 80 }}
+              value={remainDays}
+            >
+              {times(
+                (index) => (
+                  <Select.Option value={index + 1} key={`remain_day_${index}`}>
+                    {index + 1}
+                  </Select.Option>
+                ),
+                7
+              )}
+            </Select>
+          </Form.Item>
+        </Col>
+        <Col span={24}>
           <Form.Item
             label="Reboot"
             shouldUpdate={T}
@@ -204,7 +272,7 @@ const SettingCard = ({ t }) => {
             }}
           >
             <Switch
-              onChange={handleChangeReboot}
+              onChange={handleChangeMeta('isReboot')}
               checked={isReboot}
               key={`tools-${isReboot}`}
             />

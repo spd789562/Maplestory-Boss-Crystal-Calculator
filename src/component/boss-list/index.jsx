@@ -23,9 +23,8 @@ import BossesMapping from '@mapping/bosses-crystal'
 
 const BossList = ({ t }) => {
   const [region] = useStore('meta.region')
-
-  const boss = useStore('boss')
-  const suggestions = pipe(getBossSuggestion(__, region), map(prop('id')), boss)
+  const [boss] = useStore('boss')
+  const suggestions = pipe(getBossSuggestion(__, region), map(prop('id')))(boss)
 
   return (
     <List

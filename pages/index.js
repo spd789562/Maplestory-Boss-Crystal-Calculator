@@ -39,9 +39,8 @@ function Home({ t, i18n }) {
   useEffect(() => {
     if (process.browser) {
       let data = JSON.parse(window.localStorage.getItem(storageKey))
-      const advanced = localStorage.getItem('advanced') === 'true'
-      const resetDayOfWeek = localStorage.getItem('resetDayOfWeek') || 4
-      const resetHour = localStorage.getItem('resetHour') || 0
+      const { advanced = true, resetDayOfWeek = 4, resetHour = 0 } =
+        JSON.parse(localStorage.getItem('meta') || '{}') || {}
       const _lastOpen =
         +window.localStorage.getItem('lastOpenDate') || utcMoment()
       const lastOpen = utcMoment(_lastOpen)
