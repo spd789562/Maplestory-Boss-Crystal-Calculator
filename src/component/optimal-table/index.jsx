@@ -1,6 +1,6 @@
 import { useState } from 'react'
 /* store */
-import { useStore } from '@store'
+import { useStore, useStroeSelector } from '@store'
 
 /* components */
 import { Card } from 'antd'
@@ -11,7 +11,7 @@ import Chart from './chart'
 import { withTranslation } from '@i18n'
 
 /* utils */
-import { assoc, evolve, multiply } from 'ramda'
+import { assoc, evolve, multiply, pick } from 'ramda'
 import numberFormat from '@utils/number-format'
 import getBossSuggestion from '@utils/get-boss-suggestion'
 
@@ -22,8 +22,11 @@ const tabList = [
 
 const useTableData = (t) => {
   const [bossData] = useStore('boss')
-  const [isReboot] = useStore('meta.isReboot')
-  const mergedData = getBossSuggestion(bossData)
+  const { isReboot, region } = useStroeSelector(
+    'meta',
+    pick(['isReboot', 'region'])
+  )
+  const mergedData = getBossSuggestion(bossData, region)
     .map((boss) =>
       assoc(
         'name',

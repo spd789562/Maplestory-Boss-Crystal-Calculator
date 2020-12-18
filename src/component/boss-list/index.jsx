@@ -1,5 +1,5 @@
 /* store */
-import { useStroeSelector, useDispatch } from '@store'
+import { useStroeSelector, useStore } from '@store'
 
 /* components */
 import { List, Checkbox, Space } from 'antd'
@@ -12,16 +12,18 @@ import FilterSelect from './filter-select'
 import { withTranslation } from '@i18n'
 
 /* utils */
-import { assoc, map, pipe, prop, includes } from 'ramda'
+import { assoc, map, pipe, prop, includes, __ } from 'ramda'
 import getBossSuggestion from '@utils/get-boss-suggestion'
 
 /* mapping */
 import BossesMapping from '@mapping/bosses-crystal'
 
 const BossList = ({ t }) => {
+  const [region] = useStore('meta.region')
+
   const suggestions = useStroeSelector(
     'boss',
-    pipe(getBossSuggestion, map(prop('id')))
+    pipe(getBossSuggestion(__, region), map(prop('id')))
   )
   return (
     <List
