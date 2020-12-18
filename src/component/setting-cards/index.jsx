@@ -64,6 +64,17 @@ const SettingCard = ({ t }) => {
   }
   const handleChangeAdvanced = (value) => {
     dispatch({ type: CHANGE_ADVANCED, payload: value })
+    if (value) {
+      const serverTime = getResetDay(
+        moment().utcOffset(TimeZone[region]),
+        4
+      ).utcOffset(moment().utcOffset())
+      dispatch({
+        type: CHANGE_RESET_DAY_OF_WEEK,
+        payload: serverTime.day(),
+      })
+      dispatch({ type: CHANGE_RESET_HOUR, payload: serverTime.hour() })
+    }
   }
   const handleChangeDay = (value) => {
     dispatch({ type: CHANGE_RESET_DAY_OF_WEEK, payload: value })

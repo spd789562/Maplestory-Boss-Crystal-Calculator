@@ -8,6 +8,9 @@ import SelectAll from './select-all'
 import OptionSelect from './option-select'
 import FilterSelect from './filter-select'
 
+/* hooks */
+import { Fragment, useMemo } from 'react'
+
 /* i18n */
 import { withTranslation } from '@i18n'
 
@@ -21,10 +24,9 @@ import BossesMapping from '@mapping/bosses-crystal'
 const BossList = ({ t }) => {
   const [region] = useStore('meta.region')
 
-  const suggestions = useStroeSelector(
-    'boss',
-    pipe(getBossSuggestion(__, region), map(prop('id')))
-  )
+  const boss = useStore('boss')
+  const suggestions = pipe(getBossSuggestion(__, region), map(prop('id')), boss)
+
   return (
     <List
       style={{ backgroundColor: '#fff' }}
