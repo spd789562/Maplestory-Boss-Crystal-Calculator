@@ -27,13 +27,37 @@ const TimeZone = {
   TWMS: 480,
   GMS: 0,
 }
+
+const getResetDay = (momentObj, dayOfWeek) =>
+  (momentObj.day() >= dayOfWeek
+    ? momentObj.day(dayOfWeek + 7)
+    : momentObj.day(dayOfWeek)
+  ).startOf('day')
+
 const SettingCard = ({ t }) => {
   const [
     { region, isReboot, advanced, resetDayOfWeek, resetHour },
     dispatch,
   ] = useStore('meta')
+
+  const nextResetTime = getResetDay(moment(), resetDayOfWeek)
+    .hour(resetHour)
+    .startOf('hour')
+    .utc()
+  const currentTimeZone = nextResetTime.clone().utcOffset(moment().utcOffset())
+  const serverResetTime = nextResetTime.clone().utcOffset(TimeZone[region])
+
   const handleChangeRegion = (value) => {
+    const serverTime = getResetDay(
+      moment().utcOffset(TimeZone[value]),
+      4
+    ).utcOffset(moment().utcOffset())
     dispatch({ type: CHANGE_REGION, payload: value })
+    dispatch({
+      type: CHANGE_RESET_DAY_OF_WEEK,
+      payload: serverTime.day(),
+    })
+    dispatch({ type: CHANGE_RESET_HOUR, payload: serverTime.hour() })
   }
   const handleChangeReboot = (value) => {
     dispatch({ type: CHANGE_REBOOT, payload: value })
@@ -62,15 +86,7 @@ const SettingCard = ({ t }) => {
       resetHour !== null && handleChangeHour(+resetHour)
     }
   }, [])
-  const nextResetTime = (moment().day() >= resetDayOfWeek
-    ? moment().day(resetDayOfWeek + 7)
-    : moment().day(resetDayOfWeek)
-  )
-    .hour(resetHour)
-    .startOf('hour')
-    .utc()
-  const currentTimeZone = nextResetTime.clone().utcOffset(moment().utcOffset())
-  const serverResetTime = nextResetTime.clone().utcOffset(TimeZone[region])
+
   return (
     <Card title={t('setting')}>
       <Row gutter={[8, 8]}>
@@ -140,7 +156,7 @@ const SettingCard = ({ t }) => {
             </Tooltip>
             <div style={{ color: '#878787' }}>
               {t('next_reset_time')}:&nbsp;
-              {currentTimeZone.isSame(serverResetTime) ? (
+              {currentTimeZone.utcOffset() === serverResetTime.utcOffset() ? (
                 currentTimeZone.format(FORMAT)
               ) : (
                 <Fragment>
@@ -164,6 +180,7 @@ const SettingCard = ({ t }) => {
               value={region}
             >
               <Select.Option value="TWMS">TWMS</Select.Option>
+              <Select.Option value="GMS">GMS</Select.Option>
             </Select>
           </Form.Item>
         </Col>
