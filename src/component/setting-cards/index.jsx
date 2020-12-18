@@ -61,7 +61,7 @@ const getResetDay = (momentObj, dayOfWeek) =>
     : momentObj.day(dayOfWeek)
   ).startOf('day')
 
-const SettingCard = ({ t }) => {
+const SettingCard = ({ t, i18n: { language } }) => {
   const [
     { region, isReboot, advanced, resetDayOfWeek, resetHour, remainDays },
     dispatch,
@@ -148,6 +148,9 @@ const SettingCard = ({ t }) => {
         type: UPDATE_META,
         payload: integrateOldMeta,
       })
+      if (!integrateOldMeta.region) {
+        handleChangeRegion(language === 'zh_tw' ? 'TWMS' : 'GMS')
+      }
     }
   }, [])
 
