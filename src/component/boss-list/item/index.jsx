@@ -18,7 +18,7 @@ import Defeated from './defeated'
 import { withTranslation } from '@i18n'
 
 /* utils */
-import { equals, find, propEq, prop, pipe, pick } from 'ramda'
+import { equals, find, propEq, prop, pipe, pickAll, defaultTo } from 'ramda'
 
 const _hasOptions = (options) => (value) => find(equals(value), options)
 const matchStorageData = (id) => find(propEq('id', id))
@@ -36,7 +36,7 @@ const BossItem = ({
   const [{ bossOptions, filterOption, advanced }, dispatch] = useStore('meta')
   const { defeatDate, defeatable } = useStroeSelector(
     'boss',
-    pipe(matchStorageData(id), pick(['defeatDate', 'defeatable']))
+    pipe(matchStorageData(id),defaultTo({}), pickAll(['defeatDate', 'defeatable']))
   )
   const hasDifficultySelect = difficulties.length > 1
   const actions = []

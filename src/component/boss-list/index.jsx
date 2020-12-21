@@ -19,7 +19,7 @@ import { assoc, map, pipe, prop, includes, pick, __ } from 'ramda'
 import getBossSuggestion from '@utils/get-boss-suggestion'
 
 /* mapping */
-import BossesMapping from '@mapping/bosses-crystal'
+import BossesMapping from '@mapping/boss'
 
 const BossList = ({ t }) => {
   const { region, remainDays } = useStroeSelector(
@@ -27,6 +27,7 @@ const BossList = ({ t }) => {
     pick(['region', 'remainDays'])
   )
   const [boss] = useStore('boss')
+  
   const suggestions = getBossSuggestion(boss, region, remainDays).map(
     prop('id')
   )
@@ -34,7 +35,7 @@ const BossList = ({ t }) => {
     <List
       style={{ backgroundColor: '#fff' }}
       bordered
-      dataSource={BossesMapping.map((boss) =>
+      dataSource={BossesMapping[region].map((boss) =>
         assoc('recommend', includes(boss.id, suggestions), boss)
       )}
       header={

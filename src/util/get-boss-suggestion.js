@@ -16,7 +16,7 @@ import {
 } from 'ramda'
 
 /* mapping */
-import BossMapping, { BossObject } from '@mapping/bosses-crystal'
+import BossMapping, { BossObject } from '@mapping/boss'
 import MesosMapping from '@mapping/mesos'
 
 const toObject = reduce((data, boss) => assoc(boss.id, boss, data), {})
@@ -52,7 +52,7 @@ const getBossSuggestion = (bossData, region = 'GMS', maxTime = 7) => {
           convertBossData[boss.enterShareId].defeatable
         ) {
           const sharedBoss = convertBossData[boss.enterShareId]
-          const sharedBossData = BossObject[boss.enterShareId]
+          const sharedBossData = BossObject[currentRegion][boss.enterShareId]
           const sharedBossMaxTime = defineMaxTime(
             sharedBossData.defeatType,
             sharedBossData.defeatTime,
@@ -72,7 +72,6 @@ const getBossSuggestion = (bossData, region = 'GMS', maxTime = 7) => {
           }
         }
         let remainDefeatTime = maxDefeatTime - storeBossData.defeatTime
-
         remainDefeatTime &&
           times(
             () => {
@@ -106,7 +105,7 @@ const getBossSuggestion = (bossData, region = 'GMS', maxTime = 7) => {
     }, {}),
     values,
     sort(ascend(prop('mesos')))
-  )(BossMapping)
+  )(BossMapping[currentRegion])
   return mergedData
 }
 

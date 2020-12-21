@@ -1,7 +1,7 @@
 import { memo, Fragment } from 'react'
 
 /* store */
-import { useStroeSelector, useDispatch } from '@store'
+import { useStore, useStroeSelector, useDispatch } from '@store'
 import { CANCEL_BOSS_DEFEATED } from '@store/boss'
 
 /* components */
@@ -15,12 +15,12 @@ import { find, map, pipe, pick, propEq } from 'ramda'
 import moment from 'moment'
 
 /* mapping */
-import BossMapping from '@mapping/bosses-crystal'
+import BossMapping from '@mapping/boss'
 
 const FORMAT = 'YYYY-MM-DD HH:mm'
 
 const matchStorageData = (id) => find(propEq('id', id))
-const findBossMapping = (id) => matchStorageData(id)(BossMapping)
+const findBossMapping = (id, region='GMS') => matchStorageData(id)(BossMapping[region])
 const defineMaxTime = (type, time) => (type === 'day' ? 7 : 1) * time
 const preventClick = (e) => e.stopPropagation()
 
@@ -33,6 +33,7 @@ const BossDefeated = ({
 }) => {
   const dispatch = useDispatch()
   let hasConsumEnter = false
+  const [region] = useStore('meta.region')
   const [{ defeatTime, defeatDate }, sharedBoss] = useStroeSelector(
     'boss',
     pipe(
@@ -53,7 +54,7 @@ const BossDefeated = ({
       hasConsumEnter = true
     }
     // check max time
-    const sharedBossData = findBossMapping(sharedBoss.id)
+    const sharedBossData = findBossMapping(sharedBoss.id, region)
     const sharedBossMaxTime = defineMaxTime(
       sharedBossData.defeatType,
       sharedBossData.defeatTime

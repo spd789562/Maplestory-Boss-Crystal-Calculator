@@ -11,7 +11,7 @@ import { find, pipe, pick, propEq } from 'ramda'
 import numberFormat from '@utils/number-format'
 
 /* mapping */
-import { BossObject } from '@mapping/bosses-crystal'
+import { BossObject } from '@mapping/boss'
 import MesosMapping from '@mapping/mesos'
 
 const matchStorageData = (id) => find(propEq('id', id))
@@ -26,7 +26,7 @@ const BossMesos = ({ id, name, t }) => {
     pick(['isReboot', 'region'])
   )
   const currentRegion = MesosMapping[region] ? region : 'GMS'
-  const { defeatType } = BossObject[id]
+  const { defeatType } = BossObject[currentRegion][id]
   const mesos = numberFormat(
     Math.floor(
       (MesosMapping[currentRegion][name][difficulty] || 0) / (+partyCount || 0)

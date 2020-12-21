@@ -13,10 +13,11 @@ import {
   F,
   T,
   always,
+  values,
   mergeLeft,
 } from 'ramda'
 
-import BossMapping from '@mapping/bosses-crystal'
+import { BossObject } from '@mapping/boss'
 
 export const INIT_BOSS_DATA = 'INIT_BOSS_DATA'
 export const TOGGLE_BOSS_DEFEATABLE = 'TOGGLE_BOSS_DEFEATABLE'
@@ -37,13 +38,13 @@ const saveToStroage = (state) => {
   return state
 }
 
-const initialState = BossMapping.map(({ id, difficulties }) => ({
+const initialState = map(({ id, difficulties }) => ({
   id,
   defeatable: false,
   partyCount: 1,
   defeatTime: 0,
   difficulty: difficulties[difficulties.length - 1].difficulty,
-}))
+}))(values(mergeRight(BossObject.GMS, BossObject.TWMS)))
 
 const reducer = reducerCreator(initialState, {
   [INIT_BOSS_DATA]: (_, payload) => saveToStroage(payload),
