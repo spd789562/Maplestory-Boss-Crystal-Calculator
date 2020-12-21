@@ -87,32 +87,6 @@ const BossList = [
     defeatType: 'day',
     defeatTime: 1,
   },
-  // 簡單庫洛斯
-  {
-    id: 7,
-    name: 'cross',
-    difficulties: [
-      {
-        difficulty: 'easy',
-        mesos: 800000,
-      },
-    ],
-    defeatType: 'day',
-    defeatTime: 1,
-  },
-  // 普通庫洛斯
-  {
-    id: 8,
-    name: 'cross',
-    difficulties: [
-      {
-        difficulty: 'normal',
-        mesos: 1342000,
-      },
-    ],
-    defeatType: 'week',
-    defeatTime: 1,
-  },
   // 濃姬
   {
     id: 9,
@@ -122,6 +96,20 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 16200000,
+      },
+    ],
+    defeatType: 'week',
+    defeatTime: 1,
+  },
+  // 明智光秀
+  {
+    id: 36,
+    name: 'akechi_mitsuhide',
+    withoutDifficulty: true,
+    difficulties: [
+      {
+        difficulty: 'normal',
+        mesos: 28800000,
       },
     ],
     defeatType: 'week',
@@ -330,8 +318,6 @@ const BossList = [
     ],
     defeatType: 'day',
     defeatTime: 1,
-    enterShareId: 24,
-    enterShareTime: 7,
   },
   // 混沌皮卡啾
   {
@@ -345,8 +331,6 @@ const BossList = [
     ],
     defeatType: 'week',
     defeatTime: 1,
-    enterShareId: 23,
-    enterShareTime: 7,
   },
   // 西格諾斯
   {
@@ -538,10 +522,5 @@ const BossList = [
     enterTime: 1,
   },
 ]
-
-export const BossObject = reduce(
-  (obj, boss) => assoc(boss.id, boss, obj),
-  {}
-)(BossList)
 
 export default BossList

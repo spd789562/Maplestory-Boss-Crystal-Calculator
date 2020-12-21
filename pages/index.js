@@ -20,7 +20,7 @@ import moment from 'moment'
 import { assoc, clone } from 'ramda'
 
 /* mapping */
-import { BossObject } from '@mapping/bosses-crystal'
+import { BossObject } from '@mapping/boss'
 
 import styles from '../styles/Home.module.css'
 
@@ -39,9 +39,12 @@ function Home({ t, i18n }) {
   useEffect(() => {
     if (process.browser) {
       let data = JSON.parse(window.localStorage.getItem(storageKey))
-      const { advanced = true, resetDayOfWeek = 4, resetHour = 0 } = JSON.parse(
-        localStorage.getItem('meta') || 'null'
-      ) || {
+      const {
+        region = 'GMS',
+        advanced = true,
+        resetDayOfWeek = 4,
+        resetHour = 0,
+      } = JSON.parse(localStorage.getItem('meta') || 'null') || {
         advanced: localStorage.getItem('advanced') === 'true',
         resetDayOfWeek: localStorage.getItem('resetDayOfWeek') || 4,
         resetHour: localStorage.getItem('resetHour') || 0,
@@ -57,7 +60,7 @@ function Home({ t, i18n }) {
         const isAfterResetHout = utcMoment().hour() >= +resetHour
         data = advanced
           ? data.map((boss) => {
-              const { defeatType } = BossObject[boss.id] || {}
+              const { defeatType } = BossObject[region][boss.id] || {}
               let bossData = clone(boss)
               if (defeatType) {
                 // today is different day with last open or defeatDate is different day

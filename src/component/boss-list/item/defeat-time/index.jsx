@@ -15,10 +15,10 @@ import { withTranslation } from '@i18n'
 import { __, curry, find, pipe, prop, map, propEq, pick } from 'ramda'
 
 /* mapping */
-import BossMapping from '@mapping/bosses-crystal'
+import BossMapping from '@mapping/boss'
 
 const matchStorageData = (id) => curry(find(propEq('id', id)))
-const findBossMapping = (id) => matchStorageData(id)(BossMapping)
+const findBossMapping = (id, region = 'GMS') => matchStorageData(id)(BossMapping[region])
 const defineMaxTime = (type, time, max) => (type === 'day' ? max : 1) * time
 const preventClick = (e) => e.stopPropagation()
 
@@ -30,6 +30,7 @@ const DefeatTime = ({
   t,
 }) => {
   const dispatch = useDispatch()
+  const [region] = useStore('meta.region')
   const [{ defeatTime, defeatable }, sharedBoss] = useStroeSelector(
     'boss',
     pipe(
@@ -42,7 +43,7 @@ const DefeatTime = ({
   )
   let maxTime = defineMaxTime(defeatType, defeatTypeTime, 7)
   if (sharedBoss) {
-    const sharedBossData = findBossMapping(sharedBoss.id)
+    const sharedBossData = findBossMapping(sharedBoss.id, region)
     const sharedBossMaxTime = defineMaxTime(
       sharedBossData.defeatType,
       sharedBossData.defeatTime,
