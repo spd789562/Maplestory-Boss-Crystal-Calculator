@@ -12,7 +12,7 @@ import { UsergroupAddOutlined } from '@ant-design/icons'
 import { withTranslation } from '@i18n'
 
 /* utils */
-import { find, pipe, prop, propEq } from 'ramda'
+import { find, pipe, prop, propEq,defaultTo } from 'ramda'
 
 const matchStorageData = (id) => find(propEq('id', id))
 
@@ -24,7 +24,7 @@ const PartyCount = ({ id }) => {
   const dispatch = useDispatch()
   const partyCount = useStroeSelector(
     'boss',
-    pipe(matchStorageData(id), prop('partyCount'))
+    pipe(matchStorageData(id), defaultTo({}), prop('partyCount'))
   )
   const handleChange = (value) => {
     if (value >= 1 && value <= MAX_PARTY_COUNT) {

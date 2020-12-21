@@ -7,14 +7,14 @@ import { useStroeSelector } from '@store'
 import { withTranslation } from '@i18n'
 
 /* utils */
-import { find, pipe, prop, propEq } from 'ramda'
+import { find, pipe, prop, propEq,defaultTo } from 'ramda'
 
 const matchStorageData = (id) => find(propEq('id', id))
 
 const BossName = ({ id, name, difficulties, withoutDifficulty, t }) => {
   const difficulty = useStroeSelector(
     'boss',
-    pipe(matchStorageData(id), prop('difficulty'))
+    pipe(matchStorageData(id), defaultTo({}), prop('difficulty'))
   )
 
   return (

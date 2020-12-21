@@ -12,12 +12,23 @@ import { CheckOutlined } from '@ant-design/icons'
 import { withTranslation } from '@i18n'
 
 /* utils */
-import { __, curry, find, pipe, prop, map, propEq, pick } from 'ramda'
+import {
+  __,
+  curry,
+  find,
+  pipe,
+  prop,
+  map,
+  propEq,
+  pick,
+  defaultTo,
+} from 'ramda'
 
 /* mapping */
 import BossMapping from '@mapping/boss'
 
-const matchStorageData = (id) => curry(find(propEq('id', id)))
+const matchStorageData = (id) => (boss) =>
+  pipe(find(propEq('id', id)), defaultTo({}))(boss)
 const findBossMapping = (id, region = 'GMS') => matchStorageData(id)(BossMapping[region])
 const defineMaxTime = (type, time, max) => (type === 'day' ? max : 1) * time
 const preventClick = (e) => e.stopPropagation()

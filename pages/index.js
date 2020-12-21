@@ -17,10 +17,10 @@ import { withTranslation } from '../src/i18n'
 
 /* helper */
 import moment from 'moment'
-import { assoc, clone } from 'ramda'
+import { assoc, clone, propEq } from 'ramda'
 
 /* mapping */
-import { BossObject } from '@mapping/boss'
+import BossListMapping, { BossObject } from '@mapping/boss'
 
 import styles from '../styles/Home.module.css'
 
@@ -107,7 +107,21 @@ function Home({ t, i18n }) {
               return bossData
             })
           : data
-        dispatch({ type: INIT_BOSS_DATA, payload: data })
+        dispatch({
+          type: INIT_BOSS_DATA,
+          payload: BossListMapping[region]
+            .map(({ id, difficulties }) => ({
+              id,
+              defeatable: false,
+              partyCount: 1,
+              defeatTime: 0,
+              difficulty: difficulties[difficulties.length - 1].difficulty,
+            }))
+            .map((boss) => {
+              const mapping = data.find(propEq('id', boss.id))
+              return mapping || boss
+            }),
+        })
         window.localStorage.setItem('lastOpenDate', new Date().getTime())
       }
     }

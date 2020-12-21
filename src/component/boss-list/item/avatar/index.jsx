@@ -16,7 +16,7 @@ import {
 import { withTranslation } from '@i18n'
 
 /* utils */
-import { find, pipe, prop, propEq } from 'ramda'
+import { find, pipe, prop, propEq, defaultTo } from 'ramda'
 
 const matchStorageData = (id) => find(propEq('id', id))
 
@@ -26,7 +26,7 @@ const BossAvatar = ({ id, name, recommend, t }) => {
   const dispatch = useDispatch()
   const defeatable = useStroeSelector(
     'boss',
-    pipe(matchStorageData(id), prop('defeatable'))
+    pipe(matchStorageData(id), defaultTo({}), prop('defeatable'))
   )
   const handleToggleDefeatable = () => (e) => {
     e.stopPropagation()

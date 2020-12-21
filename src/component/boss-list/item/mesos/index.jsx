@@ -7,7 +7,7 @@ import { useStore, useStroeSelector } from '@store'
 import { withTranslation } from '@i18n'
 
 /* utils */
-import { find, pipe, pick, propEq } from 'ramda'
+import { find, pipe, pick, propEq,defaultTo } from 'ramda'
 import numberFormat from '@utils/number-format'
 
 /* mapping */
@@ -19,7 +19,11 @@ const matchStorageData = (id) => find(propEq('id', id))
 const BossMesos = ({ id, name, t }) => {
   const { difficulty, partyCount } = useStroeSelector(
     'boss',
-    pipe(matchStorageData(id), pick(['difficulty', 'partyCount']))
+    pipe(
+      matchStorageData(id),
+      defaultTo({}),
+      pick(['difficulty', 'partyCount'])
+    )
   )
   const { isReboot, region } = useStroeSelector(
     'meta',
