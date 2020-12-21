@@ -20,6 +20,7 @@
   "table": "表格",
   "chart": "图表",
 
+  "all": "全部",
   "defeatable": "可击杀",
   "boss_list_description": "点击 Boss 头像已变更是否可击杀，并输入已击杀次数，结果会根据是否击杀与击杀次数计算出推荐贩卖的Boss",
 
