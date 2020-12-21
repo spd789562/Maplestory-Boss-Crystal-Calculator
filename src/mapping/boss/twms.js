@@ -1,5 +1,3 @@
-import { assoc, reduce } from 'ramda'
-
 const BossList = [
   // 炎魔
   {
@@ -538,10 +536,5 @@ const BossList = [
     enterTime: 1,
   },
 ]
-
-export const BossObject = reduce(
-  (obj, boss) => assoc(boss.id, boss, obj),
-  {}
-)(BossList)
 
 export default BossList
