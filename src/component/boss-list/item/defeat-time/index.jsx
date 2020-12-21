@@ -30,10 +30,6 @@ const DefeatTime = ({
   t,
 }) => {
   const dispatch = useDispatch()
-  const { remainDays, advanced } = useStroeSelector(
-    'meta',
-    pick(['remainDays', 'advanced'])
-  )
   const [{ defeatTime, defeatable }, sharedBoss] = useStroeSelector(
     'boss',
     pipe(
@@ -44,17 +40,13 @@ const DefeatTime = ({
       map(pick(['id', 'defeatTime', 'defeatable']))
     )
   )
-  let maxTime = defineMaxTime(
-    defeatType,
-    defeatTypeTime,
-    advanced ? remainDays : 7
-  )
+  let maxTime = defineMaxTime(defeatType, defeatTypeTime, 7)
   if (sharedBoss) {
     const sharedBossData = findBossMapping(sharedBoss.id)
     const sharedBossMaxTime = defineMaxTime(
       sharedBossData.defeatType,
       sharedBossData.defeatTime,
-      advanced ? remainDays : 7
+      7
     )
     const bigMaxTime = Math.max(maxTime, sharedBossMaxTime)
     const withoutSelfRemainTime = bigMaxTime - sharedBoss.defeatTime
