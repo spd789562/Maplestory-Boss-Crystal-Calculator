@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react'
 
 /* store */
 import { useStore } from '@store'
-import { CHANGE_BOSS_OPTIONS } from '@store/meta'
+import { UPDATE_META } from '@store/meta'
 
 /* components */
 import { Popover, Checkbox } from 'antd'
@@ -34,13 +34,7 @@ const Options = ({ t, bossOptions, handleChange }) => {
 const OptionSelect = ({ t }) => {
   const [bossOptions, dispatch] = useStore('meta.bossOptions')
   const handleChange = useCallback((value) => {
-    dispatch({ type: CHANGE_BOSS_OPTIONS, payload: value })
-  }, [])
-  useEffect(() => {
-    if (process.browser) {
-      const bossOptions = localStorage.getItem('bossOptions')
-      bossOptions !== null && handleChange(bossOptions.split(','))
-    }
+    dispatch({ type: UPDATE_META, payload: { bossOptions: value } })
   }, [])
   return (
     <Popover

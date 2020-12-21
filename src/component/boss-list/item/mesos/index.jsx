@@ -12,7 +12,7 @@ import numberFormat from '@utils/number-format'
 
 /* mapping */
 import { BossObject } from '@mapping/bosses-crystal'
-import BossMesosMapping from '@mapping/bosses-mesos'
+import MesosMapping from '@mapping/mesos'
 
 const matchStorageData = (id) => find(propEq('id', id))
 
@@ -21,11 +21,16 @@ const BossMesos = ({ id, name, t }) => {
     'boss',
     pipe(matchStorageData(id), pick(['difficulty', 'partyCount']))
   )
-  const [isReboot] = useStore('meta.isReboot')
+  const { isReboot, region } = useStroeSelector(
+    'meta',
+    pick(['isReboot', 'region'])
+  )
+  const currentRegion = MesosMapping[region] ? region : 'GMS'
   const { defeatType } = BossObject[id]
   const mesos = numberFormat(
-    Math.floor((BossMesosMapping[name][difficulty] || 0) / (+partyCount || 0)) *
-      (isReboot ? 3 : 1)
+    Math.floor(
+      (MesosMapping[currentRegion][name][difficulty] || 0) / (+partyCount || 0)
+    ) * (isReboot ? 3 : 1)
   )
 
   return (

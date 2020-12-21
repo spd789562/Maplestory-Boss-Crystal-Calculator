@@ -1,14 +1,8 @@
-import { useEffect } from 'react'
+import { useEffect, Fragment } from 'react'
 
 /* store */
 import { useStore } from '@store'
-import {
-  CHANGE_REGION,
-  CHANGE_REBOOT,
-  CHANGE_ADVANCED,
-  CHANGE_RESET_DAY_OF_WEEK,
-  CHANGE_RESET_HOUR,
-} from '@store/meta'
+import { UPDATE_META } from '@store/meta'
 
 /* components */
 import { Row, Col, Card, Select, Form, Switch, Tooltip, Space } from 'antd'
@@ -18,59 +12,148 @@ import { withTranslation } from '@i18n'
 
 /* utils */
 import moment from 'moment'
-import { pick, times, T } from 'ramda'
-import { Fragment } from 'react/cjs/react.production.min'
+import {
+  assoc,
+  dissoc,
+  pick,
+  times,
+  T,
+  ifElse,
+  isNil,
+  prop,
+  pipe,
+  not,
+  identity,
+  has,
+  mergeLeft,
+  join,
+  evolve,
+  split,
+} from 'ramda'
 
 const FORMAT = 'YYYY/MM/DD HH:mm'
+
+const hasValue = (field) => pipe(prop(field), isNil, not)
+const removeFieldWhenNeil = (field) =>
+  ifElse(hasValue(field), identity, dissoc(field))
+const integrateByField = (field) =>
+  ifElse(
+    has(field),
+    identity,
+    ifElse(
+      isNil,
+      () => identity,
+      (data) => {
+        localStorage.removeItem(field)
+        return assoc(field, data)
+      }
+    )(localStorage.getItem(field))
+  )
 
 const TimeZone = {
   TWMS: 480,
   GMS: 0,
 }
-const SettingCard = ({ t }) => {
+
+const getResetDay = (momentObj, dayOfWeek) =>
+  (momentObj.day() >= dayOfWeek
+    ? momentObj.day(dayOfWeek + 7)
+    : momentObj.day(dayOfWeek)
+  ).startOf('day')
+
+const SettingCard = ({ t, i18n: { language } }) => {
   const [
-    { region, isReboot, advanced, resetDayOfWeek, resetHour },
+    { region, isReboot, advanced, resetDayOfWeek, resetHour, remainDays },
     dispatch,
   ] = useStore('meta')
-  const handleChangeRegion = (value) => {
-    dispatch({ type: CHANGE_REGION, payload: value })
-  }
-  const handleChangeReboot = (value) => {
-    dispatch({ type: CHANGE_REBOOT, payload: value })
-  }
-  const handleChangeAdvanced = (value) => {
-    dispatch({ type: CHANGE_ADVANCED, payload: value })
-  }
-  const handleChangeDay = (value) => {
-    dispatch({ type: CHANGE_RESET_DAY_OF_WEEK, payload: value })
-  }
-  const handleChangeHour = (value) => {
-    dispatch({ type: CHANGE_RESET_HOUR, payload: value })
-  }
 
-  useEffect(() => {
-    if (process.browser) {
-      const region = localStorage.getItem('region')
-      const isReboot = localStorage.getItem('isReboot') === 'true'
-      const advanced = localStorage.getItem('advanced') === 'true'
-      const resetDayOfWeek = localStorage.getItem('resetDayOfWeek')
-      const resetHour = localStorage.getItem('resetHour')
-      region !== null && handleChangeRegion(region)
-      isReboot !== null && handleChangeReboot(isReboot)
-      advanced !== null && handleChangeAdvanced(advanced)
-      resetDayOfWeek !== null && handleChangeDay(+resetDayOfWeek)
-      resetHour !== null && handleChangeHour(+resetHour)
-    }
-  }, [])
-  const nextResetTime = (moment().day() >= resetDayOfWeek
-    ? moment().day(resetDayOfWeek + 7)
-    : moment().day(resetDayOfWeek)
-  )
+  const nextResetTime = getResetDay(moment(), resetDayOfWeek)
     .hour(resetHour)
     .startOf('hour')
     .utc()
   const currentTimeZone = nextResetTime.clone().utcOffset(moment().utcOffset())
   const serverResetTime = nextResetTime.clone().utcOffset(TimeZone[region])
+
+  const handleChangeRegion = (value) => {
+    const serverTime = getResetDay(
+      moment().utcOffset(TimeZone[value]),
+      4
+    ).utcOffset(moment().utcOffset())
+    dispatch({
+      type: UPDATE_META,
+      payload: {
+        region: value,
+        resetDayOfWeek: serverTime.day(),
+        resetHour: serverTime.hour(),
+      },
+    })
+  }
+  const handleChangeAdvanced = (value) => {
+    if (value) {
+      const serverTime = getResetDay(
+        moment().utcOffset(TimeZone[region]),
+        4
+      ).utcOffset(moment().utcOffset())
+      dispatch({
+        type: UPDATE_META,
+        payload: {
+          advanced: value,
+          resetDayOfWeek: serverTime.day(),
+          resetHour: serverTime.hour(),
+          remainDays: Math.ceil(currentTimeZone.diff(moment(), 'days', true)),
+        },
+      })
+    } else {
+      dispatch({
+        type: UPDATE_META,
+        payload: {
+          advanced: value,
+          remainDays: 7,
+        },
+      })
+    }
+  }
+  const handleChangeMeta = (field) => (value) => {
+    dispatch({
+      type: UPDATE_META,
+      payload: {
+        [field]: value,
+      },
+    })
+  }
+  useEffect(() => {
+    if (process.browser) {
+      const meta = JSON.parse(localStorage.getItem('meta'))
+      const updatedMeta = pipe(
+        removeFieldWhenNeil('region'),
+        removeFieldWhenNeil('isReboot'),
+        removeFieldWhenNeil('advanced'),
+        removeFieldWhenNeil('resetDayOfWeek'),
+        removeFieldWhenNeil('resetHour'),
+        removeFieldWhenNeil('remainDays'),
+        removeFieldWhenNeil('bossOptions'),
+        removeFieldWhenNeil('filterOption'),
+        evolve({ bossOptions: split(',') })
+      )(meta)
+      const integrateOldMeta = pipe(
+        integrateByField('region'),
+        integrateByField('isReboot'),
+        integrateByField('advanced'),
+        integrateByField('resetDayOfWeek'),
+        integrateByField('resetHour'),
+        integrateByField('bossOptions'),
+        integrateByField('filterOption')
+      )(updatedMeta)
+      dispatch({
+        type: UPDATE_META,
+        payload: integrateOldMeta,
+      })
+      if (!integrateOldMeta.region) {
+        handleChangeRegion(language === 'zh_tw' ? 'TWMS' : 'GMS')
+      }
+    }
+  }, [])
+
   return (
     <Card title={t('setting')}>
       <Row gutter={[8, 8]}>
@@ -101,7 +184,7 @@ const SettingCard = ({ t }) => {
                 style={{ display: 'inline-flex', marginBottom: 0 }}
               >
                 <Select
-                  onChange={handleChangeDay}
+                  onChange={handleChangeMeta('resetDayOfWeek')}
                   style={{ width: 100 }}
                   value={+resetDayOfWeek}
                 >
@@ -122,7 +205,7 @@ const SettingCard = ({ t }) => {
                 style={{ display: 'inline-flex', marginBottom: 0 }}
               >
                 <Select
-                  onChange={handleChangeHour}
+                  onChange={handleChangeMeta('resetHour')}
                   style={{ width: 80 }}
                   value={+resetHour}
                 >
@@ -140,7 +223,7 @@ const SettingCard = ({ t }) => {
             </Tooltip>
             <div style={{ color: '#878787' }}>
               {t('next_reset_time')}:&nbsp;
-              {currentTimeZone.isSame(serverResetTime) ? (
+              {currentTimeZone.utcOffset() === serverResetTime.utcOffset() ? (
                 currentTimeZone.format(FORMAT)
               ) : (
                 <Fragment>
@@ -164,6 +247,27 @@ const SettingCard = ({ t }) => {
               value={region}
             >
               <Select.Option value="TWMS">TWMS</Select.Option>
+              <Select.Option value="GMS">GMS</Select.Option>
+            </Select>
+          </Form.Item>
+        </Col>
+        <Col span={24}>
+          <Form.Item label={t('remain_days')} shouldUpdate>
+            <Select
+              onChange={handleChangeMeta('remainDays')}
+              defaultValue={7}
+              style={{ width: 80 }}
+              value={remainDays}
+              disabled={advanced}
+            >
+              {times(
+                (index) => (
+                  <Select.Option value={index + 1} key={`remain_day_${index}`}>
+                    {index + 1}
+                  </Select.Option>
+                ),
+                7
+              )}
             </Select>
           </Form.Item>
         </Col>
@@ -176,7 +280,7 @@ const SettingCard = ({ t }) => {
             }}
           >
             <Switch
-              onChange={handleChangeReboot}
+              onChange={handleChangeMeta('isReboot')}
               checked={isReboot}
               key={`tools-${isReboot}`}
             />

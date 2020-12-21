@@ -20,6 +20,7 @@
   "table": "表格",
   "chart": "圖表",
 
+  "all": "全部",
   "defeatable": "可擊殺",
   "boss_list_description": "點擊 Boss 頭像已變更是否可擊殺，並輸入已擊殺次數，結果會根據是否擊殺與擊殺次數計算出推薦販賣的Boss",
 
@@ -43,6 +44,7 @@
   "day_4": "禮拜四",
   "day_5": "禮拜五",
   "day_6": "禮拜六",
+  "remain_days": "剩餘天數",
   "game_region": "地區",
 
   "recommend": "推薦",

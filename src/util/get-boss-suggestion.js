@@ -2,6 +2,7 @@
 import {
   ascend,
   assoc,
+  curry,
   descend,
   evolve,
   map,
@@ -16,14 +17,15 @@ import {
 
 /* mapping */
 import BossMapping, { BossObject } from '@mapping/bosses-crystal'
-import MesosMapping from '@mapping/bosses-mesos'
+import MesosMapping from '@mapping/mesos'
 
 const toObject = reduce((data, boss) => assoc(boss.id, boss, data), {})
-const defineMaxTime = (type, time) => (type === 'day' ? 7 : 1) * time
+const defineMaxTime = (type, time, max) => (type === 'day' ? max : 1) * time
 
 const WEEK_MAX = 60
 
-const getBossSuggestion = (bossData) => {
+const getBossSuggestion = (bossData, region = 'GMS', maxTime = 7) => {
+  const currentRegion = MesosMapping[region] ? region : 'GMS'
   const convertBossData = toObject(bossData)
   const currentDefeatTotal = reduce(
     (total, { defeatTime = 0 }) => total + defeatTime,
@@ -33,12 +35,17 @@ const getBossSuggestion = (bossData) => {
   const mergedData = pipe(
     reduce((data, boss) => {
       const storeBossData = convertBossData[boss.id] || {}
+      const currentBossAllMesos = MesosMapping[currentRegion][boss.name]
       const bossMesos = Math.floor(
-        MesosMapping[boss.name][storeBossData.difficulty] /
+        currentBossAllMesos[storeBossData.difficulty] /
           (storeBossData.partyCount || 1)
       )
       if (storeBossData.defeatable) {
-        let maxDefeatTime = defineMaxTime(boss.defeatType, boss.defeatTime)
+        let maxDefeatTime = defineMaxTime(
+          boss.defeatType,
+          boss.defeatTime,
+          maxTime
+        )
         if (
           boss.enterShareId &&
           convertBossData[boss.enterShareId] &&
@@ -48,13 +55,14 @@ const getBossSuggestion = (bossData) => {
           const sharedBossData = BossObject[boss.enterShareId]
           const sharedBossMaxTime = defineMaxTime(
             sharedBossData.defeatType,
-            sharedBossData.defeatTime
+            sharedBossData.defeatTime,
+            maxTime
           )
           const bigMaxTime = Math.max(maxDefeatTime, sharedBossMaxTime)
           const withoutSelfRemainTime = bigMaxTime - sharedBoss.defeatTime
           maxDefeatTime = Math.min(maxDefeatTime, withoutSelfRemainTime)
           const sharedBossMesos = Math.floor(
-            MesosMapping[boss.name][sharedBoss.difficulty] /
+            currentBossAllMesos[sharedBoss.difficulty] /
               (storeBossData.partyCount || 1)
           )
           // reduce when shared boss mesos grater then this
@@ -99,8 +107,7 @@ const getBossSuggestion = (bossData) => {
     values,
     sort(ascend(prop('mesos')))
   )(BossMapping)
-
   return mergedData
 }
 
-export default getBossSuggestion
+export default curry(getBossSuggestion)
