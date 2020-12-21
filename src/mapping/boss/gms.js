@@ -127,6 +127,20 @@ const BossList = [
     defeatType: 'week',
     defeatTime: 1,
   },
+  // 明智光秀
+  {
+    id: 36,
+    name: 'akechi_mitsuhide',
+    withoutDifficulty: true,
+    difficulties: [
+      {
+        difficulty: 'normal',
+        mesos: 28800000,
+      },
+    ],
+    defeatType: 'week',
+    defeatTime: 1,
+  },
   // 茱麗伊特
   {
     id: 10,
@@ -330,8 +344,6 @@ const BossList = [
     ],
     defeatType: 'day',
     defeatTime: 1,
-    enterShareId: 24,
-    enterShareTime: 7,
   },
   // 混沌皮卡啾
   {
@@ -345,8 +357,6 @@ const BossList = [
     ],
     defeatType: 'week',
     defeatTime: 1,
-    enterShareId: 23,
-    enterShareTime: 7,
   },
   // 西格諾斯
   {

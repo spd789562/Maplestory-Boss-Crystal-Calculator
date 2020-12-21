@@ -1,5 +1,4 @@
-import TWMS from './twms'
-import GMS from './gms'
+import { GMS, TWMS } from '../boss'
 
 const toMesosMapping = (mapping) =>
   mapping.reduce((bosses, boss) => {
