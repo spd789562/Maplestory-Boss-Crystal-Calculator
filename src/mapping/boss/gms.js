@@ -318,6 +318,8 @@ const BossList = [
     ],
     defeatType: 'day',
     defeatTime: 1,
+    enterShareId: 24,
+    enterShareTime: 7,
   },
   // 混沌皮卡啾
   {
@@ -331,6 +333,8 @@ const BossList = [
     ],
     defeatType: 'week',
     defeatTime: 1,
+    enterShareId: 23,
+    enterShareTime: 7,
   },
   // 西格諾斯
   {
