@@ -85,32 +85,6 @@ const BossList = [
     defeatType: 'day',
     defeatTime: 1,
   },
-  // 簡單庫洛斯
-  {
-    id: 7,
-    name: 'cross',
-    difficulties: [
-      {
-        difficulty: 'easy',
-        mesos: 800000,
-      },
-    ],
-    defeatType: 'day',
-    defeatTime: 1,
-  },
-  // 普通庫洛斯
-  {
-    id: 8,
-    name: 'cross',
-    difficulties: [
-      {
-        difficulty: 'normal',
-        mesos: 1342000,
-      },
-    ],
-    defeatType: 'week',
-    defeatTime: 1,
-  },
   // 濃姬
   {
     id: 9,
