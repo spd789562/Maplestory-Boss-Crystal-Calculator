@@ -525,6 +525,22 @@ const BossList = [
     enterType: 'day',
     enterTime: 1,
   },
+  // 賽蓮
+  {
+    id: 36,
+    name: 'chosen_seren',
+    withoutDifficulty: true,
+    difficulties: [
+      {
+        difficulty: 'hard',
+        mesos: 151250000,
+      },
+    ],
+    defeatType: 'week',
+    defeatTime: 1,
+    enterType: 'day',
+    enterTime: 1,
+  },
 ]
 
 export default BossList
