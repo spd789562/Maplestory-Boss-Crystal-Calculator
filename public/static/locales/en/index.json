@@ -5,6 +5,10 @@
   
   "filter_option": "Filter Option",
   "display_options": "Display Option",
+  "display_difficulty": "Difficulty",
+  "display_partyCount": "Party Count",
+  "display_defeatTime": "Defeat Time",
+  "display_drops": "Drops",
   "difficulty": "Difficulty",
   "partyCount": "Party Count",
   "defeatTime": "Defeat Time",
@@ -81,6 +85,7 @@
   "verus_hilla": "Verus Hilla",
   "guard_captain_darknell": "Guard Captain Darknell",
   "black_mage":"Black Mage",
+  "chosen_seren":"Chosen Seren",
 
   "just_a_advertisement": "Just a advertisement woundn't hurt",
 

@@ -4,8 +4,13 @@ const BossList = [
     id: 0,
     name: 'zakum',
     difficulties: [
-      { difficulty: 'easy', mesos: 200000 },
-      { difficulty: 'normal', mesos: 612500 },
+      { difficulty: 'easy', mesos: 200000, hp: 2200000, drops: ['red-stone'] },
+      {
+        difficulty: 'normal',
+        mesos: 612500,
+        hp: 7000000,
+        drops: ['red-stone'],
+      },
     ],
     defeatType: 'day',
     defeatTime: 1,
@@ -18,6 +23,8 @@ const BossList = [
       {
         difficulty: 'chaos',
         mesos: 16200000,
+        hp: 84000000000,
+        drops: ['red-stone'],
       },
     ],
     defeatType: 'week',
@@ -28,8 +35,18 @@ const BossList = [
     id: 2,
     name: 'magnus',
     difficulties: [
-      { difficulty: 'easy', mesos: 722000 },
-      { difficulty: 'normal', mesos: 2592000 },
+      {
+        difficulty: 'easy',
+        mesos: 722000,
+        hp: 400000000,
+        drops: ['red-stone'],
+      },
+      {
+        difficulty: 'normal',
+        mesos: 2592000,
+        hp: 6000000000,
+        drops: ['red-stone'],
+      },
     ],
     defeatType: 'day',
     defeatTime: 1,
@@ -42,6 +59,8 @@ const BossList = [
       {
         difficulty: 'hard',
         mesos: 19012500,
+        hp: 120000000000,
+        drops: ['red-stone'],
       },
     ],
     defeatType: 'week',
@@ -56,6 +75,8 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 800000,
+        hp: 500000000,
+        drops: ['red-stone'],
       },
     ],
     defeatType: 'day',
@@ -69,6 +90,8 @@ const BossList = [
       {
         difficulty: 'hard',
         mesos: 11250000,
+        hp: 16800000000,
+        drops: ['red-stone'],
       },
     ],
     defeatType: 'week',
@@ -79,8 +102,8 @@ const BossList = [
     id: 6,
     name: 'mori_ranmaru',
     difficulties: [
-      { difficulty: 'normal', mesos: 648000 },
-      { difficulty: 'hard', mesos: 2664500 },
+      { difficulty: 'normal', hp: 1000000000, mesos: 648000 },
+      { difficulty: 'hard', hp: 10500000000, mesos: 2664500 },
     ],
     defeatType: 'day',
     defeatTime: 1,
@@ -94,6 +117,7 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 15312500,
+        hp: 200000000000,
       },
     ],
     defeatType: 'week',
@@ -108,6 +132,7 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 1200000,
+        hp: 12600000000,
       },
     ],
     defeatType: 'day',
@@ -122,6 +147,7 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 1250000,
+        hp: 1680000000,
       },
     ],
     defeatType: 'day',
@@ -135,6 +161,8 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 968000,
+        hp: 315000000,
+        drops: ['red-stone'],
       },
     ],
     defeatType: 'day',
@@ -148,6 +176,8 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 968000,
+        hp: 315000000,
+        drops: ['red-stone'],
       },
     ],
     defeatType: 'day',
@@ -161,6 +191,8 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 968000,
+        hp: 315000000,
+        drops: ['red-stone'],
       },
     ],
     defeatType: 'day',
@@ -174,6 +206,8 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 968000,
+        hp: 550000000,
+        drops: ['red-stone'],
       },
     ],
     defeatType: 'day',
@@ -187,6 +221,8 @@ const BossList = [
       {
         difficulty: 'chaos',
         mesos: 16200000,
+        hp: 100000000000,
+        drops: ['red-stone'],
       },
     ],
     defeatType: 'week',
@@ -200,6 +236,8 @@ const BossList = [
       {
         difficulty: 'chaos',
         mesos: 16200000,
+        hp: 80000000000,
+        drops: ['red-stone'],
       },
     ],
     defeatType: 'week',
@@ -213,6 +251,8 @@ const BossList = [
       {
         difficulty: 'chaos',
         mesos: 16200000,
+        hp: 140000000000,
+        drops: ['red-stone'],
       },
     ],
     defeatType: 'week',
@@ -226,6 +266,8 @@ const BossList = [
       {
         difficulty: 'chaos',
         mesos: 21012500,
+        hp: 200000000000,
+        drops: ['red-stone'],
       },
     ],
     defeatType: 'week',
@@ -239,14 +281,20 @@ const BossList = [
       {
         difficulty: 'easy',
         mesos: 1058000,
+        hp: 700000000,
+        drops: ['red-stone'],
       },
       {
         difficulty: 'normal',
         mesos: 1458000,
+        hp: 6300000000,
+        drops: ['red-stone'],
       },
       {
         difficulty: 'hard',
         mesos: 2450000,
+        hp: 10500000000,
+        drops: ['red-stone'],
       },
     ],
     defeatType: 'day',
@@ -260,14 +308,19 @@ const BossList = [
       {
         difficulty: 'easy',
         mesos: 882000,
+        hp: 1018000000,
       },
       {
         difficulty: 'normal',
         mesos: 1012500,
+        hp: 2750000000,
+        drops: ['red-stone'],
       },
       {
         difficulty: 'chaos',
         mesos: 1352000,
+        hp: 26600000000,
+        drops: ['red-stone'],
       },
     ],
     defeatType: 'day',
@@ -281,10 +334,14 @@ const BossList = [
       {
         difficulty: 'easy',
         mesos: 1152000,
+        hp: 2100000000,
+        drops: ['red-stone'],
       },
       {
         difficulty: 'normal',
         mesos: 2520500,
+        hp: 12600000000,
+        drops: ['red-stone'],
       },
     ],
     defeatType: 'day',
@@ -298,6 +355,8 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 1404500,
+        hp: 2100000000,
+        drops: ['red-stone'],
       },
     ],
     defeatType: 'day',
@@ -313,6 +372,8 @@ const BossList = [
       {
         difficulty: 'chaos',
         mesos: 12800000,
+        hp: 69500000000,
+        drops: ['red-stone'],
       },
     ],
     defeatType: 'week',
@@ -328,10 +389,13 @@ const BossList = [
       {
         difficulty: 'easy',
         mesos: 9112500,
+        hp: 10500000000,
       },
       {
         difficulty: 'normal',
         mesos: 14450000,
+        hp: 63000000000,
+        drops: ['red-stone'],
       },
     ],
     defeatType: 'week',
@@ -345,10 +409,12 @@ const BossList = [
       {
         difficulty: 'easy',
         mesos: 684500,
+        hp: [300000000, 100000000],
       },
       {
         difficulty: 'normal',
         mesos: 2664500,
+        hp: [12600000000, 4200000000],
       },
     ],
     defeatType: 'day',
@@ -362,6 +428,7 @@ const BossList = [
       {
         difficulty: 'chaos',
         mesos: 26450000,
+        hp: [378000000000, 126000000000],
       },
     ],
     defeatType: 'week',
@@ -375,10 +442,12 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 32512500,
+        hp: [400000000000, 400000000000, 700000000000],
       },
       {
         difficulty: 'hard',
         mesos: 74112500,
+        hp: [1700000000000, 7000000000000, 23370000000000],
       },
     ],
     defeatType: 'week',
@@ -392,10 +461,12 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 33800000,
+        hp: [828000000000, 360000000000],
       },
       {
         difficulty: 'hard',
         mesos: 70312500,
+        hp: [24840000000000, 10800000000000],
       },
     ],
     defeatType: 'week',
@@ -409,14 +480,17 @@ const BossList = [
       {
         difficulty: 'easy',
         mesos: 35112500,
+        hp: [600000000000, 600000000000],
       },
       {
         difficulty: 'normal',
         mesos: 40612500,
+        hp: [12000000000000, 12000000000000],
       },
       {
         difficulty: 'hard',
         mesos: 80000000,
+        hp: [41040000000000, 41040000000000, 11970000000000],
       },
     ],
     defeatType: 'week',
@@ -430,10 +504,12 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 46512500,
+        hp: [4200000000000, 6300000000000, 10500000000000],
       },
       {
         difficulty: 'hard',
         mesos: 88200000,
+        hp: [21000000000000, 31500000000000, 52500000000000],
       },
     ],
     defeatType: 'week',
@@ -447,10 +523,12 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 49612500,
+        hp: 26000000000000,
       },
       {
         difficulty: 'chaos',
         mesos: 92450000,
+        hp: 114600000000000,
       },
     ],
     defeatType: 'week',
@@ -467,6 +545,7 @@ const BossList = [
       {
         difficulty: 'hard',
         mesos: 110450000,
+        hp: 176000000000000,
       },
     ],
     defeatType: 'week',
@@ -482,10 +561,12 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 52812500,
+        hp: 26000000000000,
       },
       {
         difficulty: 'chaos',
         mesos: 96800000,
+        hp: 127000000000000,
       },
     ],
     defeatType: 'week',
@@ -502,9 +583,26 @@ const BossList = [
       {
         difficulty: 'hard',
         mesos: 500000000,
+        hp: [65000000000000, 135000000000000, 200000000000000, 100000000000000],
       },
     ],
     defeatType: 'month',
+    defeatTime: 1,
+    enterType: 'day',
+    enterTime: 1,
+  },
+  // 賽蓮
+  {
+    id: 36,
+    name: 'chosen_seren',
+    withoutDifficulty: true,
+    difficulties: [
+      {
+        difficulty: 'hard',
+        mesos: 151250000,
+      },
+    ],
+    defeatType: 'week',
     defeatTime: 1,
     enterType: 'day',
     enterTime: 1,
