@@ -1,4 +1,4 @@
-import { useEffect, Fragment } from 'react'
+import { useEffect, useCallback, Fragment } from 'react'
 
 /* store */
 import { useStore } from '@store'
@@ -73,7 +73,10 @@ const SettingCard = ({ t, i18n: { language } }) => {
     .utc()
   const currentTimeZone = nextResetTime.clone().utcOffset(moment().utcOffset())
   const serverResetTime = nextResetTime.clone().utcOffset(TimeZone[region])
-
+  const getRemainDays = useCallback(
+    () => Math.ceil(currentTimeZone.diff(moment(), 'days', true)),
+    [currentTimeZone]
+  )
   const handleChangeRegion = (value) => {
     const serverTime = getResetDay(
       moment().utcOffset(TimeZone[value]),
@@ -100,7 +103,7 @@ const SettingCard = ({ t, i18n: { language } }) => {
           advanced: value,
           resetDayOfWeek: serverTime.day(),
           resetHour: serverTime.hour(),
-          remainDays: Math.ceil(currentTimeZone.diff(moment(), 'days', true)),
+          remainDays: getRemainDays(),
         },
       })
     } else {
@@ -153,6 +156,16 @@ const SettingCard = ({ t, i18n: { language } }) => {
       }
     }
   }, [])
+  useEffect(() => {
+    if (advanced) {
+      dispatch({
+        type: UPDATE_META,
+        payload: {
+          remainDays: getRemainDays(),
+        },
+      })
+    }
+  }, [advanced, resetDayOfWeek, resetHour])
 
   return (
     <Card title={t('setting')}>
@@ -257,7 +270,7 @@ const SettingCard = ({ t, i18n: { language } }) => {
               onChange={handleChangeMeta('remainDays')}
               defaultValue={7}
               style={{ width: 80 }}
-              value={remainDays}
+              value={advanced ? getRemainDays() : remainDays}
               disabled={advanced}
             >
               {times(
