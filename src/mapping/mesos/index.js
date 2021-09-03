@@ -13,7 +13,9 @@ const toMesosMapping = (mapping) =>
     return bosses
   }, {})
 
-export default {
+const MesosMapping = {
   TWMS: toMesosMapping(TWMS),
   GMS: toMesosMapping(GMS),
 }
+
+export default MesosMapping
