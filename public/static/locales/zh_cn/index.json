@@ -5,6 +5,10 @@
 
   "filter_option": "筛选",
   "display_options": "显示选项",
+  "display_difficulty": "难度",
+  "display_partyCount": "人数",
+  "display_defeatTime": "次数",
+  "display_drops": "掉落物",
   "difficulty": "难度",
   "partyCount": "人数",
   "defeatTime": "次数",

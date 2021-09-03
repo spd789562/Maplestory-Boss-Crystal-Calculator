@@ -7,6 +7,7 @@ import { SET_BOSS_DEFEATED } from '@store/boss'
 /* components */
 import { List, Space } from 'antd'
 import Name from './name'
+import Drops from './drops'
 import Mesos from './mesos'
 import Avatar from './avatar'
 import DefeatTime from './defeat-time'
@@ -36,7 +37,11 @@ const BossItem = ({
   const [{ bossOptions, filterOption, advanced }, dispatch] = useStore('meta')
   const { defeatDate, defeatable } = useStroeSelector(
     'boss',
-    pipe(matchStorageData(id),defaultTo({}), pickAll(['defeatDate', 'defeatable']))
+    pipe(
+      matchStorageData(id),
+      defaultTo({}),
+      pickAll(['defeatDate', 'defeatable'])
+    )
   )
   const hasDifficultySelect = difficulties.length > 1
   const actions = []
@@ -82,12 +87,15 @@ const BossItem = ({
       <List.Item.Meta
         avatar={<Avatar id={id} name={name} recommend={recommend} />}
         title={
-          <Name
-            id={id}
-            name={name}
-            difficulties={difficulties}
-            withoutDifficulty={withoutDifficulty}
-          />
+          <>
+            <Name
+              id={id}
+              name={name}
+              difficulties={difficulties}
+              withoutDifficulty={withoutDifficulty}
+            />
+            {hasOptions('drops') && <Drops id={id} />}
+          </>
         }
         description={<Mesos id={id} name={name} difficulties={difficulties} />}
       />

@@ -5,6 +5,10 @@
   
   "filter_option": "篩選",
   "display_options": "顯示選項",
+  "display_difficulty": "難度",
+  "display_partyCount": "組隊人數",
+  "display_defeatTime": "已擊殺次數",
+  "display_drops": "掉落物",
   "difficulty": "難度",
   "partyCount": "組隊人數",
   "defeatTime": "已擊殺次數",

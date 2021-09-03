@@ -14,13 +14,13 @@ import { withTranslation } from '@i18n'
 /* utils */
 import { evolve } from 'ramda'
 
-const options = ['difficulty', 'partyCount', 'defeatTime']
+const options = ['difficulty', 'partyCount', 'defeatTime', 'drops']
 
 const Options = ({ t, bossOptions, handleChange }) => {
   return (
     <Checkbox.Group defaultValue={bossOptions} onChange={handleChange}>
       {options
-        .map((value) => ({ value, label: value }))
+        .map((value) => ({ value, label: `display_${value}` }))
         .map(evolve({ label: t }))
         .map(({ label, value }) => (
           <div key={`random-${value}`}>
