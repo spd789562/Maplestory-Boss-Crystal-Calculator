@@ -123,21 +123,6 @@ const BossList = [
     defeatType: 'week',
     defeatTime: 1,
   },
-  // 茱麗伊特
-  {
-    id: 10,
-    name: 'julieta',
-    withoutDifficulty: true,
-    difficulties: [
-      {
-        difficulty: 'normal',
-        mesos: 1200000,
-        hp: 12600000000,
-      },
-    ],
-    defeatType: 'day',
-    defeatTime: 4,
-  },
   // 卡翁
   {
     id: 11,
