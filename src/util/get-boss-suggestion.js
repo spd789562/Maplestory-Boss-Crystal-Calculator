@@ -8,6 +8,7 @@ import {
   map,
   pipe,
   prop,
+  propEq,
   reduce,
   slice,
   sort,
@@ -40,6 +41,12 @@ const getBossSuggestion = (bossData, region = 'GMS', maxTime = 7) => {
         currentBossAllMesos[storeBossData.difficulty] /
           (storeBossData.partyCount || 1)
       )
+      const bossDrops =
+        (
+          BossObject[currentRegion][boss.id].difficulties.find(
+            propEq('difficulty', storeBossData.difficulty)
+          ) || {}
+        ).drops || []
       if (storeBossData.defeatable) {
         let maxDefeatTime = defineMaxTime(
           boss.defeatType,
@@ -83,6 +90,7 @@ const getBossSuggestion = (bossData, region = 'GMS', maxTime = 7) => {
                   : storeBossData.difficulty,
                 name: boss.name,
                 mesos: bossMesos,
+                drops: bossDrops,
               })
             },
             remainDefeatTime < 0 ? 0 : remainDefeatTime
