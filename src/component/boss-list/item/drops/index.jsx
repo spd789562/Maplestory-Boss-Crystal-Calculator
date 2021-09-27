@@ -27,7 +27,7 @@ const imgStyle = {
   height: 16,
 }
 
-const CurrentDropShows = ['red-stone']
+const CurrentDropShows = ['red_stone']
 
 const BossItemDrops = ({ id, t }) => {
   const [region] = useStore('meta.region')
