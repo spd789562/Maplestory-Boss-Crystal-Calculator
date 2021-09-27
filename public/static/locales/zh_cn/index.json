@@ -22,12 +22,17 @@
   "mesos": "枫币",
   "total": "总和",
   "table": "表格",
-  "chart": "图表",
+  "chart": "图表",  
+  "red_stone": "红石",
   "crusader": "十字硬币",
   "crusader_description": "根据推荐贩卖结晶，计算可获得总十字硬币数",
   "per_coin_count": "每次硬币",
   "coin_total": "硬币总和",
 
+  "boss_data_table": "BOSS 资料表格",
+  "table_defeatTime": "可击杀次数",
+  "table_hp": "血量",
+  
   "all": "全部",
   "defeatable": "可击杀",
   "boss_list_description": "点击 Boss 头像已变更是否可击杀，并输入已击杀次数，结果会根据是否击杀与击杀次数计算出推荐贩卖的Boss",

@@ -23,10 +23,15 @@
   "total": "總和",
   "table": "表格",
   "chart": "圖表",
+  "red_stone": "紅石",
   "crusader": "十字硬幣",
   "crusader_description": "根據推薦販賣結晶，計算可獲得總十字硬幣數",
   "per_coin_count": "每次硬幣",
   "coin_total": "硬幣總和",
+
+  "boss_data_table": "BOSS 資料表格",
+  "table_defeatTime": "可擊殺次數",
+  "table_hp": "血量",
 
   "all": "全部",
   "defeatable": "可擊殺",

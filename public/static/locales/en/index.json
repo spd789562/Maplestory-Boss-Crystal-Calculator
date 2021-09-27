@@ -23,10 +23,15 @@
   "total": "Total",
   "table": "Table",
   "chart": "Chart",
+  "red_stone": "Red Stone",
   "crusader": "Crusader Coin",
   "crusader_description": "Calculate crusader coin total by Optimal Table",
   "per_coin_count": "Per Coin",
   "coin_total": "Coin Total",
+
+  "boss_data_table": "BOSS Data",
+  "table_defeatTime": "Defeat Time",
+  "table_hp": "HP",
 
   "all": "All",
   "defeatable": "Beatable",
