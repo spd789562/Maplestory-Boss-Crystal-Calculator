@@ -38,6 +38,7 @@
   "all": "All",
   "defeatable": "Beatable",
   "boss_list_description": "Click boss to change beatable and enter defeated count, result will base on beatable and defeated count to calculate the recommend boss.",
+  "boss_list_to_table": "Detail Table >",
 
   "defeated_on": "Defeated on",
   "today_was_entered": "Today was enter",

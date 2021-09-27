@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import App from 'next/app'
 import Head from 'next/head'
+import Link from 'next/link'
 import { appWithTranslation, withTranslation } from '@i18n'
 import { Provider, useDispatch } from '@store'
 
@@ -58,7 +59,7 @@ const AppHeader = withTranslation('index')(({ t, i18n }) => {
     <Header className={styles.header}>
       <div className={styles['header-container']}>
         <h2 style={{ marginBottom: 0 }}>
-          {t('title')}
+          <Link href="/">{t('title')}</Link>
           &nbsp;
         </h2>
         <div style={{ marginLeft: 'auto' }}>

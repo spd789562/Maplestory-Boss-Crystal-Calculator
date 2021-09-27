@@ -38,6 +38,7 @@
   "all": "全部",
   "defeatable": "可擊殺",
   "boss_list_description": "點擊 Boss 頭像已變更是否可擊殺，並輸入已擊殺次數，結果會根據是否擊殺與擊殺次數計算出推薦販賣的Boss",
+  "boss_list_to_table": "點此觀看詳細表格 >",
 
   "defeated_on": "擊殺於",
   "today_was_entered": "今日已進入",
