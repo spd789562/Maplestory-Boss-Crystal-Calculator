@@ -24,7 +24,7 @@ import BossListMapping, { BossObject } from '@mapping/boss'
 
 import styles from '../styles/Home.module.css'
 
-const { Header, Content } = Layout
+const { Content } = Layout
 
 const storageKey = 'MAPLESTORY_BOSS_CRYSTAL_CALCULATOR_DATA'
 
@@ -34,7 +34,7 @@ const defineResetTime = (dayOfWeek, date) =>
     ? utcMoment(date).day(dayOfWeek + 7)
     : utcMoment(date).day(dayOfWeek)
 
-function Home({ t, i18n }) {
+function Home({ t }) {
   const dispatch = useDispatch()
   useEffect(() => {
     if (process.browser) {
@@ -126,34 +126,8 @@ function Home({ t, i18n }) {
       }
     }
   }, [process.browser])
-  const handelReset = () => {
-    dispatch({ type: RESET_BOSS_DATA })
-  }
   return (
     <Fragment>
-      <Header className={styles.header}>
-        <div className={styles['header-container']}>
-          <h2 style={{ marginBottom: 0 }}>
-            {t('title')}
-            &nbsp;
-          </h2>
-          <div style={{ marginLeft: 'auto' }}>
-            <Button onClick={handelReset} style={{ marginRight: '.5rem' }}>
-              {t('reset')}
-            </Button>
-            <Select
-              onChange={(value) =>
-                i18n.changeLanguage && i18n.changeLanguage(value)
-              }
-              defaultValue={i18n.language}
-            >
-              <Select.Option value="en">English</Select.Option>
-              <Select.Option value="zh_tw">繁體中文</Select.Option>
-              <Select.Option value="zh_cn">简体中文</Select.Option>
-            </Select>
-          </div>
-        </div>
-      </Header>
       <Content className={styles.content}>
         <Row gutter={[8, 8]}>
           <Col span={24}>

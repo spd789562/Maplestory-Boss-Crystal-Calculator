@@ -10,7 +10,7 @@ import { useStore, useStroeSelector } from '@store'
 import { withTranslation } from '@i18n'
 
 /* utils */
-import { find, pipe, prop, path, propEq, defaultTo } from 'ramda'
+import { find, pipe, prop, path, propEq, defaultTo, includes } from 'ramda'
 
 /* mapping */
 import { BossObject } from '@mapping/boss'
@@ -27,6 +27,8 @@ const imgStyle = {
   height: 16,
 }
 
+const CurrentDropShows = ['red_stone']
+
 const BossItemDrops = ({ id, t }) => {
   const [region] = useStore('meta.region')
   const difficulty = useStroeSelector(
@@ -37,11 +39,13 @@ const BossItemDrops = ({ id, t }) => {
 
   return drops && drops.length ? (
     <Space style={{ marginLeft: 4 }}>
-      {drops.map((item) => {
-        const itemIsObj = typeof item === 'object'
-        const name = itemIsObj ? item.name : item
-        return <img src={`/drops/${name}.png`} alt={name} style={imgStyle} />
-      })}
+      {drops
+        .filter((item) => includes(item.name || item, CurrentDropShows))
+        .map((item) => {
+          const itemIsObj = typeof item === 'object'
+          const name = itemIsObj ? item.name : item
+          return <img src={`/drops/${name}.png`} alt={name} style={imgStyle} />
+        })}
     </Space>
   ) : null
 }

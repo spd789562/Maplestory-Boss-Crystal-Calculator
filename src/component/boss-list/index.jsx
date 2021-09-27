@@ -7,6 +7,7 @@ import Item from './item'
 import SelectAll from './select-all'
 import OptionSelect from './option-select'
 import FilterSelect from './filter-select'
+import Link from 'next/link'
 
 /* hooks */
 import { Fragment, useMemo } from 'react'
@@ -27,7 +28,7 @@ const BossList = ({ t }) => {
     pick(['region', 'remainDays'])
   )
   const [boss] = useStore('boss')
-  
+
   const suggestions = getBossSuggestion(boss, region, remainDays).map(
     prop('id')
   )
@@ -47,6 +48,8 @@ const BossList = ({ t }) => {
           </Space>
           <div style={{ color: '#666', fontSize: 14, width: '100%' }}>
             {t('boss_list_description')}
+            <br />
+            <Link href="/table">{t('boss_list_to_table')}</Link>
           </div>
         </div>
       }

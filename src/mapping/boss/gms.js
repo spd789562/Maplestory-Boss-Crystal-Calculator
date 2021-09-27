@@ -6,8 +6,22 @@ const BossList = [
     id: 0,
     name: 'zakum',
     difficulties: [
-      { difficulty: 'easy', mesos: 200000 },
-      { difficulty: 'normal', mesos: 612500 },
+      {
+        difficulty: 'easy',
+        mesos: 200000,
+        contribution: {
+          self: 100,
+          party: 500,
+        },
+      },
+      {
+        difficulty: 'normal',
+        mesos: 612500,
+        contribution: {
+          self: 100,
+          party: 500,
+        },
+      },
     ],
     defeatType: 'day',
     defeatTime: 1,
@@ -20,6 +34,10 @@ const BossList = [
       {
         difficulty: 'chaos',
         mesos: 16200000,
+        contribution: {
+          self: 1000,
+          party: 2000,
+        },
       },
     ],
     defeatType: 'week',
@@ -30,8 +48,22 @@ const BossList = [
     id: 2,
     name: 'magnus',
     difficulties: [
-      { difficulty: 'easy', mesos: 722000 },
-      { difficulty: 'normal', mesos: 2592000 },
+      {
+        difficulty: 'easy',
+        mesos: 722000,
+        contribution: {
+          self: 100,
+          party: 500,
+        },
+      },
+      {
+        difficulty: 'normal',
+        mesos: 2592000,
+        contribution: {
+          self: 500,
+          party: 2000,
+        },
+      },
     ],
     defeatType: 'day',
     defeatTime: 1,
@@ -44,6 +76,10 @@ const BossList = [
       {
         difficulty: 'hard',
         mesos: 19012500,
+        contribution: {
+          self: 1250,
+          party: 2500,
+        },
       },
     ],
     defeatType: 'week',
@@ -58,6 +94,10 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 800000,
+        contribution: {
+          self: 150,
+          party: 1000,
+        },
       },
     ],
     defeatType: 'day',
@@ -71,6 +111,10 @@ const BossList = [
       {
         difficulty: 'hard',
         mesos: 11250000,
+        contribution: {
+          self: 1000,
+          party: 2000,
+        },
       },
     ],
     defeatType: 'week',
@@ -124,6 +168,10 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 1200000,
+        contribution: {
+          self: 150,
+          party: 1000,
+        },
       },
     ],
     defeatType: 'day',
@@ -138,6 +186,10 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 1250000,
+        contribution: {
+          self: 250,
+          party: 1500,
+        },
       },
     ],
     defeatType: 'day',
@@ -151,6 +203,10 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 968000,
+        contribution: {
+          self: 150,
+          party: 1000,
+        },
       },
     ],
     defeatType: 'day',
@@ -164,6 +220,10 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 968000,
+        contribution: {
+          self: 150,
+          party: 1000,
+        },
       },
     ],
     defeatType: 'day',
@@ -177,6 +237,10 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 968000,
+        contribution: {
+          self: 150,
+          party: 1000,
+        },
       },
     ],
     defeatType: 'day',
@@ -190,6 +254,10 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 968000,
+        contribution: {
+          self: 150,
+          party: 1000,
+        },
       },
     ],
     defeatType: 'day',
@@ -203,6 +271,10 @@ const BossList = [
       {
         difficulty: 'chaos',
         mesos: 16200000,
+        contribution: {
+          self: 1000,
+          party: 2000,
+        },
       },
     ],
     defeatType: 'week',
@@ -216,6 +288,10 @@ const BossList = [
       {
         difficulty: 'chaos',
         mesos: 16200000,
+        contribution: {
+          self: 1000,
+          party: 2000,
+        },
       },
     ],
     defeatType: 'week',
@@ -229,6 +305,10 @@ const BossList = [
       {
         difficulty: 'chaos',
         mesos: 16200000,
+        contribution: {
+          self: 1000,
+          party: 2000,
+        },
       },
     ],
     defeatType: 'week',
@@ -242,6 +322,10 @@ const BossList = [
       {
         difficulty: 'chaos',
         mesos: 21012500,
+        contribution: {
+          self: 1250,
+          party: 2500,
+        },
       },
     ],
     defeatType: 'week',
@@ -255,14 +339,26 @@ const BossList = [
       {
         difficulty: 'easy',
         mesos: 1058000,
+        contribution: {
+          self: 150,
+          party: 1000,
+        },
       },
       {
         difficulty: 'normal',
         mesos: 1458000,
+        contribution: {
+          self: 250,
+          party: 1500,
+        },
       },
       {
         difficulty: 'hard',
         mesos: 2450000,
+        contribution: {
+          self: 500,
+          party: 2000,
+        },
       },
     ],
     defeatType: 'day',
@@ -276,14 +372,26 @@ const BossList = [
       {
         difficulty: 'easy',
         mesos: 882000,
+        contribution: {
+          self: 150,
+          party: 1000,
+        },
       },
       {
         difficulty: 'normal',
         mesos: 1012500,
+        contribution: {
+          self: 150,
+          party: 1000,
+        },
       },
       {
         difficulty: 'chaos',
         mesos: 1352000,
+        contribution: {
+          self: 250,
+          party: 1500,
+        },
       },
     ],
     defeatType: 'day',
@@ -297,10 +405,18 @@ const BossList = [
       {
         difficulty: 'easy',
         mesos: 1152000,
+        contribution: {
+          self: 200,
+          party: 1500,
+        },
       },
       {
         difficulty: 'normal',
         mesos: 2520500,
+        contribution: {
+          self: 500,
+          party: 2000,
+        },
       },
     ],
     defeatType: 'day',
@@ -314,6 +430,10 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 1404500,
+        contribution: {
+          self: 250,
+          party: 1500,
+        },
       },
     ],
     defeatType: 'day',
@@ -329,6 +449,10 @@ const BossList = [
       {
         difficulty: 'chaos',
         mesos: 12800000,
+        contribution: {
+          self: 1000,
+          party: 2000,
+        },
       },
     ],
     defeatType: 'week',
@@ -344,10 +468,18 @@ const BossList = [
       {
         difficulty: 'easy',
         mesos: 9112500,
+        contribution: {
+          self: 1000,
+          party: 2000,
+        },
       },
       {
         difficulty: 'normal',
         mesos: 14450000,
+        contribution: {
+          self: 1000,
+          party: 2000,
+        },
       },
     ],
     defeatType: 'week',
@@ -361,10 +493,18 @@ const BossList = [
       {
         difficulty: 'easy',
         mesos: 684500,
+        contribution: {
+          self: 100,
+          party: 500,
+        },
       },
       {
         difficulty: 'normal',
         mesos: 2664500,
+        contribution: {
+          self: 500,
+          party: 2000,
+        },
       },
     ],
     defeatType: 'day',
@@ -378,6 +518,10 @@ const BossList = [
       {
         difficulty: 'chaos',
         mesos: 26450000,
+        contribution: {
+          self: 1250,
+          party: 2500,
+        },
       },
     ],
     defeatType: 'week',
@@ -391,10 +535,18 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 32512500,
+        contribution: {
+          self: 1500,
+          party: 3000,
+        },
       },
       {
         difficulty: 'hard',
         mesos: 74112500,
+        contribution: {
+          self: 1500,
+          party: 3000,
+        },
       },
     ],
     defeatType: 'week',
@@ -408,10 +560,18 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 33800000,
+        contribution: {
+          self: 1500,
+          party: 3000,
+        },
       },
       {
         difficulty: 'hard',
         mesos: 70312500,
+        contribution: {
+          self: 1500,
+          party: 3000,
+        },
       },
     ],
     defeatType: 'week',
@@ -425,14 +585,26 @@ const BossList = [
       {
         difficulty: 'easy',
         mesos: 35112500,
+        contribution: {
+          self: 1500,
+          party: 3000,
+        },
       },
       {
         difficulty: 'normal',
         mesos: 40612500,
+        contribution: {
+          self: 1500,
+          party: 3000,
+        },
       },
       {
         difficulty: 'hard',
         mesos: 80000000,
+        contribution: {
+          self: 1500,
+          party: 3000,
+        },
       },
     ],
     defeatType: 'week',
@@ -446,10 +618,18 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 46512500,
+        contribution: {
+          self: 1500,
+          party: 3000,
+        },
       },
       {
         difficulty: 'hard',
         mesos: 88200000,
+        contribution: {
+          self: 1500,
+          party: 3000,
+        },
       },
     ],
     defeatType: 'week',
@@ -463,10 +643,18 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 49612500,
+        contribution: {
+          self: 1500,
+          party: 3000,
+        },
       },
       {
         difficulty: 'chaos',
         mesos: 92450000,
+        contribution: {
+          self: 1500,
+          party: 3000,
+        },
       },
     ],
     defeatType: 'week',
@@ -483,6 +671,10 @@ const BossList = [
       {
         difficulty: 'hard',
         mesos: 110450000,
+        contribution: {
+          self: 1500,
+          party: 3000,
+        },
       },
     ],
     defeatType: 'week',
@@ -498,10 +690,18 @@ const BossList = [
       {
         difficulty: 'normal',
         mesos: 52812500,
+        contribution: {
+          self: 1500,
+          party: 3000,
+        },
       },
       {
         difficulty: 'chaos',
         mesos: 96800000,
+        contribution: {
+          self: 1500,
+          party: 3000,
+        },
       },
     ],
     defeatType: 'week',
@@ -518,6 +718,10 @@ const BossList = [
       {
         difficulty: 'hard',
         mesos: 500000000,
+        contribution: {
+          self: 2000,
+          party: 3000,
+        },
       },
     ],
     defeatType: 'month',
@@ -534,6 +738,7 @@ const BossList = [
       {
         difficulty: 'hard',
         mesos: 151250000,
+        hp: [126000000000000, 0],
       },
     ],
     defeatType: 'week',
