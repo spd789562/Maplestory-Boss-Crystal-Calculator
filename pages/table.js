@@ -113,6 +113,18 @@ const useTableData = (t, region, lang) => {
       render: (_, { hasRedStone }) => hasRedStone && <CheckOutlined />,
       hidden,
     },
+    {
+      title: 'table_self_contribution',
+      dataIndex: 'contribution',
+      align: 'center',
+      render: (_, { contribution: { self = 0 } = {} }) => self,
+    },
+    {
+      title: 'table_party_contribution',
+      dataIndex: 'contribution',
+      align: 'center',
+      render: (_, { contribution: { party = 0 } = {} }) => party,
+    },
   ]
 
   return {

@@ -32,6 +32,8 @@
   "boss_data_table": "BOSS Data",
   "table_defeatTime": "Defeat Time",
   "table_hp": "HP",
+  "table_self_contribution": "Self Contribution",
+  "table_party_contribution": "Party Contribution",
 
   "all": "All",
   "defeatable": "Beatable",

@@ -32,6 +32,8 @@
   "boss_data_table": "BOSS 資料表格",
   "table_defeatTime": "可擊殺次數",
   "table_hp": "血量",
+  "table_self_contribution": "個人貢獻",
+  "table_party_contribution": "組隊貢獻",
 
   "all": "全部",
   "defeatable": "可擊殺",
