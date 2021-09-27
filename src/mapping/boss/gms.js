@@ -534,6 +534,7 @@ const BossList = [
       {
         difficulty: 'hard',
         mesos: 151250000,
+        hp: [126000000000000, 0],
       },
     ],
     defeatType: 'week',
