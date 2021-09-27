@@ -23,6 +23,10 @@
   "total": "总和",
   "table": "表格",
   "chart": "图表",
+  "crusader": "十字硬币",
+  "crusader_description": "根据推荐贩卖结晶，计算可获得总十字硬币数",
+  "per_coin_count": "每次硬币",
+  "coin_total": "硬币总和",
 
   "all": "全部",
   "defeatable": "可击杀",

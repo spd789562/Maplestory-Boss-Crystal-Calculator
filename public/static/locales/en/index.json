@@ -23,6 +23,10 @@
   "total": "Total",
   "table": "Table",
   "chart": "Chart",
+  "crusader": "Crusader Coin",
+  "crusader_description": "Calculate crusader coin total by Optimal Table",
+  "per_coin_count": "Per Coin",
+  "coin_total": "Coin Total",
 
   "all": "All",
   "defeatable": "Beatable",
