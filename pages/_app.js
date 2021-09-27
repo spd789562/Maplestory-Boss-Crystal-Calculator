@@ -1,13 +1,18 @@
 import { Fragment } from 'react'
 import App from 'next/app'
 import Head from 'next/head'
-import { Layout, BackTop } from 'antd'
 import { appWithTranslation, withTranslation } from '@i18n'
-import { Provider } from '@store'
+import { Provider, useDispatch } from '@store'
+
+import { Layout, BackTop, Select, Button } from 'antd'
+import GoogleAD from '../src/component/google-ad'
+
 import '@styles/antd.less'
 import '@styles/globals.css'
 
 import styles from '@styles/Home.module.css'
+
+const { Header, Content, Footer } = Layout
 
 const NextHead = withTranslation('index')(({ t, i18n: { language } }) => (
   <Head>
@@ -43,8 +48,41 @@ const NextHead = withTranslation('index')(({ t, i18n: { language } }) => (
   </Head>
 ))
 
+const AppHeader = withTranslation('index')(({ t, i18n }) => {
+  const dispatch = useDispatch()
+
+  const handelReset = () => {
+    dispatch({ type: RESET_BOSS_DATA })
+  }
+  return (
+    <Header className={styles.header}>
+      <div className={styles['header-container']}>
+        <h2 style={{ marginBottom: 0 }}>
+          {t('title')}
+          &nbsp;
+        </h2>
+        <div style={{ marginLeft: 'auto' }}>
+          <Button onClick={handelReset} style={{ marginRight: '.5rem' }}>
+            {t('reset')}
+          </Button>
+          <Select
+            onChange={(value) =>
+              i18n.changeLanguage && i18n.changeLanguage(value)
+            }
+            defaultValue={i18n.language}
+          >
+            <Select.Option value="en">English</Select.Option>
+            <Select.Option value="zh_tw">繁體中文</Select.Option>
+            <Select.Option value="zh_cn">简体中文</Select.Option>
+          </Select>
+        </div>
+      </div>
+    </Header>
+  )
+})
+
 const AppFooter = withTranslation('index')(({ t }) => (
-  <Layout.Footer className={styles.footer}>
+  <Footer className={styles.footer}>
     <div>
       {t('other_tools')}：
       <a href="https://maplestory-arcane-symbol-calculator.vercel.app/">
@@ -53,7 +91,7 @@ const AppFooter = withTranslation('index')(({ t }) => (
       、<a href="https://maplesalon.vercel.app">{t('web_maplesalon')}</a>
     </div>
     {t('title')} ©2020 Created by 丫村
-  </Layout.Footer>
+  </Footer>
 ))
 
 function MyApp({ Component, pageProps }) {
@@ -63,6 +101,7 @@ function MyApp({ Component, pageProps }) {
       <Layout>
         <BackTop />
         <Provider>
+          <AppHeader />
           <Component {...pageProps} />
         </Provider>
         <AppFooter />
