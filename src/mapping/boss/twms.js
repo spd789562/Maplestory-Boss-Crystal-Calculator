@@ -644,7 +644,7 @@ const BossList = [
       {
         difficulty: 'easy',
         mesos: 35112500,
-        hp: [600000000000, 600000000000],
+        hp: [6000000000000, 6000000000000],
         drops: [{ name: 'crusaders_coin', value: 26 }],
         contribution: {
           self: 1500,
