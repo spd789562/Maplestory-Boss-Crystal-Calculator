@@ -1,0 +1,12 @@
+services:
+  frontend:
+    image: next
+    build:
+      context: ./
+    ports:
+      - 8000:3000
+    volumes:
+      - ./:/app:rw
+      - node_modules:/app/node_modules
+volumes:
+  node_modules:
