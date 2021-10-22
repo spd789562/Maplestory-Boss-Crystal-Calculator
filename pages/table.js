@@ -144,7 +144,7 @@ function BossTable({ t, i18n }) {
     })
   }
   const { tableData, columns } = useTableData(t, region, i18n.language)
-  console.log(tableData)
+
   return (
     <Fragment>
       <Content className={styles.content}>
