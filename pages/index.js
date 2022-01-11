@@ -115,6 +115,7 @@ function Home({ t }) {
               id,
               defeatable: false,
               partyCount: 1,
+              characters: 1,
               defeatTime: 0,
               difficulty: difficulties[difficulties.length - 1].difficulty,
             }))

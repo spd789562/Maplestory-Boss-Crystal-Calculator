@@ -22,7 +22,8 @@ import BossMapping, { BossObject } from '@mapping/boss'
 import MesosMapping from '@mapping/mesos'
 
 const toObject = reduce((data, boss) => assoc(boss.id, boss, data), {})
-const defineMaxTime = (type, time, max) => (type === 'day' ? max : 1) * time
+const defineMaxTime = (type, time, max, characters = 1) =>
+  (type === 'day' ? max : 1) * time * characters
 
 const getBossSuggestion = ({
   bossData,
@@ -61,7 +62,8 @@ const getBossSuggestion = ({
         let maxDefeatTime = defineMaxTime(
           boss.defeatType,
           boss.defeatTime,
-          maxTime
+          maxTime,
+          storeBossData.characters || 1
         )
         if (
           boss.enterShareId &&
@@ -73,7 +75,8 @@ const getBossSuggestion = ({
           const sharedBossMaxTime = defineMaxTime(
             sharedBossData.defeatType,
             sharedBossData.defeatTime,
-            maxTime
+            maxTime,
+            convertBossData.characters || 1
           )
           const bigMaxTime = Math.max(maxDefeatTime, sharedBossMaxTime)
           const withoutSelfRemainTime = bigMaxTime - sharedBoss.defeatTime

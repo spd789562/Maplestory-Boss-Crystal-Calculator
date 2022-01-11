@@ -17,13 +17,9 @@ import MesosMapping from '@mapping/mesos'
 const matchStorageData = (id) => find(propEq('id', id))
 
 const BossMesos = ({ id, name, t }) => {
-  const { difficulty, partyCount } = useStroeSelector(
+  const { difficulty } = useStroeSelector(
     'boss',
-    pipe(
-      matchStorageData(id),
-      defaultTo({}),
-      pick(['difficulty', 'partyCount'])
-    )
+    pipe(matchStorageData(id), defaultTo({}), pick(['difficulty']))
   )
   const { isReboot, region } = useStroeSelector(
     'meta',
@@ -37,8 +33,7 @@ const BossMesos = ({ id, name, t }) => {
   const defaultMesos = MesosMapping[currentRegion][name][difficulty]
   const { defeatType } = BossObject[currentRegion][id]
   const mesos = numberFormat(
-    Math.floor((storeMesos || defaultMesos || 0) / (+partyCount || 0)) *
-      (isReboot ? 3 : 1)
+    (storeMesos || defaultMesos || 0) * (isReboot ? 3 : 1)
   )
 
   return (
