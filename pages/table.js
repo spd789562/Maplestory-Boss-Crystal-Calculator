@@ -23,7 +23,6 @@ import styles from '../styles/Home.module.css'
 const { Content } = Layout
 
 const useTableData = (t, region, lang) => {
-  const [mesosData] = useStore(`mesos.${region}`)
   const _tableData = []
   BossListMapping[region].forEach((boss) => {
     const { difficulties, ...bossData } = boss
@@ -32,7 +31,6 @@ const useTableData = (t, region, lang) => {
       _tableData.push({
         ...bossData,
         ...df,
-        mesos: path([bossData.name, df.difficulty], mesosData) || df.mesos,
         name: `${!boss.withoutDifficulty ? t(df.difficulty) : ''}${t(
           boss.name
         )}`,
@@ -102,7 +100,9 @@ const useTableData = (t, region, lang) => {
       dataIndex: 'mesos',
       align: 'right',
       render: (_, { avatar, difficulty, mesos }) => (
-        <EditableMesos {...{ region, name: avatar, difficulty, mesos }} />
+        <EditableMesos
+          {...{ region, name: avatar, difficulty, defaultMesos: mesos }}
+        />
       ),
     },
     {
