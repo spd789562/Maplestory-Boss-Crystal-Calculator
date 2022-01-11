@@ -437,7 +437,7 @@ const BossList = [
       },
     ],
     defeatType: 'day',
-    defeatTime: 1
+    defeatTime: 1,
   },
   // 混沌皮卡啾
   {
@@ -454,7 +454,7 @@ const BossList = [
       },
     ],
     defeatType: 'week',
-    defeatTime: 1
+    defeatTime: 1,
   },
   // 西格諾斯
   {
@@ -564,6 +564,31 @@ const BossList = [
       {
         difficulty: 'hard',
         mesos: 70312500,
+        contribution: {
+          self: 1500,
+          party: 3000,
+        },
+      },
+    ],
+    defeatType: 'week',
+    defeatTime: 1,
+  },
+  // 守護者天使綠水靈
+  {
+    id: 37,
+    name: 'guardian_angel_slime',
+    difficulties: [
+      {
+        difficulty: 'normal',
+        mesos: 47498700,
+        contribution: {
+          self: 1500,
+          party: 3000,
+        },
+      },
+      {
+        difficulty: 'hard',
+        mesos: 148071700,
         contribution: {
           self: 1500,
           party: 3000,
