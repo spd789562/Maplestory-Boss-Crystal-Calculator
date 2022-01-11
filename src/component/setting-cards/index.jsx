@@ -5,7 +5,16 @@ import { useStore } from '@store'
 import { UPDATE_META } from '@store/meta'
 
 /* components */
-import { Row, Col, Card, Select, Form, Switch, Tooltip, Space } from 'antd'
+import {
+  Row,
+  Col,
+  Card,
+  Select,
+  Form,
+  Switch,
+  Tooltip,
+  InputNumber,
+} from 'antd'
 
 /* i18n */
 import { withTranslation } from '@i18n'
@@ -63,7 +72,15 @@ const getResetDay = (momentObj, dayOfWeek) =>
 
 const SettingCard = ({ t, i18n: { language } }) => {
   const [
-    { region, isReboot, advanced, resetDayOfWeek, resetHour, remainDays },
+    {
+      region,
+      isReboot,
+      advanced,
+      resetDayOfWeek,
+      resetHour,
+      remainDays,
+      weekMax,
+    },
     dispatch,
   ] = useStore('meta')
 
@@ -134,6 +151,7 @@ const SettingCard = ({ t, i18n: { language } }) => {
         removeFieldWhenNeil('resetDayOfWeek'),
         removeFieldWhenNeil('resetHour'),
         removeFieldWhenNeil('remainDays'),
+        removeFieldWhenNeil('weekMax'),
         removeFieldWhenNeil('bossOptions'),
         removeFieldWhenNeil('filterOption'),
         evolve({ bossOptions: split(',') })
@@ -144,6 +162,8 @@ const SettingCard = ({ t, i18n: { language } }) => {
         integrateByField('advanced'),
         integrateByField('resetDayOfWeek'),
         integrateByField('resetHour'),
+        integrateByField('remainDays'),
+        integrateByField('weekMax'),
         integrateByField('bossOptions'),
         integrateByField('filterOption')
       )(updatedMeta)
@@ -282,6 +302,16 @@ const SettingCard = ({ t, i18n: { language } }) => {
                 7
               )}
             </Select>
+          </Form.Item>
+        </Col>
+        <Col span={24}>
+          <Form.Item label={t('week_max')} shouldUpdate>
+            <InputNumber
+              onChange={handleChangeMeta('weekMax')}
+              defaultValue={180}
+              style={{ width: 80 }}
+              value={weekMax}
+            />
           </Form.Item>
         </Col>
         <Col span={24}>

@@ -7,7 +7,7 @@ import { useStore, useStroeSelector } from '@store'
 import { withTranslation } from '@i18n'
 
 /* utils */
-import { find, pipe, pick, propEq,defaultTo } from 'ramda'
+import { find, pipe, pick, propEq, defaultTo, path } from 'ramda'
 import numberFormat from '@utils/number-format'
 
 /* mapping */
@@ -30,11 +30,15 @@ const BossMesos = ({ id, name, t }) => {
     pick(['isReboot', 'region'])
   )
   const currentRegion = MesosMapping[region] ? region : 'GMS'
+  const storeMesos = useStroeSelector(
+    'mesos',
+    path([currentRegion, name, difficulty])
+  )
+  const defaultMesos = MesosMapping[currentRegion][name][difficulty]
   const { defeatType } = BossObject[currentRegion][id]
   const mesos = numberFormat(
-    Math.floor(
-      (MesosMapping[currentRegion][name][difficulty] || 0) / (+partyCount || 0)
-    ) * (isReboot ? 3 : 1)
+    Math.floor((storeMesos || defaultMesos || 0) / (+partyCount || 0)) *
+      (isReboot ? 3 : 1)
   )
 
   return (

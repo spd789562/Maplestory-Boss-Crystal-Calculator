@@ -14,6 +14,7 @@ const initialState = {
   filterOption: 'all',
   resetDayOfWeek: 4,
   remainDays: 7,
+  weekMax: 180,
   resetHour: 0,
 }
 

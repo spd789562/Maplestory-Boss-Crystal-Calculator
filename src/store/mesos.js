@@ -19,8 +19,9 @@ const initialState = {
 }
 
 const reducer = reducerCreator(initialState, {
-  [INIT_MESOS_DATA]: (_, payload) =>
-    pipe(mergeDeepLeft(payload), saveToStroage(payload))(state),
+  [INIT_MESOS_DATA]: (state, payload) => {
+    return mergeDeepLeft(payload)(state)
+  },
   [UPDATE_MESOS_DATA]: (state, payload) =>
     pipe(
       mergeDeepLeft({

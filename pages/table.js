@@ -10,6 +10,7 @@ import { withTranslation } from '../src/i18n'
 /* store */
 import { useStore } from '@store'
 import { UPDATE_META } from '@store/meta'
+import { INIT_MESOS_DATA } from '@store/mesos'
 
 /* helper */
 import { assoc, evolve, propEq, equals, path } from 'ramda'
@@ -149,6 +150,15 @@ function BossTable({ t, i18n }) {
     })
   }
   const { tableData, columns } = useTableData(t, region, i18n.language)
+  useEffect(() => {
+    const storageData = JSON.parse(
+      localStorage.getItem('MAPLESTORY_BOSS_MESOS_DATA') || '{}'
+    )
+    dispatch({
+      type: INIT_MESOS_DATA,
+      payload: storageData,
+    })
+  }, [])
 
   return (
     <Fragment>

@@ -4,6 +4,7 @@ import { Layout, Select, Button } from 'antd'
 /* store */
 import { useStore, useDispatch } from '@store'
 import { INIT_BOSS_DATA, RESET_BOSS_DATA } from '@store/boss'
+import { INIT_MESOS_DATA } from '@store/mesos'
 
 /* component */
 import { Row, Col } from 'antd'
@@ -126,6 +127,15 @@ function Home({ t }) {
       }
     }
   }, [process.browser])
+  useEffect(() => {
+    const storageData = JSON.parse(
+      localStorage.getItem('MAPLESTORY_BOSS_MESOS_DATA') || '{}'
+    )
+    dispatch({
+      type: INIT_MESOS_DATA,
+      payload: storageData,
+    })
+  }, [])
   return (
     <Fragment>
       <Content className={styles.content}>
