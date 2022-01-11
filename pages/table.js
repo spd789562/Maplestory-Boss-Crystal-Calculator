@@ -3,6 +3,7 @@ import React, { Fragment, useCallback, useEffect } from 'react'
 /* component */
 import { Avatar, Layout, Select, Space, Table, Form, Card } from 'antd'
 import { CheckOutlined } from '@ant-design/icons'
+import EditableMesos from '@components/editable-mesos'
 /* i18n */
 import { withTranslation } from '../src/i18n'
 
@@ -11,7 +12,7 @@ import { useStore } from '@store'
 import { UPDATE_META } from '@store/meta'
 
 /* helper */
-import { assoc, evolve, propEq, equals } from 'ramda'
+import { assoc, evolve, propEq, equals, path } from 'ramda'
 import numberFormat, { unitFormat } from '@utils/number-format'
 
 /* mapping */
@@ -22,6 +23,7 @@ import styles from '../styles/Home.module.css'
 const { Content } = Layout
 
 const useTableData = (t, region, lang) => {
+  const [mesosData] = useStore(`mesos.${region}`)
   const _tableData = []
   BossListMapping[region].forEach((boss) => {
     const { difficulties, ...bossData } = boss
@@ -30,6 +32,7 @@ const useTableData = (t, region, lang) => {
       _tableData.push({
         ...bossData,
         ...df,
+        mesos: path([bossData.name, df.difficulty], mesosData) || df.mesos,
         name: `${!boss.withoutDifficulty ? t(df.difficulty) : ''}${t(
           boss.name
         )}`,
@@ -98,7 +101,9 @@ const useTableData = (t, region, lang) => {
       title: 'mesos',
       dataIndex: 'mesos',
       align: 'right',
-      render: (_, { mesos }) => numberFormat(mesos),
+      render: (_, { avatar, difficulty, mesos }) => (
+        <EditableMesos {...{ region, name: avatar, difficulty, mesos }} />
+      ),
     },
     {
       title: 'crusader',
