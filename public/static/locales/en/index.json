@@ -36,6 +36,7 @@
   "table_hp": "HP",
   "table_self_contribution": "Self Contribution",
   "table_party_contribution": "Party Contribution",
+  "table_mesos_edit_tip": "Click value to edit",
   "table_download": "Export Mesos",
   "table_upload": "Import Mesos",
   "table_upload_success": "Success",
@@ -45,8 +46,8 @@
 
   "all": "All",
   "defeatable": "Beatable",
-  "boss_list_description": "Click boss to change beatable and enter defeated count, result will base on beatable and defeated count to calculate the recommend boss.",
-  "boss_list_to_table": "Detail Table >",
+  "boss_list_description": "Click boss to change beatable, enter character count that you can defeat and enter defeated count, result will base on beatable count and defeated count to calculate the recommend boss.",
+  "boss_list_to_table": "Click Here to change or update Crystal value >",
 
   "defeated_on": "Defeated on",
   "today_was_entered": "Today was enter",

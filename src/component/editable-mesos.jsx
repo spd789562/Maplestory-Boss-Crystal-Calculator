@@ -39,7 +39,9 @@ const EditableMesos = ({ region, name, difficulty, defaultMesos }) => {
       autoFocus
     />
   ) : (
-    <span onClick={handleEdit}>{numberFormat(_mesos)}</span>
+    <span tabIndex={0} onClick={handleEdit} onFocus={handleEdit}>
+      {numberFormat(_mesos)}
+    </span>
   )
 }
 

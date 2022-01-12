@@ -99,7 +99,20 @@ const useTableData = (t, region, lang) => {
       hidden,
     },
     {
-      title: 'mesos',
+      title: () => (
+        <span>
+          {t('mesos')}
+          <br />
+          <span
+            style={{
+              fontSize: '0.8rem',
+              color: '#666',
+            }}
+          >
+            ({t('table_mesos_edit_tip')})
+          </span>
+        </span>
+      ),
       dataIndex: 'mesos',
       align: 'right',
       render: (_, { avatar, difficulty, mesos }) => (
@@ -186,13 +199,18 @@ function BossTable({ t, i18n }) {
           }
         >
           <Table
-            columns={columns.map(evolve({ title: t }))}
+            columns={columns.map(
+              evolve({
+                title: (text) => (typeof text === 'string' ? t(text) : text),
+              })
+            )}
             dataSource={tableData}
             pagination={false}
             rowKey="key"
             size="small"
             scroll={{ x: true }}
             bordered
+            sticky
           />
         </Card>
       </Content>
