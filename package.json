@@ -16,6 +16,7 @@
     "@zeit/next-sass": "^1.0.1",
     "antd": "^4.6.3",
     "babel-plugin-import": "^1.13.0",
+    "downloadjs": "^1.4.7",
     "express": "^4.17.1",
     "i18next-hmr": "^1.6.0",
     "less": "^3.12.2",
