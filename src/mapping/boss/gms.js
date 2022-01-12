@@ -587,7 +587,7 @@ const BossList = [
         },
       },
       {
-        difficulty: 'hard',
+        difficulty: 'chaos',
         mesos: 148071700,
         contribution: {
           self: 1500,

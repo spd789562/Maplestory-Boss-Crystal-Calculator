@@ -34,6 +34,7 @@
   "table_hp": "HP",
   "table_self_contribution": "Self Contribution",
   "table_party_contribution": "Party Contribution",
+  "table_drops": "Other Drops",
   "table_mesos_edit_tip": "Click value to edit",
   "table_download": "Export Mesos",
   "table_upload": "Import Mesos",
