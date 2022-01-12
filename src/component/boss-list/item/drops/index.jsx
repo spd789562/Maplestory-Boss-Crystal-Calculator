@@ -27,7 +27,7 @@ const imgStyle = {
   height: 16,
 }
 
-const CurrentDropShows = ['red_stone']
+const ExcludeDrops = ['crusaders_coin']
 
 const BossItemDrops = ({ id, t }) => {
   const [region] = useStore('meta.region')
@@ -40,7 +40,7 @@ const BossItemDrops = ({ id, t }) => {
   return drops && drops.length ? (
     <Space style={{ marginLeft: 4 }}>
       {drops
-        .filter((item) => includes(item.name || item, CurrentDropShows))
+        .filter((item) => !includes(item.name || item, ExcludeDrops))
         .map((item) => {
           const itemIsObj = typeof item === 'object'
           const name = itemIsObj ? item.name : item

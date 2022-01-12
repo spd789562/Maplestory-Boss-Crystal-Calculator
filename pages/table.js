@@ -15,7 +15,7 @@ import { UPDATE_META } from '@store/meta'
 import { INIT_MESOS_DATA } from '@store/mesos'
 
 /* helper */
-import { assoc, evolve, propEq, equals, path } from 'ramda'
+import { assoc, evolve, propEq, equals, includes } from 'ramda'
 import numberFormat, { unitFormat } from '@utils/number-format'
 
 /* mapping */
@@ -25,6 +25,10 @@ import styles from '../styles/Home.module.css'
 
 const { Content } = Layout
 
+const ExcludeDrops = ['red_stone', 'crusaders_coin']
+const imgStyle = {
+  height: 24,
+}
 const useTableData = (t, region, lang) => {
   const _tableData = []
   BossListMapping[region].forEach((boss) => {
@@ -145,6 +149,23 @@ const useTableData = (t, region, lang) => {
       dataIndex: 'contribution',
       align: 'center',
       render: (_, { contribution: { party = 0 } = {} }) => party,
+    },
+    {
+      title: 'table_drops',
+      dataIndex: 'drops',
+      render: (_, { drops = [] }) => (
+        <Space style={{ marginLeft: 4 }}>
+          {drops
+            .filter((item) => !includes(item.name || item, ExcludeDrops))
+            .map((item) => {
+              const itemIsObj = typeof item === 'object'
+              const name = itemIsObj ? item.name : item
+              return (
+                <img src={`/drops/${name}.png`} alt={name} style={imgStyle} />
+              )
+            })}
+        </Space>
+      ),
     },
   ]
 
