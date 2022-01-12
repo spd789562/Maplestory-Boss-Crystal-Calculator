@@ -6,7 +6,7 @@ services:
     ports:
       - 8787:3000
     volumes:
-      - ./:/app:rw
-      - node_modules:/app/node_modules
+      - ./:/usr/app
+      - ./node_modules:/usr/app/node_modules
 volumes:
   node_modules:

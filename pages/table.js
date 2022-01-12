@@ -4,6 +4,8 @@ import React, { Fragment, useCallback, useEffect } from 'react'
 import { Avatar, Layout, Select, Space, Table, Form, Card } from 'antd'
 import { CheckOutlined } from '@ant-design/icons'
 import EditableMesos from '@components/editable-mesos'
+import DownloadButton from '@components/mesos-data/download'
+import UploadButton from '@components/mesos-data/upload'
 /* i18n */
 import { withTranslation } from '../src/i18n'
 
@@ -165,7 +167,7 @@ function BossTable({ t, i18n }) {
       <Content className={styles.content}>
         <Card
           title={
-            <>
+            <Space wrap>
               {t('boss_data_table')}
               <Form.Item shouldUpdate noStyle>
                 <Select
@@ -178,7 +180,9 @@ function BossTable({ t, i18n }) {
                   <Select.Option value="GMS">GMS</Select.Option>
                 </Select>
               </Form.Item>
-            </>
+              <DownloadButton />
+              <UploadButton />
+            </Space>
           }
         >
           <Table

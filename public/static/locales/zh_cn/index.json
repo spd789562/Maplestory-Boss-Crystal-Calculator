@@ -36,6 +36,12 @@
   "table_hp": "血量",
   "table_self_contribution": "个人贡献",
   "table_party_contribution": "组队贡献",
+  "table_download": "汇出枫币资料",
+  "table_upload": "汇入枫币资料",
+  "table_upload_success": "成功",
+  "table_upload_success_desc": "汇入成功",
+  "table_upload_fail": "失败",
+  "table_upload_fail_desc": "档案错误",
   
   "all": "全部",
   "defeatable": "可击杀",

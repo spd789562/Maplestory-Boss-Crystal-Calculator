@@ -36,6 +36,12 @@
   "table_hp": "HP",
   "table_self_contribution": "Self Contribution",
   "table_party_contribution": "Party Contribution",
+  "table_download": "Export Mesos",
+  "table_upload": "Import Mesos",
+  "table_upload_success": "Success",
+  "table_upload_success_desc": "Import Success",
+  "table_upload_fail": "Fail",
+  "table_upload_fail_desc": "File Error",
 
   "all": "All",
   "defeatable": "Beatable",
