@@ -29,7 +29,7 @@ const getBossSuggestion = ({
   bossData,
   mesosData,
   region = 'GMS',
-  maxTime = 7,
+  remainDays = 7,
   weekMax = 180,
 }) => {
   const currentRegion = MesosMapping[region] ? region : 'GMS'
@@ -62,7 +62,7 @@ const getBossSuggestion = ({
         let maxDefeatTime = defineMaxTime(
           boss.defeatType,
           boss.defeatTime,
-          maxTime,
+          remainDays,
           storeBossData.characters || 1
         )
         if (
@@ -75,7 +75,7 @@ const getBossSuggestion = ({
           const sharedBossMaxTime = defineMaxTime(
             sharedBossData.defeatType,
             sharedBossData.defeatTime,
-            maxTime,
+            remainDays,
             convertBossData.characters || 1
           )
           const bigMaxTime = Math.max(maxDefeatTime, sharedBossMaxTime)
