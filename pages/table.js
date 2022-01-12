@@ -167,7 +167,7 @@ function BossTable({ t, i18n }) {
       <Content className={styles.content}>
         <Card
           title={
-            <Space>
+            <Space wrap>
               {t('boss_data_table')}
               <Form.Item shouldUpdate noStyle>
                 <Select

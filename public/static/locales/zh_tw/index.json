@@ -34,6 +34,12 @@
   "table_hp": "血量",
   "table_self_contribution": "個人貢獻",
   "table_party_contribution": "組隊貢獻",
+  "table_download": "匯出楓幣資料",
+  "table_upload": "匯入楓幣資料",
+  "table_upload_success": "成功",
+  "table_upload_success_desc": "匯入成功",
+  "table_upload_fail": "失敗",
+  "table_upload_fail_desc": "檔案錯誤",
 
   "all": "全部",
   "defeatable": "可擊殺",
