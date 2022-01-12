@@ -23,15 +23,20 @@ import getBossSuggestion from '@utils/get-boss-suggestion'
 import BossesMapping from '@mapping/boss'
 
 const BossList = ({ t }) => {
-  const { region, remainDays } = useStroeSelector(
+  const { region, remainDays, weekMax } = useStroeSelector(
     'meta',
-    pick(['region', 'remainDays'])
+    pick(['region', 'remainDays', 'weekMax'])
   )
-  const [boss] = useStore('boss')
+  const [bossData] = useStore('boss')
+  const [mesosData] = useStore('mesos')
 
-  const suggestions = getBossSuggestion(boss, region, remainDays).map(
-    prop('id')
-  )
+  const suggestions = getBossSuggestion({
+    bossData,
+    mesosData,
+    region,
+    remainDays,
+    weekMax,
+  }).map(prop('id'))
   return (
     <List
       style={{ backgroundColor: '#fff' }}

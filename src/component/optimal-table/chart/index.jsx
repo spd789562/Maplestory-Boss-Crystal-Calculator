@@ -7,7 +7,7 @@ import { withTranslation } from '@i18n'
 import { defaultTo, path, not, mergeLeft, includes, pipe } from 'ramda'
 import numberFormat from '@utils/number-format'
 
-const Pie = dynamic(() => import('@ant-design/charts/lib/pie'), {
+const Pie = dynamic(() => import('@ant-design/plots/lib/components/pie'), {
   ssr: false,
 })
 
@@ -52,9 +52,7 @@ const OptimalChart = ({ tableData, totalCount, totalMesos, t }) => {
           fontSize: 18,
         },
         formatter: function formatter(args) {
-          return `<div style="display:flex;align-items:center;flex-direction:column;${
-            args ? 'transform:translateY(-50%)' : ''
-          }">
+          return `<div style="display:flex;align-items:center;flex-direction:column;">
             <img height="48px" src="${
               args ? `/boss/${args.avatar}` : 'crystal'
             }.png" alt=${args ? args.name : 'crystal'} />
@@ -107,7 +105,7 @@ const OptimalChart = ({ tableData, totalCount, totalMesos, t }) => {
       },
     ],
   }
-
+  console.log(Pie)
   return config.data.length ? <Pie {...config} /> : null
 }
 

@@ -6,7 +6,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'easy',
-        mesos: 200000,
+        mesos: 157500,
         hp: 2200000,
         drops: ['red_stone'],
         contribution: {
@@ -16,9 +16,14 @@ const BossList = [
       },
       {
         difficulty: 'normal',
-        mesos: 612500,
+        mesos: 482400,
         hp: 7000000,
-        drops: ['red_stone', { name: 'crusaders_coin', value: 6 }],
+        drops: [
+          'red_stone',
+          { name: 'crusaders_coin', value: 6 },
+          'condensed_power_crystal',
+          'aquatic_letter_eye_accessory',
+        ],
         contribution: {
           self: 100,
           party: 500,
@@ -35,9 +40,14 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'chaos',
-        mesos: 16200000,
+        mesos: 12834800,
         hp: 84000000000,
-        drops: ['red_stone', { name: 'crusaders_coin', value: 26 }],
+        drops: [
+          'red_stone',
+          { name: 'crusaders_coin', value: 26 },
+          'condensed_power_crystal',
+          'aquatic_letter_eye_accessory',
+        ],
         contribution: {
           self: 1000,
           party: 2000,
@@ -54,9 +64,14 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'easy',
-        mesos: 722000,
+        mesos: 568600,
         hp: 400000000,
-        drops: ['red_stone', { name: 'crusaders_coin', value: 6 }],
+        drops: [
+          'red_stone',
+          { name: 'crusaders_coin', value: 6 },
+          'royal_black_metal_shoulder',
+          'crystal_ventus_badge',
+        ],
         contribution: {
           self: 100,
           party: 500,
@@ -64,9 +79,14 @@ const BossList = [
       },
       {
         difficulty: 'normal',
-        mesos: 2592000,
+        mesos: 2041500,
         hp: 6000000000,
-        drops: ['red_stone', { name: 'crusaders_coin', value: 12 }],
+        drops: [
+          'red_stone',
+          { name: 'crusaders_coin', value: 12 },
+          'royal_black_metal_shoulder',
+          'crystal_ventus_badge',
+        ],
         contribution: {
           self: 500,
           party: 2000,
@@ -83,9 +103,14 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'hard',
-        mesos: 19012500,
+        mesos: 15074200,
         hp: 120000000000,
-        drops: ['red_stone', { name: 'crusaders_coin', value: 26 }],
+        drops: [
+          'red_stone',
+          { name: 'crusaders_coin', value: 26 },
+          'royal_black_metal_shoulder',
+          'crystal_ventus_badge',
+        ],
         contribution: {
           self: 1250,
           party: 2500,
@@ -103,7 +128,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'normal',
-        mesos: 800000,
+        mesos: 630000,
         hp: 500000000,
         drops: ['red_stone', { name: 'crusaders_coin', value: 6 }],
         contribution: {
@@ -122,7 +147,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'hard',
-        mesos: 11250000,
+        mesos: 8968100,
         hp: 16800000000,
         drops: ['red_stone', { name: 'crusaders_coin', value: 24 }],
         contribution: {
@@ -142,7 +167,7 @@ const BossList = [
       {
         difficulty: 'normal',
         hp: 1000000000,
-        mesos: 648000,
+        mesos: 510300,
         contribution: {
           self: 150,
           party: 1000,
@@ -151,7 +176,7 @@ const BossList = [
       {
         difficulty: 'hard',
         hp: 10500000000,
-        mesos: 2664500,
+        mesos: 2098600,
         contribution: {
           self: 500,
           party: 2000,
@@ -169,7 +194,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'normal',
-        mesos: 15312500,
+        mesos: 12115400,
         hp: 200000000000,
         contribution: {
           self: 1000,
@@ -188,7 +213,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'normal',
-        mesos: 1250000,
+        mesos: 984500,
         hp: 1680000000,
         drops: [{ name: 'crusaders_coin', value: 8 }],
         contribution: {
@@ -207,7 +232,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'normal',
-        mesos: 968000,
+        mesos: 766000,
         hp: 315000000,
         drops: ['red_stone', { name: 'crusaders_coin', value: 6 }],
         contribution: {
@@ -226,7 +251,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'normal',
-        mesos: 968000,
+        mesos: 762400,
         hp: 315000000,
         drops: ['red_stone', { name: 'crusaders_coin', value: 6 }],
         contribution: {
@@ -245,7 +270,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'normal',
-        mesos: 968000,
+        mesos: 765800,
         hp: 315000000,
         drops: ['red_stone', { name: 'crusaders_coin', value: 6 }],
         contribution: {
@@ -264,7 +289,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'normal',
-        mesos: 968000,
+        mesos: 766900,
         hp: 550000000,
         drops: ['red_stone', { name: 'crusaders_coin', value: 6 }],
         contribution: {
@@ -283,7 +308,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'chaos',
-        mesos: 16200000,
+        mesos: 12819500,
         hp: 100000000000,
         drops: ['red_stone', { name: 'crusaders_coin', value: 26 }],
         contribution: {
@@ -302,7 +327,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'chaos',
-        mesos: 16200000,
+        mesos: 12834800,
         hp: 80000000000,
         drops: ['red_stone', { name: 'crusaders_coin', value: 26 }],
         contribution: {
@@ -321,7 +346,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'chaos',
-        mesos: 16200000,
+        mesos: 12817600,
         hp: 140000000000,
         drops: ['red_stone', { name: 'crusaders_coin', value: 26 }],
         contribution: {
@@ -340,7 +365,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'chaos',
-        mesos: 21012500,
+        mesos: 16549700,
         hp: 200000000000,
         drops: ['red_stone', { name: 'crusaders_coin', value: 26 }],
         contribution: {
@@ -359,7 +384,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'easy',
-        mesos: 1058000,
+        mesos: 833200,
         hp: 700000000,
         drops: ['red_stone', { name: 'crusaders_coin', value: 7 }],
         contribution: {
@@ -369,7 +394,7 @@ const BossList = [
       },
       {
         difficulty: 'normal',
-        mesos: 1458000,
+        mesos: 1148300,
         hp: 6300000000,
         drops: ['red_stone', { name: 'crusaders_coin', value: 10 }],
         contribution: {
@@ -379,7 +404,7 @@ const BossList = [
       },
       {
         difficulty: 'hard',
-        mesos: 2450000,
+        mesos: 1929600,
         hp: 10500000000,
         drops: ['red_stone', { name: 'crusaders_coin', value: 12 }],
         contribution: {
@@ -398,9 +423,13 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'easy',
-        mesos: 882000,
+        mesos: 694600,
         hp: 1018000000,
-        drops: [{ name: 'crusaders_coin', value: 6 }],
+        drops: [
+          { name: 'crusaders_coin', value: 6 },
+          'silver_blossom_ring',
+          'dea_sidus_earring',
+        ],
         contribution: {
           self: 150,
           party: 1000,
@@ -408,9 +437,14 @@ const BossList = [
       },
       {
         difficulty: 'normal',
-        mesos: 1012500,
+        mesos: 797400,
         hp: 2750000000,
-        drops: ['red_stone', { name: 'crusaders_coin', value: 7 }],
+        drops: [
+          'red_stone',
+          { name: 'crusaders_coin', value: 7 },
+          'silver_blossom_ring',
+          'dea_sidus_earring',
+        ],
         contribution: {
           self: 150,
           party: 1000,
@@ -418,9 +452,14 @@ const BossList = [
       },
       {
         difficulty: 'chaos',
-        mesos: 1352000,
+        mesos: 1064800,
         hp: 26600000000,
-        drops: ['red_stone', { name: 'crusaders_coin', value: 10 }],
+        drops: [
+          'red_stone',
+          { name: 'crusaders_coin', value: 10 },
+          'silver_blossom_ring',
+          'dea_sidus_earring',
+        ],
         contribution: {
           self: 250,
           party: 1500,
@@ -437,7 +476,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'easy',
-        mesos: 1152000,
+        mesos: 907300,
         hp: 2100000000,
         drops: ['red_stone', { name: 'crusaders_coin', value: 8 }],
         contribution: {
@@ -447,7 +486,7 @@ const BossList = [
       },
       {
         difficulty: 'normal',
-        mesos: 2520500,
+        mesos: 1985100,
         hp: 12600000000,
         drops: ['red_stone', { name: 'crusaders_coin', value: 12 }],
         contribution: {
@@ -466,9 +505,13 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'normal',
-        mesos: 1404500,
+        mesos: 1106200,
         hp: 2100000000,
-        drops: ['red_stone', { name: 'crusaders_coin', value: 10 }],
+        drops: [
+          'red_stone',
+          { name: 'crusaders_coin', value: 10 },
+          'golden_clover_belt',
+        ],
         contribution: {
           self: 250,
           party: 1500,
@@ -485,9 +528,13 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'chaos',
-        mesos: 12800000,
+        mesos: 10225800,
         hp: 69500000000,
-        drops: ['red_stone', { name: 'crusaders_coin', value: 24 }],
+        drops: [
+          'red_stone',
+          { name: 'crusaders_coin', value: 24 },
+          'golden_clover_belt',
+        ],
         contribution: {
           self: 1000,
           party: 2000,
@@ -504,7 +551,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'easy',
-        mesos: 9112500,
+        mesos: 7195900,
         hp: 10500000000,
         drops: [{ name: 'crusaders_coin', value: 24 }],
         contribution: {
@@ -514,7 +561,7 @@ const BossList = [
       },
       {
         difficulty: 'normal',
-        mesos: 14450000,
+        mesos: 11607300,
         hp: 63000000000,
         drops: ['red_stone', { name: 'crusaders_coin', value: 26 }],
         contribution: {
@@ -533,7 +580,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'easy',
-        mesos: 684500,
+        mesos: 539100,
         hp: [300000000, 100000000],
         drops: [{ name: 'crusaders_coin', value: 6 }],
         contribution: {
@@ -543,7 +590,7 @@ const BossList = [
       },
       {
         difficulty: 'normal',
-        mesos: 2664500,
+        mesos: 2098600,
         hp: [12600000000, 4200000000],
         drops: [{ name: 'crusaders_coin', value: 12 }],
         contribution: {
@@ -562,7 +609,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'chaos',
-        mesos: 26450000,
+        mesos: 26770800,
         hp: [378000000000, 126000000000],
         drops: [{ name: 'crusaders_coin', value: 26 }],
         contribution: {
@@ -581,7 +628,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'normal',
-        mesos: 32512500,
+        mesos: 33974400,
         hp: [400000000000, 400000000000, 700000000000],
         drops: [{ name: 'crusaders_coin', value: 26 }],
         contribution: {
@@ -591,9 +638,14 @@ const BossList = [
       },
       {
         difficulty: 'hard',
-        mesos: 74112500,
+        mesos: 115805800,
         hp: [1700000000000, 7000000000000, 23370000000000],
-        drops: [{ name: 'crusaders_coin', value: 26 }],
+        drops: [
+          { name: 'crusaders_coin', value: 26 },
+          'black_heart',
+          'berserked',
+          'abso_lab',
+        ],
         contribution: {
           self: 1500,
           party: 3000,
@@ -610,7 +662,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'normal',
-        mesos: 33800000,
+        mesos: 35524300,
         hp: [828000000000, 360000000000],
         drops: [{ name: 'crusaders_coin', value: 26 }],
         contribution: {
@@ -620,9 +672,40 @@ const BossList = [
       },
       {
         difficulty: 'hard',
-        mesos: 70312500,
+        mesos: 110088400,
         hp: [24840000000000, 10800000000000],
-        drops: [{ name: 'crusaders_coin', value: 26 }],
+        drops: [
+          { name: 'crusaders_coin', value: 26 },
+          'magic_eyepatch',
+          'abso_lab',
+        ],
+        contribution: {
+          self: 1500,
+          party: 3000,
+        },
+      },
+    ],
+    defeatType: 'week',
+    defeatTime: 1,
+  },
+  // 守護者天使綠水靈
+  {
+    id: 37,
+    name: 'guardian_angel_slime',
+    difficulties: [
+      {
+        difficulty: 'normal',
+        mesos: 47498700,
+        drops: [{ name: 'crusaders_coin', value: 26 }, 'guardian_angel_ring'],
+        contribution: {
+          self: 1500,
+          party: 3000,
+        },
+      },
+      {
+        difficulty: 'chaos',
+        mesos: 148071700,
+        drops: [{ name: 'crusaders_coin', value: 26 }, 'guardian_angel_ring'],
         contribution: {
           self: 1500,
           party: 3000,
@@ -639,7 +722,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'easy',
-        mesos: 35112500,
+        mesos: 48592600,
         hp: [6000000000000, 6000000000000],
         drops: [{ name: 'crusaders_coin', value: 26 }],
         contribution: {
@@ -649,7 +732,7 @@ const BossList = [
       },
       {
         difficulty: 'normal',
-        mesos: 40612500,
+        mesos: 57814300,
         hp: [12000000000000, 12000000000000],
         drops: [{ name: 'crusaders_coin', value: 26 }],
         contribution: {
@@ -659,9 +742,13 @@ const BossList = [
       },
       {
         difficulty: 'hard',
-        mesos: 80000000,
+        mesos: 127197800,
         hp: [41040000000000, 41040000000000, 11970000000000],
-        drops: [{ name: 'crusaders_coin', value: 26 }],
+        drops: [
+          { name: 'crusaders_coin', value: 26 },
+          'dreamy_belt',
+          'arcane_umbra',
+        ],
         contribution: {
           self: 1500,
           party: 3000,
@@ -678,7 +765,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'normal',
-        mesos: 46512500,
+        mesos: 66588300,
         hp: [4200000000000, 6300000000000, 10500000000000],
         drops: [{ name: 'crusaders_coin', value: 26 }],
         contribution: {
@@ -688,9 +775,13 @@ const BossList = [
       },
       {
         difficulty: 'hard',
-        mesos: 88200000,
+        mesos: 140594200,
         hp: [21000000000000, 31500000000000, 52500000000000],
-        drops: [{ name: 'crusaders_coin', value: 26 }],
+        drops: [
+          { name: 'crusaders_coin', value: 26 },
+          'cursed_spellbook',
+          'arcane_umbra',
+        ],
         contribution: {
           self: 1500,
           party: 3000,
@@ -707,7 +798,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'normal',
-        mesos: 49612500,
+        mesos: 71327600,
         hp: 26000000000000,
         drops: [{ name: 'crusaders_coin', value: 26 }],
         contribution: {
@@ -717,9 +808,13 @@ const BossList = [
       },
       {
         difficulty: 'chaos',
-        mesos: 92450000,
+        mesos: 151576200,
         hp: 114600000000000,
-        drops: [{ name: 'crusaders_coin', value: 26 }],
+        drops: [
+          { name: 'crusaders_coin', value: 26 },
+          'endless_terror',
+          'arcane_umbra',
+        ],
         contribution: {
           self: 1500,
           party: 3000,
@@ -739,9 +834,13 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'hard',
-        mesos: 110450000,
+        mesos: 180241400,
         hp: 176000000000000,
-        drops: [{ name: 'crusaders_coin', value: 26 }],
+        drops: [
+          { name: 'crusaders_coin', value: 26 },
+          'source_of_suffering',
+          'arcane_umbra',
+        ],
         contribution: {
           self: 1500,
           party: 3000,
@@ -760,7 +859,7 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'normal',
-        mesos: 52812500,
+        mesos: 76683600,
         hp: 26000000000000,
         drops: [{ name: 'crusaders_coin', value: 26 }],
         contribution: {
@@ -770,9 +869,13 @@ const BossList = [
       },
       {
         difficulty: 'chaos',
-        mesos: 96800000,
+        mesos: 159223800,
         hp: 127000000000000,
-        drops: [{ name: 'crusaders_coin', value: 26 }],
+        drops: [
+          { name: 'crusaders_coin', value: 26 },
+          'commanding_force_earring',
+          'arcane_umbra',
+        ],
         contribution: {
           self: 1500,
           party: 3000,
@@ -792,7 +895,12 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'hard',
-        mesos: 500000000,
+        mesos: 1628295299,
+        drops: [
+          { name: 'crusaders_coin', value: 26 },
+          'genesis_badge',
+          'arcane_umbra',
+        ],
         hp: [65000000000000, 135000000000000, 200000000000000, 100000000000000],
         contribution: {
           self: 2000,
@@ -813,7 +921,8 @@ const BossList = [
     difficulties: [
       {
         difficulty: 'hard',
-        mesos: 151250000,
+        mesos: 251350800,
+        drops: ['mitras_rage'],
         hp: [126000000000000, 0],
       },
     ],

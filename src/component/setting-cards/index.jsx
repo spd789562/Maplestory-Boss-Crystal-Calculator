@@ -5,7 +5,16 @@ import { useStore } from '@store'
 import { UPDATE_META } from '@store/meta'
 
 /* components */
-import { Row, Col, Card, Select, Form, Switch, Tooltip, Space } from 'antd'
+import {
+  Row,
+  Col,
+  Card,
+  Select,
+  Form,
+  Switch,
+  Tooltip,
+  InputNumber,
+} from 'antd'
 
 /* i18n */
 import { withTranslation } from '@i18n'
@@ -63,7 +72,7 @@ const getResetDay = (momentObj, dayOfWeek) =>
 
 const SettingCard = ({ t, i18n: { language } }) => {
   const [
-    { region, isReboot, advanced, resetDayOfWeek, resetHour, remainDays },
+    { region, isReboot, resetDayOfWeek, resetHour, remainDays, weekMax },
     dispatch,
   ] = useStore('meta')
 
@@ -91,31 +100,6 @@ const SettingCard = ({ t, i18n: { language } }) => {
       },
     })
   }
-  const handleChangeAdvanced = (value) => {
-    if (value) {
-      const serverTime = getResetDay(
-        moment().utcOffset(TimeZone[region]),
-        4
-      ).utcOffset(moment().utcOffset())
-      dispatch({
-        type: UPDATE_META,
-        payload: {
-          advanced: value,
-          resetDayOfWeek: serverTime.day(),
-          resetHour: serverTime.hour(),
-          remainDays: getRemainDays(),
-        },
-      })
-    } else {
-      dispatch({
-        type: UPDATE_META,
-        payload: {
-          advanced: value,
-          remainDays: 7,
-        },
-      })
-    }
-  }
   const handleChangeMeta = (field) => (value) => {
     dispatch({
       type: UPDATE_META,
@@ -134,6 +118,7 @@ const SettingCard = ({ t, i18n: { language } }) => {
         removeFieldWhenNeil('resetDayOfWeek'),
         removeFieldWhenNeil('resetHour'),
         removeFieldWhenNeil('remainDays'),
+        removeFieldWhenNeil('weekMax'),
         removeFieldWhenNeil('bossOptions'),
         removeFieldWhenNeil('filterOption'),
         evolve({ bossOptions: split(',') })
@@ -144,6 +129,8 @@ const SettingCard = ({ t, i18n: { language } }) => {
         integrateByField('advanced'),
         integrateByField('resetDayOfWeek'),
         integrateByField('resetHour'),
+        integrateByField('remainDays'),
+        integrateByField('weekMax'),
         integrateByField('bossOptions'),
         integrateByField('filterOption')
       )(updatedMeta)
@@ -156,101 +143,10 @@ const SettingCard = ({ t, i18n: { language } }) => {
       }
     }
   }, [])
-  useEffect(() => {
-    if (advanced) {
-      dispatch({
-        type: UPDATE_META,
-        payload: {
-          remainDays: getRemainDays(),
-        },
-      })
-    }
-  }, [advanced, resetDayOfWeek, resetHour])
 
   return (
     <Card title={t('setting')}>
       <Row gutter={[8, 8]}>
-        <Col span={24}>
-          <Tooltip title={t('advanced_mode_description')}>
-            <Form.Item
-              label={t('advanced_mode')}
-              shouldUpdate={T}
-              style={{
-                display: 'inline-flex',
-                marginBottom: advanced ? 4 : 24,
-              }}
-            >
-              <Switch
-                onChange={handleChangeAdvanced}
-                checked={advanced}
-                key={`tools-${advanced}`}
-              />
-            </Form.Item>
-          </Tooltip>
-        </Col>
-        {advanced && (
-          <Col span={24} style={{ marginBottom: 24 }}>
-            <Tooltip title={t('reset_description')}>
-              <Form.Item
-                label={t('reset_day')}
-                shouldUpdate
-                style={{ display: 'inline-flex', marginBottom: 0 }}
-              >
-                <Select
-                  onChange={handleChangeMeta('resetDayOfWeek')}
-                  style={{ width: 100 }}
-                  value={+resetDayOfWeek}
-                >
-                  {times(
-                    (index) => (
-                      <Select.Option value={index} key={`day_${index}`}>
-                        {t(`day_${index}`)}
-                      </Select.Option>
-                    ),
-                    7
-                  )}
-                </Select>
-              </Form.Item>
-              &nbsp;
-              <Form.Item
-                label={t('reset_hour')}
-                shouldUpdate
-                style={{ display: 'inline-flex', marginBottom: 0 }}
-              >
-                <Select
-                  onChange={handleChangeMeta('resetHour')}
-                  style={{ width: 80 }}
-                  value={+resetHour}
-                >
-                  {times(
-                    (index) => (
-                      <Select.Option value={index} key={`hour_${index}`}>
-                        {index}
-                      </Select.Option>
-                    ),
-                    24
-                  )}
-                </Select>
-              </Form.Item>
-              &nbsp;
-            </Tooltip>
-            <div style={{ color: '#878787' }}>
-              {t('next_reset_time')}:&nbsp;
-              {currentTimeZone.utcOffset() === serverResetTime.utcOffset() ? (
-                currentTimeZone.format(FORMAT)
-              ) : (
-                <Fragment>
-                  <div>
-                    {t('current_zone')}: {currentTimeZone.format(FORMAT)}
-                  </div>
-                  <div>
-                    {t('server_zone')}: {serverResetTime.format(FORMAT)}
-                  </div>
-                </Fragment>
-              )}
-            </div>
-          </Col>
-        )}
         <Col span={24}>
           <Form.Item label={t('game_region')} shouldUpdate>
             <Select
@@ -270,8 +166,7 @@ const SettingCard = ({ t, i18n: { language } }) => {
               onChange={handleChangeMeta('remainDays')}
               defaultValue={7}
               style={{ width: 80 }}
-              value={advanced ? getRemainDays() : remainDays}
-              disabled={advanced}
+              value={remainDays}
             >
               {times(
                 (index) => (
@@ -282,6 +177,16 @@ const SettingCard = ({ t, i18n: { language } }) => {
                 7
               )}
             </Select>
+          </Form.Item>
+        </Col>
+        <Col span={24}>
+          <Form.Item label={t('week_max')} shouldUpdate>
+            <InputNumber
+              onChange={handleChangeMeta('weekMax')}
+              defaultValue={180}
+              style={{ width: 80 }}
+              value={weekMax}
+            />
           </Form.Item>
         </Col>
         <Col span={24}>

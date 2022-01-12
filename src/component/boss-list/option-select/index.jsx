@@ -14,7 +14,7 @@ import { withTranslation } from '@i18n'
 /* utils */
 import { evolve } from 'ramda'
 
-const options = ['difficulty', 'partyCount', 'defeatTime', 'drops']
+const options = ['difficulty', 'characterCount', 'defeatTime', 'drops']
 
 const Options = ({ t, bossOptions, handleChange }) => {
   return (

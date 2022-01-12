@@ -24,11 +24,18 @@ const tabList = [
 
 const useTableData = (t) => {
   const [bossData] = useStore('boss')
-  const { isReboot, region, remainDays } = useStroeSelector(
+  const [mesosData] = useStore('mesos')
+  const { isReboot, region, remainDays, weekMax } = useStroeSelector(
     'meta',
-    pick(['isReboot', 'region', 'remainDays'])
+    pick(['isReboot', 'region', 'remainDays', 'weekMax'])
   )
-  const mergedData = getBossSuggestion(bossData, region, remainDays)
+  const mergedData = getBossSuggestion({
+    bossData,
+    mesosData,
+    region,
+    remainDays,
+    weekMax,
+  })
     .map((boss) =>
       assoc(
         'name',

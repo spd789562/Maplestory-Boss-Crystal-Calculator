@@ -10,10 +10,11 @@ const initialState = {
   region: 'TWMS',
   isReboot: false,
   advanced: false,
-  bossOptions: ['difficulty', 'partyCount', 'defeatTime'],
+  bossOptions: ['difficulty', 'characterCount', 'defeatTime'],
   filterOption: 'all',
   resetDayOfWeek: 4,
   remainDays: 7,
+  weekMax: 180,
   resetHour: 0,
 }
 

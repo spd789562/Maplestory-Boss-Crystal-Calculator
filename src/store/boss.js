@@ -42,6 +42,7 @@ const initialState = map(({ id, difficulties }) => ({
   id,
   defeatable: false,
   partyCount: 1,
+  characters: 1,
   defeatTime: 0,
   difficulty: difficulties[difficulties.length - 1].difficulty,
 }))(values(mergeRight(BossObject.GMS, BossObject.TWMS)))

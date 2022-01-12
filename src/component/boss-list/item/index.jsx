@@ -11,7 +11,7 @@ import Drops from './drops'
 import Mesos from './mesos'
 import Avatar from './avatar'
 import DefeatTime from './defeat-time'
-import PartyCount from './party-count'
+import CharacterCount from './character-count'
 import DifficultySelect from './difficulty-select'
 import Defeated from './defeated'
 
@@ -55,8 +55,8 @@ const BossItem = ({
         key={`${id}-difficulty`}
       />
     )
-  hasOptions('partyCount') &&
-    actions.push(<PartyCount id={id} key={`${id}-party`} />)
+  hasOptions('characterCount') &&
+    actions.push(<CharacterCount id={id} key={`${id}-characters`} />)
   hasOptions('defeatTime') &&
     actions.push(
       <DefeatTime

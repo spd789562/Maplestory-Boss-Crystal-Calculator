@@ -3,15 +3,19 @@ import React, { Fragment, useCallback, useEffect } from 'react'
 /* component */
 import { Avatar, Layout, Select, Space, Table, Form, Card } from 'antd'
 import { CheckOutlined } from '@ant-design/icons'
+import EditableMesos from '@components/editable-mesos'
+import DownloadButton from '@components/mesos-data/download'
+import UploadButton from '@components/mesos-data/upload'
 /* i18n */
 import { withTranslation } from '../src/i18n'
 
 /* store */
 import { useStore } from '@store'
 import { UPDATE_META } from '@store/meta'
+import { INIT_MESOS_DATA } from '@store/mesos'
 
 /* helper */
-import { assoc, evolve, propEq, equals } from 'ramda'
+import { assoc, evolve, propEq, equals, includes } from 'ramda'
 import numberFormat, { unitFormat } from '@utils/number-format'
 
 /* mapping */
@@ -21,6 +25,10 @@ import styles from '../styles/Home.module.css'
 
 const { Content } = Layout
 
+const ExcludeDrops = ['red_stone', 'crusaders_coin']
+const imgStyle = {
+  height: 24,
+}
 const useTableData = (t, region, lang) => {
   const _tableData = []
   BossListMapping[region].forEach((boss) => {
@@ -95,10 +103,27 @@ const useTableData = (t, region, lang) => {
       hidden,
     },
     {
-      title: 'mesos',
+      title: () => (
+        <span>
+          {t('mesos')}
+          <br />
+          <span
+            style={{
+              fontSize: '0.8rem',
+              color: '#666',
+            }}
+          >
+            ({t('table_mesos_edit_tip')})
+          </span>
+        </span>
+      ),
       dataIndex: 'mesos',
       align: 'right',
-      render: (_, { mesos }) => numberFormat(mesos),
+      render: (_, { avatar, difficulty, mesos }) => (
+        <EditableMesos
+          {...{ region, name: avatar, difficulty, defaultMesos: mesos }}
+        />
+      ),
     },
     {
       title: 'crusader',
@@ -125,6 +150,23 @@ const useTableData = (t, region, lang) => {
       align: 'center',
       render: (_, { contribution: { party = 0 } = {} }) => party,
     },
+    {
+      title: 'table_drops',
+      dataIndex: 'drops',
+      render: (_, { drops = [] }) => (
+        <Space style={{ marginLeft: 4 }}>
+          {drops
+            .filter((item) => !includes(item.name || item, ExcludeDrops))
+            .map((item) => {
+              const itemIsObj = typeof item === 'object'
+              const name = itemIsObj ? item.name : item
+              return (
+                <img src={`/drops/${name}.png`} alt={name} style={imgStyle} />
+              )
+            })}
+        </Space>
+      ),
+    },
   ]
 
   return {
@@ -144,13 +186,22 @@ function BossTable({ t, i18n }) {
     })
   }
   const { tableData, columns } = useTableData(t, region, i18n.language)
-  console.log(tableData)
+  useEffect(() => {
+    const storageData = JSON.parse(
+      localStorage.getItem('MAPLESTORY_BOSS_MESOS_DATA') || '{}'
+    )
+    dispatch({
+      type: INIT_MESOS_DATA,
+      payload: storageData,
+    })
+  }, [])
+
   return (
     <Fragment>
       <Content className={styles.content}>
         <Card
           title={
-            <>
+            <Space wrap>
               {t('boss_data_table')}
               <Form.Item shouldUpdate noStyle>
                 <Select
@@ -163,17 +214,24 @@ function BossTable({ t, i18n }) {
                   <Select.Option value="GMS">GMS</Select.Option>
                 </Select>
               </Form.Item>
-            </>
+              <DownloadButton />
+              <UploadButton />
+            </Space>
           }
         >
           <Table
-            columns={columns.map(evolve({ title: t }))}
+            columns={columns.map(
+              evolve({
+                title: (text) => (typeof text === 'string' ? t(text) : text),
+              })
+            )}
             dataSource={tableData}
             pagination={false}
             rowKey="key"
             size="small"
             scroll={{ x: true }}
             bordered
+            sticky
           />
         </Card>
       </Content>

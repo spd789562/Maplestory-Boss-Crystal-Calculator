@@ -9,6 +9,7 @@ import {
 import { combineReducer } from './_helper'
 import bossReducer from './boss'
 import metaReducer from './meta'
+import mesosReducer from './mesos'
 
 import { isNil, prop, curry, path, pickAll, pipe } from 'ramda'
 
@@ -17,6 +18,7 @@ const GlobalStore = createContext({})
 const [combinedReducers, initialState] = combineReducer({
   boss: bossReducer,
   meta: metaReducer,
+  mesos: mesosReducer,
 })
 
 export const Provider = ({ children }) => {

@@ -6,6 +6,7 @@ import {
   descend,
   evolve,
   map,
+  path,
   pipe,
   prop,
   propEq,
@@ -21,25 +22,35 @@ import BossMapping, { BossObject } from '@mapping/boss'
 import MesosMapping from '@mapping/mesos'
 
 const toObject = reduce((data, boss) => assoc(boss.id, boss, data), {})
-const defineMaxTime = (type, time, max) => (type === 'day' ? max : 1) * time
+const defineMaxTime = (type, time, max, characters = 1) =>
+  (type === 'day' ? max : 1) * time * characters
 
-const WEEK_MAX = 60
-
-const getBossSuggestion = (bossData, region = 'GMS', maxTime = 7) => {
+const getBossSuggestion = ({
+  bossData,
+  mesosData,
+  region = 'GMS',
+  remainDays = 7,
+  weekMax = 180,
+}) => {
   const currentRegion = MesosMapping[region] ? region : 'GMS'
   const convertBossData = toObject(bossData)
   const currentDefeatTotal = reduce(
     (total, { defeatTime = 0 }) => total + defeatTime,
     0
   )(bossData)
-  const remainCount = WEEK_MAX - currentDefeatTotal
+  const remainCount = weekMax - currentDefeatTotal
   const mergedData = pipe(
     reduce((data, boss) => {
       const storeBossData = convertBossData[boss.id] || {}
-      const currentBossAllMesos = MesosMapping[currentRegion][boss.name]
+      const currentBossAllDefaultMesos =
+        path([currentRegion, boss.name])(MesosMapping) || {}
+      const currentBossAllMesos =
+        path([currentRegion, boss.name])(mesosData) || {}
+      const currentBossMesos =
+        currentBossAllMesos[storeBossData.difficulty] ||
+        currentBossAllDefaultMesos[storeBossData.difficulty]
       const bossMesos = Math.floor(
-        currentBossAllMesos[storeBossData.difficulty] /
-          (storeBossData.partyCount || 1)
+        currentBossMesos / (storeBossData.partyCount || 1)
       )
       const bossDrops =
         (
@@ -51,7 +62,8 @@ const getBossSuggestion = (bossData, region = 'GMS', maxTime = 7) => {
         let maxDefeatTime = defineMaxTime(
           boss.defeatType,
           boss.defeatTime,
-          maxTime
+          remainDays,
+          storeBossData.characters || 1
         )
         if (
           boss.enterShareId &&
@@ -63,14 +75,17 @@ const getBossSuggestion = (bossData, region = 'GMS', maxTime = 7) => {
           const sharedBossMaxTime = defineMaxTime(
             sharedBossData.defeatType,
             sharedBossData.defeatTime,
-            maxTime
+            remainDays,
+            convertBossData.characters || 1
           )
           const bigMaxTime = Math.max(maxDefeatTime, sharedBossMaxTime)
           const withoutSelfRemainTime = bigMaxTime - sharedBoss.defeatTime
           maxDefeatTime = Math.min(maxDefeatTime, withoutSelfRemainTime)
+          const sharedBossMesosBase =
+            currentBossAllMesos[sharedBoss.difficulty] ||
+            currentBossAllDefaultMesos[sharedBoss.difficulty]
           const sharedBossMesos = Math.floor(
-            currentBossAllMesos[sharedBoss.difficulty] /
-              (storeBossData.partyCount || 1)
+            sharedBossMesosBase / (storeBossData.partyCount || 1)
           )
           // reduce when shared boss mesos grater then this
           if (sharedBossMesos > bossMesos) {
