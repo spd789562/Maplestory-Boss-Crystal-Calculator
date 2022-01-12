@@ -34,6 +34,7 @@
   "table_hp": "血量",
   "table_self_contribution": "个人贡献",
   "table_party_contribution": "组队贡献",
+  "table_mesos_edit_tip": "点击金额编辑",
   "table_download": "汇出枫币资料",
   "table_upload": "汇入枫币资料",
   "table_upload_success": "成功",
@@ -43,8 +44,8 @@
   
   "all": "全部",
   "defeatable": "可击杀",
-  "boss_list_description": "点击 Boss 头像已变更是否可击杀，并输入已击杀次数，结果会根据是否击杀与击杀次数计算出推荐贩卖的Boss",
-  "boss_list_to_table": "点此观看详细表格 >",
+  "boss_list_description": "点击 Boss 头像已变更是否可击杀，并输入可击杀角色数量和“已”击杀次数，结果会根据是否击杀与击杀次数计算出推荐贩卖的Boss",
+  "boss_list_to_table": "点此修改&更新结晶价格 >",
 
   "defeated_on": "击杀于",
   "today_was_entered": "今日已进入",
